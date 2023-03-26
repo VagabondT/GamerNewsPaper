@@ -17,7 +17,8 @@ var app = express();
 // Cross Origin Resource Sharing
 // app.use(cors(corsOptions));
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
+const apiPostRouter = require('./routes/api/post');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Authorization below this line
 // app.use(verifyJWT);
 app.use('/',indexRouter );
+app.use('/posts', apiPostRouter);
 
 
 

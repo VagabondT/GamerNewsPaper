@@ -35,10 +35,10 @@ const PostsSchema = new mongoose.Schema(
       default: "wait",
     },
     Tags: {
-      type: Array[String]
+      type: Array
     },
-    CategoryID: {
-      type: mongoose.Schema.ObjectId,
+    Category: {
+      type: Number,
       ref: 'Category',
       required: [true, "The posts must be belong to a category."],
     },
@@ -48,6 +48,8 @@ const PostsSchema = new mongoose.Schema(
     autoIndex: true,
     _id: false,
     collection: "Posts",
+    toJSON: {virtuals: true},
+    toObject: {virtuals: true}
   }
 );
 
