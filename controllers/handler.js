@@ -2,6 +2,8 @@ const catchAsync = require('./../Utilities/catchAsync');
 const AppError = require('./../Utilities/appError');
 
 
+
+
 exports.getAll = Model => 
 catchAsync(async (req, res, next) =>{
 
@@ -70,6 +72,7 @@ exports.updateOne = Model =>
 
 exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
+
     const doc = await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {

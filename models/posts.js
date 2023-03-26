@@ -38,7 +38,7 @@ const PostsSchema = new mongoose.Schema(
       type: Array
     },
     Category: {
-      type: Number,
+      type: mongoose.Schema.ObjectId,
       ref: 'Category',
       required: [true, "The posts must be belong to a category."],
     },

@@ -5,10 +5,11 @@ const mongoose = require("mongoose");
 const CategorySchema = new mongoose.Schema(
   {
     _id: {
-      type: Number,
+      type: mongoose.Schema.ObjectId,
       required: [true, "The category must have ID."],
+      default: new mongoose.Types.ObjectId()
     },
-    Name: {
+    name: {
       type: String,
       require: [true, "Please tell us your category name!."],
       max: 100,

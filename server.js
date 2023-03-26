@@ -12,17 +12,22 @@ mongoose.connect(
         useUnifiedTopology: true 
 }).then(() => console.log('Kết nối db thành công!'));
 
-process.on('uncaughtException', err => {
-    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-    console.log(err.name, err.message);
-    process.exit(1);
-  });
+// process.on('uncaughtException', err => {
+//     console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+//     console.log(err.name, err.message);
+//     process.exit(1);
+//   });
 
 
 //TEST CREATE MODEL
 // const Category = require('./models/category')
-// const postModel = require('./models/posts');
+// // const postModel = require('./models/posts');
 
+// const newCate = new Category({
+//   Name: 'testCateFromSerbrt'
+// })
+
+// newCate.save();
 
 // const newPost = new postModel({
 //     _id: 0,
@@ -40,17 +45,17 @@ app.listen(port,() => {
     console.log(`Server đang chạy ở cổng ${port}...`);
 });
 
-process.on('unhandledRejection', err => {
-    console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-    console.log(err.name, err.message);
-    server.close(() => {
-      process.exit(1);
-    });
-  });
+// process.on('unhandledRejection', err => {
+//     console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+//     console.log(err.name, err.message);
+//     server.close(() => {
+//       process.exit(1);
+//     });
+//   });
   
-  process.on('SIGTERM', () => {
-    console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
-    server.close(() => {
-      console.log('💥 Process terminated!');
-    });
-  });
+//   process.on('SIGTERM', () => {
+//     console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+//     server.close(() => {
+//       console.log('💥 Process terminated!');
+//     });
+//   });

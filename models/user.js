@@ -9,18 +9,19 @@ const Account = require("./account");
 const UserSchema = new mongoose.Schema(
   {
     _id: {
-      type: Number,
+      type: mongoose.Schema.ObjectId,
+      default: new mongoose.Types.ObjectId(),
       required: [true, "Object document must have ID."],
     },
     Name: {
       type: String,
-      required: [true, "Please tell us your name."],
+      required: [true, "Do you have your name?"],
       max: 200,
-      set: capitalize,
+      capitalize: true
     },
     BirthOfDate: {
       type: Date,
-      required: [true, "Please tell us your birth day"],
+      required: [true, "Go ask someone for your birthday."],
     },
     Photo: {
       type: String,
@@ -31,16 +32,16 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Please provide your email"],
       unique: true,
       lowercase: true,
-      validate: [validator.isEmail, "Please provide a valid email"],
+      // validate: [validator.isEmail, "Please provide a valid email"],
     },
     Address: {
       type: String,
       max: 300,
     },
     Account: {
-      type: mongoose.ObjectId,
+      type: Number,
       ref: "Account",
-      required: [true, "Account must belong to a user."],
+      required: [true],
     },
     Phone: {
       type: String,

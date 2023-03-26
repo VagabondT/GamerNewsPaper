@@ -1,16 +1,23 @@
 const Category = require('../models/posts');
 const Post = require('../models/posts');
 const handler = require('./handler');
+const AppError = require('./../Utilities/appError');
 
 
 exports.getAllPosts = handler.getAll(Post);
 // exports.getPost = handler.getOne(Post, { path: 'Category'});
-exports.getPost = async (req,res) =>{
+exports.getPost = async (req,res,next) =>{
     let query = Post.findById(req.params.id);
     const doc = await query;
 
     if (!doc) {
-        return next(new AppError('No document found with that ID', 404));
+        res.status(404).json({
+            status: 'failed',
+            data: {
+                msg: 'There is no post with that id'
+            }
+        
+    })
     }
 
     res.status(200).json({
