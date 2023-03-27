@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Do you have your name?"],
       max: 200,
-      capitalize: true
+      capitalize: true,
     },
     BirthOfDate: {
       type: Date,
@@ -32,11 +32,13 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Please provide your email"],
       unique: true,
       lowercase: true,
-      // validate: [validator.isEmail, "Please provide a valid email"],
+      trim: true,
+      // validate: [validator.isEmail(Email), "Please provide a valid email"],
     },
     Address: {
       type: String,
       max: 300,
+      trim: true,
     },
     Account: {
       type: Number,
@@ -47,6 +49,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       match: "/^(+84|0)(1d{9}|3d{8}|5d{8}|7d{8}|8d{8}|9d{8})$/",
       unique: true,
+      trim: true,
     },
   },
   {
