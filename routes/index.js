@@ -1,13 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const accountController = require('../controllers/AccountController')
-
+const overviewController = require('../controllers/OverviewController')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.send("hello! This is gamer Thời BÁO")
-});
+router.get('/',overviewController.GetOverview);
 
-router.get('/test',accountController.getAllAccounts)
 
 
 module.exports = router;

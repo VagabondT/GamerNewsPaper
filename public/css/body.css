@@ -1,0 +1,861 @@
+html{
+    height: 100%;
+    max-height: 1024px;
+}
+body{
+    background-color: #1F1F1F;
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.container{
+    /* width: 100%; */
+    /* height: auto; */
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    flex-wrap: nowrap;
+
+}
+
+.row{
+    flex: none !important;
+}
+
+
+
+.mainSection{
+    background: url(https://www.riotgames.com/darkroom/2000/899c0d8ab62556d1b116a90f12e1d5b4:61d644e08a5fe944519400c1ac7601f4/riotgames-com-3840x1644-premiereday.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100% !important;
+    height: 95vh;
+    display: table;
+    max-width: 1890px;
+
+    z-index: 1;
+    /* -webkit-clip-path: polygon(0 0,100% 0,100% 100%,0 90%);
+    clip-path: polygon(0 0,100% 0,100% 100%,0 90%);
+    background: linear-gradient(275deg,rgba(10,10,10,0) 0,rgba(10,10,10,.8) 120%); */
+
+}
+
+
+.blackBG{
+    position: absolute;
+    width: 100%;
+    height: 95vh !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: -10;
+    top: 0;
+    left: 0 ;
+}
+
+
+.mainSectionContentWrapper{
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 10 ;
+}
+
+.sectionLogo{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.sectionLogo img{
+    width: 70%;
+}
+
+.styledLinkButton{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    overflow: visible;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 18px;
+    line-height: 1;
+    min-width: 150px;
+    padding: 9px;
+    font-size: 2em;
+    font-weight: 700;
+    -webkit-font-smoothing: auto;
+    letter-spacing: .025em;
+    transition: all .2s ease-out;
+    color: #f9f9f9;
+    padding: 20px;
+}
+
+.styledLinkButton:hover{
+    background: linear-gradient(135deg,#ba8964 0,#d1ac90 50%,#d1ac90 100%);
+    box-shadow: 0 10px 30px -10px rgba(186,137,100,.25), 0 10px 30px -10px rgba(186,137,100,.5), 0 10px 35px -10px rgba(186,137,100,.5);
+}
+
+.styledLinkButton--arcane{
+    background: linear-gradient(135deg,#ba8964 0,#d1ac90 100%);
+    box-shadow: 0 10px 45px -10px rgba(186,137,100,.15), 0 0 20px -10px rgba(186,137,100,.35), 0 10px 30px -10px rgba(186,137,100,.25);
+    color: #0a0a0a;
+}
+
+.buttonIcon{
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #0a0a0a;
+    margin-right: .5rem;
+    transition: .2s ease-out;
+    filter: drop-shadow(0 4px 3px rgba(10,10,10,.4));
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.newsSection {
+    position: relative;
+    width: 100%;
+    /* height: 85%; */
+    height: 85vh;
+    transition: all .2s ease-out;
+    background-color: #0a0a0a;
+    color: #f9f9f9;
+
+}
+
+
+.newsSectionHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-left: 5%;
+    margin-bottom: 2%;
+}
+.newsSectionHeader h1{
+    font-size: 3rem;
+}
+
+.newsSectionHeader a{
+    color: white;
+}
+
+#seemore2{
+    display: none;
+
+}
+
+#seemore1{
+    display: block;
+}
+
+.newsSectionBody{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: 100%;
+}
+
+.bodyLeft{
+    padding-left: 5%;
+    flex: 1.25;
+         
+}
+
+.bodyLeft,.bodyRight{
+    position: relative;
+    height: 100%;
+    
+}
+
+.bodyRight{
+    padding-right: 5%;
+    flex: 0.75;
+}
+
+
+.newsArticle{
+    font-size: 1rem;
+    list-style: none;
+    margin: 0;
+    transition: .25s ease-out;
+    box-shadow: 0 4px 4px rgba(10,10,10,.15);
+    border-radius: 8px;
+    background-color: #0a0a0a;
+
+}
+.newsArticle a{
+    text-decoration: none;
+}
+.newsArticleCard{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 10px;
+    min-height: 85px;
+    background-color: #2E2E2E;
+    color: #f1f1f1;
+    margin-bottom: 10px;
+    max-height: 115px;
+    border: 2px solid black;
+    transition: 0.2s;
+    background-color: #222222;
+    
+}
+.newsArticleCard:hover{
+    cursor: pointer;
+    border-color: rgba(128, 128, 128,0.8);
+    transition: all 0.2s;
+    animation: splash 0.2s ease-in-out 1 normal forwards;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.cardImage {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 180px;
+    -webkit-clip-path: polygon(15% 0,100% 0,100% 100%,0 100%);
+    clip-path: polygon(15% 0,100% 0,100% 100%,0 100%);
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 8px 8px 0;
+}
+
+.buttonSmall {
+    font-size: .813rem;
+    border-radius: 6.5px;
+    padding: .5rem .75rem;
+    min-width: auto;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: .08em;
+    line-height: 1;
+    padding-right: 5%;
+    text-decoration: none !important;
+
+}
+
+.buttonSmall span{
+    background-color: rgba(255, 255, 255, 0.09);
+    padding: .5rem;
+    border-radius: 8px;
+
+}
+
+.bigCard{
+    border-radius: 8px;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1px;
+    border: 2px solid black;
+    transition: 0.2s;
+}
+
+.bigCard:hover{
+    border-color: rgba(128, 128, 128,0.8);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.bigCardTitle{
+    padding-left: 40px;
+}
+
+.bigCardTitle h3{
+    font-size: 2rem;
+    line-height: 0.4;
+}
+
+.bigCardTitle p{
+    font-size: 1.5rem;
+    line-height: 0.4;
+}
+
+.category{
+    opacity: 0.3;
+}
+
+.cardBg{
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-image: url('https://www.riotgames.com/darkroom/1000/ff86705fe4337578c54b001f648875f0:bcb4c06309c4cbe61b3a5f24bfe235ce/11-14-embargo-riotxarcane-phase02-keyart-4k.jpg'); */
+}
+.cardTitle{
+    padding: 10px 20px;
+    width: 70%;
+}
+
+
+.buttonIcon{
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #0a0a0a;
+    margin-right: .5rem;
+    transition: .2s ease-out;
+    filter: drop-shadow(0 4px 3px rgba(10,10,10,.4));
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.badge{
+    width: 40px;
+    height: 40px;
+    background-color: #141212;
+    border-radius: 50%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    margin-left: 40px;
+    margin-top: 40px;
+}
+
+.bageItems{
+    margin:10px;
+
+    float: right;
+}
+
+
+@keyframes splash{
+    25%{
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    50%{
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+.gameSection{
+    background-color: #1F1F1F;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.gameSectionTitle{
+    text-align: left;
+    font-size: 1.5rem;
+    color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.gameCardWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 5%;
+}
+
+.gameCardList{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.gameCardList li{
+    /* width: 50%;
+    height: 50%; */
+    padding: .4rem;
+
+}
+
+.gameCard:hover .gameCardLink img{
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(128, 128, 128,0.8);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.gameCard{
+    position: relative;
+    transition: all .2s ease-out;
+    box-shadow: 0 4px 16px rgba(10,10,10,.2);
+    border-radius: 8px;
+    width: 99%;
+}
+.bigGameCard{
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallGameCard{
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 33.3%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallGameCard .gameCardLogo{
+    padding-top: 3rem;
+}
+
+.smallGameCard .gameCardDesc .gameCardBasedPlatform{
+    width: auto;
+}
+.gameCardContent{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: justify;
+    -ms-flex-align: center;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    pointer-events: none;
+    width: 35%;
+}
+
+.gameCardLogo{
+    text-align: center;
+    padding-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.gameCardLogo img{
+    width: 70%;
+}
+
+.gameCardDesc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45%;
+}
+
+.gamedescP{
+    font-size: 1rem;
+    color: white;
+    padding: 0 .8rem;
+}
+
+.gameCardBasedPlatform{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: auto;
+    padding: 0.6rem;
+    height: 15%;
+}
+
+.gameCardBasedPlatform span svg{
+    width: 110%;
+}
+
+
+.gameCardLink{
+
+    position: relative;
+    width: 100%;
+}
+
+.gameCardLink img{
+    border-radius: 10px; 
+    width: 100%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+/* Hiring Section */
+.careersSection{
+    background-color: #000000;
+    background-color: #EBEBEB;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    width: 100% !important;
+}
+
+.buttonStyle{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    overflow: visible;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 160px;
+    -webkit-font-smoothing: auto;
+    letter-spacing: .025em;
+    color: #f9f9f9;
+    background-color: #d1363a;
+    transition: .5s;
+}
+
+.buttonStyle:hover{
+    background-color: #d1363bad;
+    transition: .5s;
+}
+
+.largeButton{
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    padding: 22px 16px;
+    min-width: 260px;
+}
+
+.careersContent{
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    padding-right: 5rem;
+}
+
+.careersContentInner{
+    margin-bottom: 2rem;
+}
+
+.careersContentInner h2{
+    font-size: 3rem;
+    line-height: 0.5;
+}
+
+.careersContentInner p {
+    font-size: 1.25rem;
+    color: #656462;
+    line-height: 1.2;
+    letter-spacing: -.03em;
+    margin: 0 auto 2.5rem;
+    font-weight: 600;
+    max-width: 450px;
+}
+
+.careersInfo{
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.careersInfo a{
+    display: block;
+    position: relative;
+    -ms-flex: 1 1 260px;
+    flex: 1 1 260px;
+    padding: 16px;
+    text-align: center;
+    background-color: rgba(173,172,170,.2);
+    border-radius: 8px;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #656462;
+    text-decoration: none;
+    margin: .5rem;
+    transition: 0.2s;
+}
+
+.careersInfo a span{
+    display: block;
+    color: #0a0a0a;
+    font-size: 3.75rem;
+    font-weight: 700;
+}
+
+.careersCounter:hover{
+    background-color: rgba(173,172,170,0.6);
+    transition: 0.2s;
+}
+
+.careersImage{
+    flex: 1 1 50%;  
+    -webkit-clip-path: polygon(10% 0,100% 0,100% 100%,0 100%);
+    clip-path: polygon(10% 0,100% 0,100% 100%,0 100%);
+}
+.careersImage picture{
+    width: 100%;
+    height: 100%;
+}
+
+.careersImage picture img{
+    width: 100%;
+    height: 100%;
+}
+
+/* Footer */
+.footer{
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    color: white;
+}
+
+.footerInner{
+    position: relative;
+    z-index: 1;
+    background-color: #252423;
+    padding: 60px 20px 40px;
+    color: #8a8887;
+    font-size: .688rem;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.contentCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerRow{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #8a8887;
+}
+
+.footerCol{
+    align-items:center;
+    color: hsl(20 1% 54%);
+    display: flex;
+    font-size:11.008px;
+    line-height:16.512px;
+    text-align:center;
+}
+
+.footerColInner{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.bottomFooter{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 70%;
+}
+
+.footerSNS a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.footerSNS a:hover .icon svg {
+    fill: #d1363a;
+    transition: all .3s ease-out;
+}
+
+.footerSNS .icon svg , .footerLogo .icon svg{
+    fill: #656462 !important;
+    transition: all .3s ease-out;
+}
+
+.footerLogo{
+    display: inline-block;
+}
+
+.icon{
+    display: inline-block;
+    vertical-align: middle;
+    font-style: normal;
+}
+
+.icon svg{
+    vertical-align: top;
+    height: auto;
+}
+
+.footerCookies .icon svg, .footerMark .icon svg, .footerLanguage .icon svg, .topLink .icon svg{
+    fill: #656462;
+}
+
+.topLink a{
+    color: #656462;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: .1s;
+}
+
+.topLink a:hover{
+    color: #e7e6e3;
+    transition: .1s;
+}
+
+.footerNavUl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.footerNavUl li{
+    text-transform: uppercase;
+    list-style: none;
+}
+
+.footerNavUl li:hover a{
+    color: #f1f1f1;
+    text-decoration: underline;
+    transition: 0.2s;
+}
+
+.footerNavUl a{
+    display: inline-block;
+    padding: 10px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #8a8887;
+    letter-spacing: .08em;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.divider{
+    height: 2px;
+    width: 70%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-image: url(/img/divider.svg);
+    background-repeat: repeat-x;
+    background-position: 50% 50%;
+    background-size: 420px 2px;
+}
+
+.footerLanguage button{
+    background: 0;
+    border: 0;
+    display: inline-block;
+    padding: 10px;
+    font-weight: 700;
+    color: #8a8887;
+    letter-spacing: .02em;
+    transition: all .3s ease-out;
+    cursor: pointer;
+}
+
+.footerCookies button{
+    background: 0;
+    border: 0;
+    display: inline-block;
+    color: #8a8887;
+    cursor: pointer;
+}
+
+.footerCookies .icon, .footerMark .icon{
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.monospace {
+    color: #d1363a;
+    letter-spacing: .025em;
+    font-size: .75rem;
+    line-height: 1.667;
+    font-family: 'Eco Coding W02 WGL4',monospace;
+}
+
+/* @media screen and (min-width:960px) {
+    
+    .careersImage{
+        -webkit-clip-path: polygon(10% 0,100% 0,100% 100%,0 100%);
+        clip-path: polygon(10% 0,100% 0,100% 100%,0 100%);
+    }
+} */
+

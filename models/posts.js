@@ -15,7 +15,7 @@ const PostsSchema = new mongoose.Schema(
       max: 50,
       required: [true, "Please tell us title posts."],
     },
-    Thubnail: {
+    Thumbnail: {
       type: String,
       default: "default.jpg",
     },

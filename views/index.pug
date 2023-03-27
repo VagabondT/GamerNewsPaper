@@ -1,0 +1,180 @@
+extends layout
+
+append head 
+  link(rel='stylesheet' href='./css/body.css')
+  title Gamer thời BÁO
+
+block content
+  #top.container
+    .row.mainSection
+      .mainSectionContentWrapper
+        .sectionLogo
+          img(src='./img/arcane-logo.png' alt='' srcset='')
+          br
+          br
+          a.styledLinkButton.styledLinkButton--arcane(href='https://www.twitch.tv/directory/game/Arcane' target='blank')
+            .buttonIcon
+              span.icon(style='width:16px;height:16px;line-height:16px')
+                svg(viewbox='0 0 24 24' fill='none')
+                  path(fill-rule='evenodd' clip-rule='evenodd' d='M15.003 14H3.5v-4h11.502l-4.165-4.538 2.705-2.947 7.353 8.012c.747.813.747 2.133 0 2.947l-7.353 8.011-2.705-2.947L15.003 14z' fill='#F0F0F0')
+            |                         Xem ngay
+    .row.newsSection
+      .newsSectionHeader
+        h1 Có tin gì mới?
+        a#seemore1.buttonSmall(href='./news')
+          span Xem thêm
+      .newsSectionBody
+        .bodyLeft
+          .bigCard.cardBg(style=`background-image:url(${featuredPost.Thumbnail})`, onclick='featuredLink("'+ featuredPost._id +'")')
+            .badge
+              span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
+                svg(viewbox='0 0 24 24' fill='none')
+                  path(d='M12.91 0L21 22h-3.893c-1.697-3.478-3.183-4.725-5.258-4.725-2.076 0-3.56 1.247-5.243 4.725H3l8.092-22h1.817zm2.136 16.74l-3.167-8.856-3.227 8.855c1.182-.42 2.287-.594 3.227-.594.925 0 2 .174 3.167.594z' fill='#BA8A63')
+            .bigCardTitle
+              h3.cut-text-big !{featuredPost.Title}
+              p.category !{featuredPost.Category[0].name}
+        .bodyRight
+          ul.newsArticle
+            each post in posts
+              li
+                a.newsArticleCard(href=`./posts/${post._id}`)
+                  .cardTitle
+                    h3.cut-text !{post.Title}
+                    p.category !{post.Category[0].name}
+                  .cardImage(style=`background-image:url(${post.Thumbnail})`)
+                    .badge.bageItems
+                      span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
+                        svg(viewbox='0 0 24 24' fill='none')
+                          path(d='M12.91 0L21 22h-3.893c-1.697-3.478-3.183-4.725-5.258-4.725-2.076 0-3.56 1.247-5.243 4.725H3l8.092-22h1.817zm2.136 16.74l-3.167-8.856-3.227 8.855c1.182-.42 2.287-.594 3.227-.594.925 0 2 .174 3.167.594z' fill='#BA8A63')
+            
+      a#seemore2.buttonSmall(href='#')
+        span Xem thêm
+    .gameSection
+      .gameSectionTitle
+        h1 Theo chủ đề
+      .gameCardWrapper
+        ul.gameCardList
+          li.bigGameCard
+            .gameCard
+              a.gameCardLink(href='https://www.leagueoflegends.com/' target='blank')
+                img(alt='LOL' src='https://www.riotgames.com/darkroom/855/eea552a09c8074c6041b970449f529a6:01cd382480eb2f754ed9e93cdeb843db/lol-card-bg-1800.jpg' srcset='https://www.riotgames.com/darkroom/855/eea552a09c8074c6041b970449f529a6:01cd382480eb2f754ed9e93cdeb843db/lol-card-bg-1800.jpg')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/a28dfa2308a772466c7d2018a87ac000:0e9fb5e8f3944bcd4375d6960d21962e/lol-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+                  p.gamedescP A team-based strategy game
+                  .gameCardBasedPlatform
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M3.444 4.415l4.087-.555.002 3.93-4.084.022-.005-3.397zM7.53 8.243l.003 3.932-4.084-.559v-3.4l4.08.027zm.496-4.455L13.442 3v4.74l-5.417.043V3.788zm5.42 4.491L13.441 13l-5.417-.762-.008-3.966 5.427.008z' fill='#FCFCFC')
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M12.437 10.793c-.146.349-.319.67-.519.966-.273.403-.496.682-.668.837-.267.255-.553.385-.858.392-.22 0-.485-.065-.794-.196a2.207 2.207 0 0 0-.853-.196c-.273 0-.565.065-.878.196-.314.131-.566.2-.759.207-.294.013-.586-.121-.878-.403-.187-.168-.42-.457-.7-.866a6.083 6.083 0 0 1-.738-1.522 5.773 5.773 0 0 1-.31-1.813c0-.67.14-1.248.42-1.733.22-.389.513-.696.879-.92.366-.225.761-.34 1.188-.348.233 0 .538.074.918.221.379.148.622.223.73.223.079 0 .35-.088.807-.262.433-.162.799-.229 1.098-.203.811.068 1.421.4 1.826.997-.725.456-1.084 1.095-1.077 1.914.006.638.23 1.169.668 1.59.2.196.421.347.668.454-.054.162-.11.317-.17.465zM10.575 3.2c0 .5-.176.967-.527 1.4-.424.513-.937.81-1.493.763a1.595 1.595 0 0 1-.011-.19c0-.48.202-.993.56-1.414.178-.213.406-.39.681-.53s.536-.217.78-.23c.008.068.01.135.01.201z' fill='#FCFCFC')
+          li.bigGameCard
+            .gameCard
+              a.gameCardLink(href='https://playvalorant.com/' target='blank')
+                img(alt='VALORANT' src='https://www.riotgames.com/darkroom/900/ac04c903e761168dfbf22893efd1ce48:fee52bb276d4ed80cf60bdb9d3c24c05/valorant-productimage.png')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/fc4d867e755e5215833d94e88068b0ab:ead77c56e200894c762889c3cd81a2e1/valorant-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+                  p.gamedescP A team-based strategy game
+                  .gameCardBasedPlatform
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M3.444 4.415l4.087-.555.002 3.93-4.084.022-.005-3.397zM7.53 8.243l.003 3.932-4.084-.559v-3.4l4.08.027zm.496-4.455L13.442 3v4.74l-5.417.043V3.788zm5.42 4.491L13.441 13l-5.417-.762-.008-3.966 5.427.008z' fill='#FCFCFC')
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://teamfighttactics.leagueoflegends.com/' target='blank')
+                img(alt='TEAMFIGHT-TACTICS' src='https://www.riotgames.com/darkroom/900/d066e7a6446f7f6d512df07e788fbc35:ef7cf9d03d8ab4f103f41188d2c31c0f/tft-card-bg-1800.jpg')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/2877a75d4539547a238b481e200edd9f:b10a003b28b89d37cc0e446bab19f206/tft-logotype-2021.png' alt='A team-based strategy game')
+                .gameCardDesc
+                  .gameCardBasedPlatform
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M3.444 4.415l4.087-.555.002 3.93-4.084.022-.005-3.397zM7.53 8.243l.003 3.932-4.084-.559v-3.4l4.08.027zm.496-4.455L13.442 3v4.74l-5.417.043V3.788zm5.42 4.491L13.441 13l-5.417-.762-.008-3.966 5.427.008z' fill='#FCFCFC')
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M8.02 11.126a.624.624 0 1 0 1.248 0 .624.624 0 0 0-1.248 0zm-2.5-7.188v8.125c0 .518.42.938.937.938h4.375c.518 0 .938-.42.938-.938V3.938A.938.938 0 0 0 10.832 3H6.457a.938.938 0 0 0-.937.938zm.937 8.008v-7.89c0-.065.053-.118.117-.118h4.14c.065 0 .118.053.118.117v7.89a.117.117 0 0 1-.117.118h-4.14a.118.118 0 0 1-.118-.117z' fill='#FCFCFC')
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M12.437 10.793c-.146.349-.319.67-.519.966-.273.403-.496.682-.668.837-.267.255-.553.385-.858.392-.22 0-.485-.065-.794-.196a2.207 2.207 0 0 0-.853-.196c-.273 0-.565.065-.878.196-.314.131-.566.2-.759.207-.294.013-.586-.121-.878-.403-.187-.168-.42-.457-.7-.866a6.083 6.083 0 0 1-.738-1.522 5.773 5.773 0 0 1-.31-1.813c0-.67.14-1.248.42-1.733.22-.389.513-.696.879-.92.366-.225.761-.34 1.188-.348.233 0 .538.074.918.221.379.148.622.223.73.223.079 0 .35-.088.807-.262.433-.162.799-.229 1.098-.203.811.068 1.421.4 1.826.997-.725.456-1.084 1.095-1.077 1.914.006.638.23 1.169.668 1.59.2.196.421.347.668.454-.054.162-.11.317-.17.465zM10.575 3.2c0 .5-.176.967-.527 1.4-.424.513-.937.81-1.493.763a1.595 1.595 0 0 1-.011-.19c0-.48.202-.993.56-1.414.178-.213.406-.39.681-.53s.536-.217.78-.23c.008.068.01.135.01.201z' fill='#FCFCFC')
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://wildrift.leagueoflegends.com/' target='blank')
+                img(alt='Wildrift' src='https://www.riotgames.com/darkroom/900/4d105e24b06ba594da0708fe8ded1314:977452c32d13752ded1552ea94d224ec/lol-wildrift-productimage.png')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/ac2e0c26a8f48cbaf0009eefb028b75f:8cddf84aea3fbcf72d02380c5d050e36/lol-wildrift-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+                  .gameCardBasedPlatform
+                    span.icon(style='width:17px;height:16px;line-height:16px')
+                      span.is-vhidden
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M8.02 11.126a.624.624 0 1 0 1.248 0 .624.624 0 0 0-1.248 0zm-2.5-7.188v8.125c0 .518.42.938.937.938h4.375c.518 0 .938-.42.938-.938V3.938A.938.938 0 0 0 10.832 3H6.457a.938.938 0 0 0-.937.938zm.937 8.008v-7.89c0-.065.053-.118.117-.118h4.14c.065 0 .118.053.118.117v7.89a.117.117 0 0 1-.117.118h-4.14a.118.118 0 0 1-.118-.117z' fill='#FCFCFC')
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://playruneterra.com/' target='blank')
+                img(alt='RUNETERRA' src='https://www.riotgames.com/darkroom/900/838a15154baf4a1c3693f73b2bd00364:c5e1aa607a8967e2f976d6173a77f285/legends-of-runeterra-productimage.png')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/3ae3913f7992eebc555ea77d1e17657b:d7874f08ba1161ac419a8f45dcfa0ae0/legends-of-runeterra-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+                  .gameCardBasedPlatform
+                    span(style='width:17px;height:16px;line-height:16px')
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M3.444 4.415l4.087-.555.002 3.93-4.084.022-.005-3.397zM7.53 8.243l.003 3.932-4.084-.559v-3.4l4.08.027zm.496-4.455L13.442 3v4.74l-5.417.043V3.788zm5.42 4.491L13.441 13l-5.417-.762-.008-3.966 5.427.008z' fill='#FCFCFC')
+                    span.icon(style='width:17px;height:16px;line-height:16px')
+                      span.is-vhidden
+                      svg(viewbox='0 0 17 16' fill='none')
+                        path(d='M8.02 11.126a.624.624 0 1 0 1.248 0 .624.624 0 0 0-1.248 0zm-2.5-7.188v8.125c0 .518.42.938.937.938h4.375c.518 0 .938-.42.938-.938V3.938A.938.938 0 0 0 10.832 3H6.457a.938.938 0 0 0-.937.938zm.937 8.008v-7.89c0-.065.053-.118.117-.118h4.14c.065 0 .118.053.118.117v7.89a.117.117 0 0 1-.117.118h-4.14a.118.118 0 0 1-.118-.117z' fill='#FCFCFC')
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://ruinedking.com/' target='blank')
+                img(alt='Ruined_King' src='https://www.riotgames.com/darkroom/900/5da6384cfe9e607b3c589ffab2eb9f53:02f5f472e47354cbf103e66b02f975f4/convrgence-productimage.png')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/89c736897feec6b49781ac1535e99c87:17c53feaa893cee07455c9c28dbac07f/convrgence-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://hextechmayhem.com/' target='blank')
+                img(alt='hextechmayhem' src='https://www.riotgames.com/darkroom/900/af936b9432ba7aedc91e01cdb384ece5:fdd782c0d3649be60bb4708a2ebc1ece/hextetch-mayhem-card-bg-1800.jpg')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/1be510de8b8088c0cf4a6af907e70d70:f5f52b428207081dad79bf9b7e3ad874/hextech-mayhem-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://convrgencegame.com/' target='blank')
+                img(alt='convergence' src='https://www.riotgames.com/darkroom/900/1131e3bf9509d7ffb5d869e3aaf41fb5:7eb0b12d6ac787d19dfc1a99af7d24a3/ruined-king-productimage.png')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/a9ea1f2afe26cc0334851b9bc59c02e5:903dee05567e561084d1b6bfb64461d3/ruined-king-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+          li.smallGameCard
+            .gameCard
+              a.gameCardLink(href='https://songofnunu.com/' target='blank')
+                img(alt='songofnunu' src='https://www.riotgames.com/darkroom/900/0bc3ca90fcd359c736f7b2dfdd591592:475ab520d62de4814c88079da707c5b4/song-of-nunu-card-bg-1800.jpg')
+              .gameCardContent
+                .gameCardLogo
+                  img(src='https://www.riotgames.com/darkroom/350/d603dd152138eff2d5566023ca703971:c50a4d529d59a16d0189b1a9b959732f/songofnunu-logotype.png' alt='A team-based strategy game')
+                .gameCardDesc
+    .careersSection
+      .careersContent
+        .careersContentInner
+          h2 Gamer thời báo
+          p
+            | Sản phẩm này là được tạo ra với mục đích học tập dựa trên website chính thức của <a href='https://www.riotgames.com/en'>RiotGames</a>. Hoàn toàn không có có mục đích thương mại.
+
+      .careersImage
+        picture
+          source(media='(max-width: 959px)' srcset='https://www.riotgames.com/darkroom/800/3ebea0ca323188169333d99be15d45d2:f71a86121f6a1aa0eb11822be9b1bbba/annie-tibber-statue-day.png')
+          source(media='(min-width: 960px)' srcset='https://www.riotgames.com/darkroom/1400/b73875a4cc7d9c26a66869eff93f940f:664991c2c57893d0f1c86c31c7c847df/annie-tibber-statue-day.png')
+          img(src='https://www.riotgames.com/darkroom/1400/b73875a4cc7d9c26a66869eff93f940f:664991c2c57893d0f1c86c31c7c847df/annie-tibber-statue-day.png' alt='Careers')
+    
+    block footer 
+      include footer 
+  script(src='./js/script.js')

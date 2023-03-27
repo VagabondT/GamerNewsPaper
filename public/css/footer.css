@@ -1,0 +1,193 @@
+/* Footer */
+.footer{
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    color: white;
+    font-family: 'Mark Pro', Arial,sans-serif;
+}
+
+.footerInner{
+    position: relative;
+    z-index: 1;
+    background-color: #252423;
+    padding: 60px 20px 40px;
+    color: #8a8887;
+    font-size: .688rem;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.contentCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerRow{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #8a8887;
+}
+
+.footerCol{
+    align-items:center;
+    color: hsl(20 1% 54%);
+    display: flex;
+    font-size:11.008px;
+    line-height:16.512px;
+    text-align:center;
+}
+
+.footerColInner{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.bottomFooter{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 70%;
+}
+
+.footerSNS a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.footerSNS a:hover .icon svg {
+    fill: #d1363a;
+    transition: all .3s ease-out;
+}
+
+.footerSNS .icon svg , .footerLogo .icon svg{
+    fill: #656462 !important;
+    transition: all .3s ease-out;
+}
+
+.footerLogo{
+    display: inline-block;
+}
+
+.icon{
+    display: inline-block;
+    vertical-align: middle;
+    font-style: normal;
+}
+
+.icon svg{
+    vertical-align: top;
+    height: auto;
+}
+
+.footerCookies .icon svg, .footerMark .icon svg, .footerLanguage .icon svg, .topLink .icon svg{
+    fill: #656462;
+}
+
+.topLink a{
+    color: #656462;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: .1s;
+}
+
+.topLink a:hover{
+    color: #e7e6e3;
+    transition: .1s;
+}
+
+.footerNavUl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.footerNavUl li{
+    text-transform: uppercase;
+    list-style: none;
+}
+
+.footerNavUl li:hover a{
+    color: #f1f1f1;
+    text-decoration: underline;
+    transition: 0.2s;
+}
+
+.footerNavUl a{
+    display: inline-block;
+    padding: 10px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #8a8887;
+    letter-spacing: .08em;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.divider{
+    height: 2px;
+    width: 70%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-image: url(/img/divider.svg);
+    background-repeat: repeat-x;
+    background-position: 50% 50%;
+    background-size: 420px 2px;
+}
+
+.footerLanguage button{
+    background: 0;
+    border: 0;
+    display: inline-block;
+    padding: 10px;
+    font-weight: 700;
+    color: #8a8887;
+    letter-spacing: .02em;
+    transition: all .3s ease-out;
+    cursor: pointer;
+}
+
+.footerCookies button{
+    background: 0;
+    border: 0;
+    display: inline-block;
+    color: #8a8887;
+    cursor: pointer;
+}
+
+.footerCookies .icon, .footerMark .icon{
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.monospace {
+    color: #d1363a;
+    letter-spacing: .025em;
+    font-size: .75rem;
+    line-height: 1.667;
+    font-family: 'Eco Coding W02 WGL4',monospace;
+}

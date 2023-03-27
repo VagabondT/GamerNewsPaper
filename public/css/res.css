@@ -1,0 +1,507 @@
+
+
+/* @media screen and (max-width:1500px) {
+
+    .footerColInner, .footerCol{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .footerNavUl{
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .footerNav{
+        padding-right: 3rem;
+    }
+
+    .footerRow{
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .careersContent{
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+    .careersSection{
+        flex-direction: column;
+    }
+    .careersImage{
+        -webkit-clip-path:none;
+        clip-path: none;
+    }
+    .blackBG{
+        display: block;
+        min-height: 500px !important;
+        height: 50vh;
+    }
+
+    .mainSection{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: right;
+        width: 100%;
+        min-height: 500px !important;
+        height: 50vh;
+    }
+
+
+    
+    .sectionLogo img{
+        width: 50%;
+    }
+
+    .blackBG{
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+
+    .newsSection{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #seemore1{
+        display: none;
+    }
+    #seemore2{
+        display: block;
+        text-align: center;
+        
+    }
+   .newsSectionBody{
+        flex-direction: column;
+   }
+
+   .newsSectionHeader{
+       justify-content: center;
+   }
+
+   .bodyLeft{
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        height: 100%;
+        flex: 0.75;
+   }
+
+   .bodyRight{
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        flex: 0.25;
+    }
+
+
+   .newsArticle{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+   }
+
+   .bigCard{
+        height: 100%;
+        width: 100%;
+   }
+
+   .gameCardList{
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       height: auto;
+       width: 100%;
+   }
+   
+    .bigGameCard, .smallGameCard{
+        flex: 1;
+    }
+
+    .gameSectionTitle{
+        text-align: center;
+    }
+
+} */
+
+@media screen and (max-width:1280px) {
+
+    /* Stuff */
+    .cut-text { 
+        text-overflow:clip;
+        overflow: show; 
+    }
+
+    .bigCard{
+        height: 40vh !important;
+    }
+    
+
+    /* Main */
+    .blackBG{
+        width: 100% !important;
+        height: 95vh !important;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: 0;
+    }
+
+    /* Footer  */ 
+    .footerColInner, .footerCol{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .footerNavUl{
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .footerNav{
+        padding-right: 3rem;
+    }
+
+    .footerRow{
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Careers Section */
+    .careersInfo{
+        margin-bottom: 1rem !important; 
+    }
+    .careersContent{
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 2rem;
+        padding-top: 2rem !important;
+    }
+    .careersSection{
+        flex-direction: column;
+    }
+    .careersImage{
+        -webkit-clip-path:none;
+        clip-path: none;
+    }
+
+    /* News Section */
+    .newsSectionHeader h1{
+        font-size: 2rem;
+    }
+    .category{
+        font-size: 1.2rem;
+    }
+    .bigCardTitle h3{
+        font-size: 1.8rem;
+    }
+    .cardTitle h3{
+        font-size: 1.2rem;
+    }
+    .bodyLeft{
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        height: 100%;
+        flex: 0.75;
+    }
+
+   .bodyRight{
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1rem;
+        flex: 0.25;
+     }
+
+    .newsArticle{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    #seemore1{
+        display: none;
+    }
+    #seemore2{
+        display: block;
+        text-align: center;
+        color: white;
+        padding-bottom: 2rem;
+        
+    }
+   .newsSectionBody{
+        flex-direction: column;
+    }
+
+   .newsSectionHeader{
+       justify-content: center;
+    }
+    .newsSectionBody{
+        flex-direction: column;
+    }
+    .newsSection{
+        height: 100%;
+    }
+    /* GameSection */
+    .gameSectionTitle{
+        text-align: center;
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+
+    }
+    .gameCardList{
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 100%;
+    }
+
+    .bigGameCard, .smallGameCard{
+        flex-basis: 50%;
+    }
+
+    .gamedescP{
+        font-size: 0.6rem;
+    }
+}
+
+@media screen and (max-width:960px) {
+    /* Stuff */
+    .gameCardLogo{
+        padding-bottom: 0.5rem;
+    }
+
+    .gameCardBasedPlatform{
+        height: 5% !important;
+    }
+
+    .careersContentInner h2{
+        font-size: 2rem;
+    }
+
+    .careersContentInner p{
+        font-size: 1rem; 
+        padding: 0 2rem;
+    }
+
+    .careersContent{
+        padding-top: 2rem !important;
+    }
+
+
+    .bigCard{
+        height: 30vh !important;
+    }
+    .badge{
+        margin-left:1rem;
+        margin-top: 1rem;
+        width: 25px;
+        height: 25px;
+    }
+
+    .bigCardTitle{
+        padding-left: 1rem;
+    }
+
+    .category{
+        font-size: 0.8rem !important;
+    }
+    
+    /* HeaderLeft */
+
+    .leftTagContentWrapper{
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .leftHeaderContent{
+        width: 75vw;
+        height: 100vh !important;
+        
+        pointer-events: all;
+        overflow-y: auto;
+        background-color: #fff;
+        max-width: 484px;
+    }
+
+
+    .leftTagItems{
+        width: 100% !important;
+    }
+
+    .leftTag{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .leftTagContent{
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Footer  */ 
+    .topLink{
+        padding-top: 2rem;
+    }
+    .footerMark{
+        padding-top: 2rem;
+    }
+    .is-hidden-mobile{
+        display: none;
+    }
+    .footerNavUl{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .footerNav{
+        padding-right: 2rem;
+    }
+
+    .footerRow{
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    /* Main */
+
+    .mainSection{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: right;
+        width: 100%;
+        min-height: 500px !important;
+        height: 50vh;
+    }
+
+    .sectionLogo img{
+        width: 50%;
+    }
+
+    .blackBG{
+        background-color: rgba(0, 0, 0, 0.4);
+        height: 60vh !important;
+    }
+
+    /* News Section */
+
+    .newsSectionHeader h1{
+        padding-top: 2rem;
+        font-size: 2rem;
+    }
+
+    .category{
+        font-size: 0.8rem;
+    }
+    .bigCardTitle h3{
+        font-size: 1.2rem;
+    }
+    .cardTitle h3{
+        font-size: 0.8rem;
+    }
+    
+    /* GameSection */
+    .gameSectionTitle{
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    .gameCardList{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        padding: 0 !important;
+        margin: 0;
+    }
+
+    .gamedescP{
+        font-size: 0.8rem;
+    }
+
+}
+
+@media screen and (max-width:510px) {
+
+    .gamedescP{
+        font-size: 0.4rem;
+    }
+
+    .cut-text { 
+        position: relative;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 10rem !important;
+        height: 1rem !important; 
+        white-space: nowrap;
+        font-size: 1rem !important;
+    }
+
+    /* News Res */
+
+    .heroFilter .heroFilterSelect, .heroFilter .filterButton {
+        font-size: 0.75rem !important;
+    }
+
+}
+
+@media screen and (max-width:320px) {
+    .cut-text-big{
+        /* text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap; */
+        font-size: 1rem !important;
+    }
+
+    .careersContent{
+        font-size: 0.5rem !important;
+    }
+
+    .newsSectionHeader h1{
+        font-size: 1.5rem;
+    }
+    .gamedescP{
+        font-size: 0.4rem;
+    }
+
+    .cut-text { 
+        position: relative;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        width: 6rem !important;
+        height: 1rem !important; 
+        white-space: nowrap;
+        font-size: 1rem !important;
+    }
+
+
+
+}

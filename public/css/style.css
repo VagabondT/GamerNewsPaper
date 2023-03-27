@@ -1,0 +1,738 @@
+@import url('http://db.onlinewebfonts.com/c/01d273202731e44f0f1187f3afcaf156?family=Mark+Pro');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@font-face {
+    font-family: "markproThin";
+    src: url("font/markpro-thin.otf") format("opentype");
+}
+
+/* @font-face{
+    font-family: Mark Pro;
+    src: url("./font/markPro.woff2");
+} */
+*{
+    box-sizing: border-box;
+    
+}
+
+::-moz-selection { 
+    color: #E7E6E3;
+    background: #A4080C;
+}
+  
+::selection {
+    color: #E7E6E3;
+    background: #A4080C;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    padding: 0;
+    font-family: 'Be Vietnam Pro','Mark Pro', Arial,sans-serif;
+    margin: 0;
+    font-size: 0.7rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+.header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    color: white;
+    padding: 0;
+    z-index: 100;
+    position: absolute;
+    /* background-color: rgba(0, 0, 0, 0.8); */
+}
+
+.fixedPos{
+    position: fixed;
+    background-color: #111;
+    transition: 0.25s;
+}
+
+@keyframes LeftHeaderLoad {
+    0%{
+        opacity: 0;
+        clip-path: polygon(0 0, 100% 0%, 100% 80px, 25% 80px, 0 80px);
+    }
+    50%{
+        clip-path: polygon(0 0, 100% 0%, 100% 40%, 25% 70%, 0 40%);
+    }
+    100%{
+        opacity: 1;
+        height: 100%;
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 25% 100%, 0 100%);
+    }
+}
+
+@keyframes FadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.FakeBackGround{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.offOverflow{
+    overflow: hidden !important;
+}
+
+.svgUp{
+    transform: rotate(180deg);
+}
+
+.leftHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftHeaderContent{
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    background-color: #fff;
+    color: black;
+    top:0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 9999;
+    display: none; 
+    flex-direction: column;
+}
+
+.displayFlexClass{
+    display: flex;
+    width: 100%;
+    height: 55vh !important;
+    opacity: 0;
+    animation: LeftHeaderLoad 1s .15s forwards;
+}
+
+.LeftSubHeader{
+    background-color: #fff !important;
+    height: 10%;
+}
+
+.leftTagContent{
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+
+}
+
+.leftTagContentWrapper{
+    display: flex;
+    padding: 0px 24px;
+    flex-direction: row;
+    flex-basis: 100%;
+    width: 100%;
+    flex: 1;
+    gap: 16px;
+    max-width: 1920px;
+
+    
+}
+
+.leftTag{
+    width: 50%;
+    columns: 10em 3;
+    column-gap: 10px;
+}
+
+
+.leftTag, .rightTag{
+    flex: 1;
+    width: 100%;
+}
+
+.leftTagItems{
+    overflow-x: auto;
+    width: 100%;
+    display: block;
+    break-inside: avoid;
+    padding-bottom: 16px;
+
+}
+
+
+
+.leftTagItemsTitle{
+    background: #F3F3F3;
+    border-radius: 6.4px;
+    width: 100%;
+    position: static;
+    height: 32px;
+    margin: 0px;
+    padding: 8px 12px 8px 16px;
+    font-size: 13px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 120%;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    border-radius: 6.4px;
+}
+
+
+.leftTagItemsSubContent:hover{
+    background-color: rgba(186,186,186,.3);
+    cursor: pointer;
+    border-radius: 6.4px;
+}
+
+
+.leftTagItemsSubContentLinkText{
+    padding: 8px 16px;
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-family: markproThin;
+    font-weight:900;
+}
+
+.leftTagItemsSubContent{
+    width: 100%;
+    position: static;
+    height: auto;
+    margin: 4px 0px;
+    font-size: 13px;
+    line-height: 120%;
+    color: #4a4a4a;
+    border-radius: 6.4px;
+}
+
+.leftTagItemsSubContent a{
+    text-decoration: none;
+    color: black;
+    font-family: markproThin;
+    font-weight: bolder;
+}
+
+
+.lefticonSpan{
+    padding-right: .2rem !important ;
+}
+
+.leftHeaderContent ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.leftHeaderContent li{
+    list-style-type: none;
+    background-color: #F3F3F3;
+    margin: .2rem 3rem .2rem 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+
+.leftHeaderContent li a{
+    font-size: 1rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    text-decoration: none;
+    color: #333333;
+}
+
+.leftHeaderSubItemList ul{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.leftHeaderSubItemList li{
+    background-color: #F9F9F9 ;
+}
+
+.leftHeaderSubItemList li:hover{
+    background-color: #E6E6E6;
+    cursor: pointer;
+}
+
+
+
+#appSwitcher svg{
+    fill: #f9f9f9;
+    margin-left: 1.2rem;
+    height: 2rem;
+}
+
+#appSwitcher:hover svg, #appSwitcher2:hover svg{
+    fill: red;
+}
+
+#appSwitcher2 svg{
+    fill: black;
+    margin-left: 1.2rem;
+    height: 2rem;
+}
+
+.centerHeader{
+    padding: 0;
+    margin: 0;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 70px;
+
+}
+
+.centerSearch{
+    width: 20% !important;
+    margin: 10rem !important;
+}
+
+.signInBtn{
+    background: #d1363a;
+    border-radius: 1.6rem!important;
+    padding: .6rem 1.4rem!important;
+    min-height: unset;
+    height: unset!important;
+    font-size: 12px!important;
+    line-height: normal!important;
+    margin-top: 18px!important;
+    margin-bottom: 20px!important;
+    transition: background .2s ease-out;
+    color: white;
+    text-decoration: none;
+    width: 15%;
+    text-align: center;
+}
+
+.barArea{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 600;
+}
+
+.navLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+}
+
+.navLinks li{
+    list-style: none;
+    display: block;
+    position: relative;
+}
+
+.navLinks li a, .rightHeaderContent li a{
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 1.5rem;
+    font-weight:600;
+}
+
+.navLinks li:nth-child(4):hover a{
+    border-bottom: 2px solid #1499BD;
+}
+
+.dropdown{
+    border-top:2px solid #1499BD;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+    width: 10.5rem;
+    position: absolute;
+    margin-top: 1.5rem;
+    left: 0;
+    display: none;
+    padding: 0;
+    
+}
+
+.dropdown li{
+    padding: 1.5rem 0rem;
+    background-color: black;
+    width: 100%;
+
+
+}
+
+.dropdown li:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.navLinks li:hover > ul,
+.navLinks li:focus-within > ul,
+.navLinks li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+
+#homeLogo svg{
+    width: 2.5rem;
+    cursor: pointer;
+}
+
+.rightHeaderWrapper{
+    display: none;
+    margin-right: 1.5rem;
+    z-index: 100;
+}
+
+.menuIcon{
+    cursor: pointer;
+}
+
+.active{
+    display: flex;
+}
+
+.rightHeader{
+    position: fixed;
+    right: 0rem;
+    top: 0rem;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 315px;
+    height: 100vh;
+    background-color: #212121;
+    animation: rightBar .25s;
+    transition: .2s;
+}
+
+.rightHeader ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.rightHeader li{
+    list-style: none;
+    padding: 1.5rem 0;
+    width: 100%;
+}
+
+.rightHeader li a{
+    text-align: left;
+}
+
+.rightSubHeader, .LeftSubHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    padding: 0 1.5rem;
+    background-color: #111111;
+}
+
+.rightSubHeader li:hover{
+    cursor: pointer;
+}
+
+.rightHeaderContent{
+    padding: 0;
+    margin: 0;
+
+}
+
+.mobileSpanArrow{
+    float: right;
+    padding-right: 2.5rem;
+}
+
+.rightHeaderContent li{
+    width: 100%;
+}
+
+.rightHeaderContent li{
+    background-color: #333333;
+    border-top: 1px solid black;
+    cursor: pointer;
+}
+
+.rightHeaderContent li a{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.searchBarBox{
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 30px;
+    width: 60%;
+    height: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+
+
+.searchBarBoxColor{
+    background:#333333 !important;
+    border: 1px solid #333333 !important;
+}
+
+.searchBarBoxInputColor::placeholder{
+    color: hsl(20 1% 54%) !important;
+}
+
+#searchInp{
+    background: transparent;
+    width: 80%;
+    height: 50px;
+    color: white;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-left: 20px;
+    outline: none;
+    border-right: none;
+    border: none;
+    text-transform: uppercase;
+}
+
+#searchInp::placeholder{
+    color: #f1f1f1;
+}
+
+.submitButton{
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 20%;
+    height: 50px;
+    outline: none;
+}
+
+.rightHeaderSubContent, .rightHeaderSubContent2{
+    display: none;
+    animation: fadeOut .2s ease-out forwards;
+    z-index: 102;
+}
+
+.rightTagWrapper{
+    width: 100%;
+    height: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    border-radius: 8px;
+}
+
+.rightTagItems{
+    flex: 1;
+    padding: .5rem;
+    border-radius: 6.4px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.rightTagItemsImgHolder{
+    border-radius: 8px;
+    width: 100%;
+    height: 100% !important;
+}
+
+.rightTagItemsImgHolder img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    transition: all .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: block;
+}
+
+
+.rightTagItemsImgHolder img:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,.05), 0 10px 10px rgba(0,0,0,.02);
+}
+
+.rightTagItemsDesc h4{
+    color: #0a0a0a;
+    margin: 16px 0 0 0;
+    letter-spacing: .03em;
+    position: static;
+    display: inline-block;
+    left: 0px;
+    bottom: 8px;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 15.6px;
+}
+
+.rightTagItemsBig{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.rightItemsBigCard{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.rightItemsBigCardImg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+
+    border-radius: 8px;
+}
+
+.rightItemsBigCardTitle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 8rem;
+    clip-path: polygon(77% 0, 63% 90%, 100% 100%, 100% 101%, 0% 101%, 0% 0%);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+}
+
+.rightItemsBigCardTitleDecs{
+    width: 75% !important;
+    text-align: center;
+    padding-top: 3rem;
+    color: white;
+    font-size: 1rem;
+    font-family: markproThin,Arial,sans-serif;
+}
+
+.rightItemsBigCardTitleDecs span{
+    color: white;
+}
+
+.rightItemsBigCardTitleImg{
+    width: 100%;
+    height: auto;
+    display: flex;
+    /* padding-left: 4rem; */
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 6.4px;
+    border-bottom-left-radius: 6.4px;
+    text-align: center;
+}
+
+.rightItemsBigCardTitleImg span{
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    align-items: center;
+}
+
+.rightItemsBigCardTitleImg img{
+    width: 75%;
+}
+
+
+.cardHide{
+    display: none;
+}
+
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeOut{
+    to{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.importantRules{
+    display: flex !important;
+    transition: .5s;
+    animation: fadeIn .2s ease-out forwards;
+}
+
+.subHeaderTitle{
+    color: white;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+}
+
+.linkActive{
+    background-color: #212121 !important;
+}
+
+/* Preference */
+#close-btn, .menuIcon a{
+    outline: none;
+}
+
+
+/* Trans Anim */
+@keyframes rightBar{
+    from{
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@media screen and (max-width:1500px) {
+    .rightHeaderWrapper{
+        display: flex;
+    }
+    .centerHeader{
+        display: none;
+    }
+
+    .header{
+        justify-content: space-between;
+    }
+
+}

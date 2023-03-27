@@ -9,6 +9,7 @@ catchAsync(async (req, res, next) =>{
 
     let query = Model.find({});
     const doc = await query;
+    
     res.status(200).json({
         status:'success',
         data: {
