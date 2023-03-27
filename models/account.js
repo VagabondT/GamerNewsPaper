@@ -24,7 +24,8 @@ const AccountSchema = new mongoose.Schema(
     Login: {
       type: String,
       required: [true, "Please tell us your login."],
-      lowercase: true
+      lowercase: true,
+      unique : true
     },
     Password: {
       type: String,
@@ -50,6 +51,7 @@ const AccountSchema = new mongoose.Schema(
     Active: {
       type: Boolean,
       default: true,
+      select: false
     },
 
     // Ghi lại thời gian mỗi lần có thay đổi mật khẩu.

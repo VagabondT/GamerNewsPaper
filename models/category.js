@@ -5,15 +5,16 @@ const mongoose = require("mongoose");
 const CategorySchema = new mongoose.Schema(
   {
     _id: {
-      type: mongoose.Schema.ObjectId,
+      type: Number,
       required: [true, "The category must have ID."],
-      default: new mongoose.Types.ObjectId()
+      unique: true,
     },
-    name: {
+    Name: {
       type: String,
       require: [true, "Please tell us your category name!."],
       max: 100,
-      capitalize: true,
+      trim: true,
+      unique: true,
     },
   },
   {
@@ -24,8 +25,8 @@ const CategorySchema = new mongoose.Schema(
   }
 );
 
-CategorySchema.pre("save", async function(next){
-  console.log('save test');
+CategorySchema.pre("save", async function (next) {
+  this.Name = await this.Name.toUpperCase();
   next();
 });
 

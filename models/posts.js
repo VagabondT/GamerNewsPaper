@@ -14,6 +14,7 @@ const PostsSchema = new mongoose.Schema(
       type: String,
       max: 50,
       required: [true, "Please tell us title posts."],
+      trim: true,
     },
     Thumbnail: {
       type: String,
@@ -21,12 +22,12 @@ const PostsSchema = new mongoose.Schema(
     },
     DateCreate: {
       type: Date,
-      default: null,
+      default: Date.now(),
     },
 
     DateChanged: {
       type: Date,
-      default: Date.now(),
+      default: null,
     },
 
     Status: {
@@ -34,12 +35,15 @@ const PostsSchema = new mongoose.Schema(
       enum: ["cancel", "wait", "public"],
       default: "wait",
     },
+    Content: {
+      type: String,
+    },
     Tags: {
-      type: Array
+      type: Array,
     },
     Category: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Category',
+      type: Number,
+      ref: "Category",
       required: [true, "The posts must be belong to a category."],
     },
   },
@@ -48,10 +52,15 @@ const PostsSchema = new mongoose.Schema(
     autoIndex: true,
     _id: false,
     collection: "Posts",
-    toJSON: {virtuals: true},
-    toObject: {virtuals: true}
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+PostsSchema.pre("save", async () => {
+  this.Title = this.Title.toUpperCase();
+  next();
+});
 
 const Posts = mongoose.model("Posts", PostsSchema);
 
