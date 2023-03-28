@@ -34,7 +34,10 @@ block content
                   br
                 .contentImg
                   .resDiv
-                    img(src=`../${featuredPost[2].Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    if featuredPost[2].Thumbnail.includes('https://')
+                      img(src=`${featuredPost[2].Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    else 
+                      img(src=`../${featuredPost[2].Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
         .grid(style='margin-top: 15%;')
           .gridInner
             .grid-4-items

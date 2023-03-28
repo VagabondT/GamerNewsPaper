@@ -1,17 +1,26 @@
 const catchAsync = require('./../Utilities/catchAsync');
 const AppError = require('./../Utilities/appError');
-
-
-
+const slugify = require('slugify')
+const APIFeatures = require('../Utilities//apiFeatures')
 
 exports.getAll = Model => 
 catchAsync(async (req, res, next) =>{
 
-    let query = Model.find({});
-    const doc = await query;
+    let filter = {};
+    if (req.params.tourId) filter = { tour: req.params.tourId };
+
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    
+    const doc = await features.query;
     
     res.status(200).json({
         status:'success',
+        results: doc.length,
         data: {
             data:doc
         }
@@ -42,6 +51,7 @@ exports.getOne = (Model) =>{
 
 exports.createOne = Model =>
   catchAsync(async (req, res, next) => {
+    
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',

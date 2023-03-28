@@ -1,4 +1,4 @@
-const Category = require('../models/posts');
+
 const Post = require('../models/posts');
 const handler = require('./handler');
 const AppError = require('./../Utilities/appError');

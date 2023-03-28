@@ -45,11 +45,12 @@ exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
 
 
     const featuredPost = posts[0];
+    featuredPost.DateChanged= prettyDate(featuredPost.DateChanged);
     posts.shift();
-
+    const ConvertedPosts = ConvertObjectTime(posts);
     res.status(200).render('News',{
         title:'All posts',
-        posts,
+        posts: ConvertedPosts,
         featuredPost
     })
 
@@ -80,3 +81,23 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
 
 })
 
+function prettyDate(dateString){
+    //if it's already a date object and not a string you don't need this line:
+    var date = new Date(dateString);
+    var d = date.getDate();
+    // var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    var monthNames = [ "Thg1", "Thg2", "Thg3", "Thg4", "Thg5", "Thg6","Thg6", "Thg8", "Thg9", "Thg10", "Thg11", "Thg12" ];
+    var m = monthNames[date.getMonth()];
+    var y = date.getFullYear();
+    return d+' '+m+' '+y;
+}
+
+function ConvertObjectTime(object){
+
+    object.forEach(element => {
+        
+        var holder= element.DateChanged;
+        element.DateChanged = prettyDate(holder);
+    });
+    return object;
+} 

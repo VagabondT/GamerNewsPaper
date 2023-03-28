@@ -2,7 +2,7 @@
 // Purpose :  Create Schema for Collection
 const mongoose = require("mongoose");
 
-const Category = require("./category");
+const slugify = require('slugify');
 
 const PostsSchema = new mongoose.Schema(
   {
@@ -12,7 +12,7 @@ const PostsSchema = new mongoose.Schema(
       required: [true, "Please tell us title posts."],
       trim: true,
     },
-    Desciption: {
+    Description: {
       type: String,
       max: 500,
     },
@@ -57,6 +57,21 @@ const PostsSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+PostsSchema.pre('save', function(next) {
+  this.Slug = slugify(this.Title, { lower: true });
+
+  //sau này implement quill vào cho nó sửa
+  if (this.Description === undefined){
+    if (this.Content.length > 100){
+      this.Description = this.Content.slice(0,100) + '...';
+    }else{
+      
+      this.Description = 'Bởi tác giả vô danh'
+    }
+  }
+  next();
+});
 
 const Posts = mongoose.model("Posts", PostsSchema);
 
