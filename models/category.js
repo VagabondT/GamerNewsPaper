@@ -4,11 +4,6 @@ const mongoose = require("mongoose");
 
 const CategorySchema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-      required: [true, "The category must have ID."],
-      unique: true,
-    },
     Name: {
       type: String,
       require: [true, "Please tell us your category name!."],
@@ -16,19 +11,27 @@ const CategorySchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+    Description: {
+      type: String,
+      max : 200
+    },
+    Thumbnail: {
+      type: String,
+      default: "default.jpg"
+    },
+    Slug : String
   },
   {
     autoCreate: true,
     autoIndex: true,
-    _id: false,
     collection: "Category",
+     // If you want show properties virtual, You must add two row below.
+     toJSON: { virtuals: true },
+     toObject: { virtuals: true },
+
   }
 );
 
-CategorySchema.pre("save", async function (next) {
-  this.Name = await this.Name.toUpperCase();
-  next();
-});
 
 const Category = mongoose.model("Category", CategorySchema);
 

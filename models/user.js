@@ -8,11 +8,6 @@ const Account = require("./account");
 
 const UserSchema = new mongoose.Schema(
   {
-    _id: {
-      type: mongoose.Schema.ObjectId,
-      default: new mongoose.Types.ObjectId(),
-      required: [true, "Object document must have ID."],
-    },
     Name: {
       type: String,
       required: [true, "Do you have your name?"],
@@ -33,7 +28,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      // validate: [validator.isEmail(Email), "Please provide a valid email"],
     },
     Address: {
       type: String,
@@ -41,7 +35,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
     Account: {
-      type: Number,
+      type: mongoose.Schema.ObjectId,
       ref: "Account",
       required: [true],
     },
@@ -55,8 +49,10 @@ const UserSchema = new mongoose.Schema(
   {
     autoCreate: true,
     autoIndex: true,
-    _id: false,
     collection: "User",
+     // If you want show properties virtual, You must add two row below.
+     toJSON: { virtuals: true },
+     toObject: { virtuals: true },
   }
 );
 

@@ -17,15 +17,12 @@ const bcrypt = require("bcryptjs");
 
 const AccountSchema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-      required: [true, "The account must have ID."],
-    },
-    Login: {
+    UserName: {
       type: String,
       required: [true, "Please tell us your login."],
       lowercase: true,
-      unique : true
+      trim : true,
+      unique: true,
     },
     Password: {
       type: String,
@@ -47,11 +44,13 @@ const AccountSchema = new mongoose.Schema(
       type: String,
       enum: ["administrator", "user"],
       default: "user",
+      trim: true,
+      lowercase: true,
     },
     Active: {
       type: Boolean,
       default: true,
-      select: false
+      select: false,
     },
 
     // Ghi lại thời gian mỗi lần có thay đổi mật khẩu.
@@ -72,8 +71,10 @@ const AccountSchema = new mongoose.Schema(
   {
     autoCreate: true,
     autoIndex: true,
-    _id: false,
     collection: "Account",
+     // If you want show properties virtual, You must add two row below.
+     toJSON: { virtuals: true },
+     toObject: { virtuals: true },
   }
 );
 

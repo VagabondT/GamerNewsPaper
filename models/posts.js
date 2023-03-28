@@ -6,15 +6,15 @@ const Category = require("./category");
 
 const PostsSchema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-      required: [true, "The posts must have ID."],
-    },
     Title: {
       type: String,
       max: 50,
       required: [true, "Please tell us title posts."],
       trim: true,
+    },
+    Desciption: {
+      type: String,
+      max: 500,
     },
     Thumbnail: {
       type: String,
@@ -32,8 +32,8 @@ const PostsSchema = new mongoose.Schema(
 
     Status: {
       type: String,
-      enum: ["cancel", "wait", "public"],
-      default: "wait",
+      enum: ["cancel", "draft", "submit", "publish"],
+      default: "draft",
     },
     Content: {
       type: String,
@@ -41,8 +41,9 @@ const PostsSchema = new mongoose.Schema(
     Tags: {
       type: Array,
     },
+    Slug: String,
     Category: {
-      type: Number,
+      type: mongoose.Schema.ObjectId,
       ref: "Category",
       required: [true, "The posts must be belong to a category."],
     },
@@ -50,17 +51,12 @@ const PostsSchema = new mongoose.Schema(
   {
     autoCreate: true,
     autoIndex: true,
-    _id: false,
     collection: "Posts",
+    // If you want show properties virtual, You must add two row below.
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
-
-PostsSchema.pre("save", async () => {
-  this.Title = this.Title.toUpperCase();
-  next();
-});
 
 const Posts = mongoose.model("Posts", PostsSchema);
 
