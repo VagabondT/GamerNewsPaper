@@ -18,6 +18,7 @@ var app = express();
 // app.use(cors(corsOptions));
 
 const indexRouter = require('./routes/index');
+const newsRouter = require('./routes/news')
 const apiPostRouter = require('./routes/api/post');
 const apiCategoryRouter = require('./routes/api/category');
 const apiUserRouter = require('./routes/api/users');
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Authorization below this line
 // app.use(verifyJWT);
 app.use('/',indexRouter );
+app.use('/news',newsRouter)
 app.use('/posts', apiPostRouter);
 app.use('/category',apiCategoryRouter);
 app.use('/users',apiUserRouter);

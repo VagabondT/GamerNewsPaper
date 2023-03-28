@@ -24,7 +24,7 @@ block content
           .heroPost(style='padding-bottom: 20%;')
             .heroContentInner
               .heroContent
-                a.postLink(href=`./posts/${featuredPost._id}`)
+                a.postLink(href=`./news/${featuredPost._id}`)
                 .contentImg
                   .resDiv
                     img(src=`${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
@@ -41,18 +41,17 @@ block content
                     span !{featuredPost.Category[0].name}
                   h2.itemHeader
                     span !{featuredPost.Title}
-                  p.itemDesc
-                    | Thank you to everyone who has watched Arcane and for making this an unforgettable moment. We&rsquo;ve never been more excited about the future.
+                  p.itemDesc !{featuredPost.Content}
                   time.itemDate not yet Implemented
         .grid
           .gridInner
             .grid-4-items
               each post in posts
                 .gridItem
-                  a.postLinkSmall(href=`./posts/${post._id}`)
+                  a.postLinkSmall(href=`./news/${post._id}`)
                   .contentImg
                     .resDiv
-                      img(src='./img/aki1000x563.png' alt='' loading='lazy' width='600' height='337')
+                      img(src=`${post.Thumbnail}` alt='' loading='lazy' width='600' height='337')
                       .typeCategorySmall
                         .brush-icon
                           span.icon.brushIconBg(aria-hidden='true' style='width:50px;height:50px;line-height:50px')
@@ -67,7 +66,7 @@ block content
                     h2.itemHeader
                       span !{post.Title}
                     p.itemDesc
-                      | Nguy&#x1EC5;n H&#x1EEF;u Tu&#x1EA5;n T&uacute; - 2174801030042
+                      | !{post.Content}
                     time.itemDate Nov 24, 2021
               //- .gridItem
               //-   a.postLinkSmall(href='#')

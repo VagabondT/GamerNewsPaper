@@ -47,8 +47,6 @@ exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
     const featuredPost = posts[0];
     posts.shift();
 
-    console.log(posts[0].Category[0].name);
-
     res.status(200).render('News',{
         title:'All posts',
         posts,
@@ -57,4 +55,28 @@ exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
 
 })
 
+exports.RenderNewsview = catchAsync(async (req,res,next) =>{
+
+
+    const post = Post.findById(req.params.id)
+
+    const featuredPost = await Post.aggregate([
+        {
+            $lookup:
+            {
+                from: "Category",
+                localField: 'Category',
+                foreignField: '_id',
+                as: 'Category'
+            }
+        }
+    ])
+
+    res.status(200).render('newsview',{
+        title:'Newsview',
+        post,
+        featuredPost
+    })
+
+})
 

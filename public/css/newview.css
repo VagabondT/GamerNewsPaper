@@ -1,9 +1,13 @@
 *, :after, :before {
     box-sizing: border-box;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,800;0,900;1,700;1,800;1,900&display=swap');
 html{
     background-color: #D9D8D4;
+}
+
+.header{
+    background-color: #0A0A0A !important;
 }
 
 .container{
@@ -233,6 +237,10 @@ html{
     display: inline-block;
     margin: 0 15%;    
     font-size: 1.5rem;
+}
+
+.contentFont{
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .boldsspan{
