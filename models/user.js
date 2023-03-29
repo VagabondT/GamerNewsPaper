@@ -13,10 +13,12 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Do you have your name?"],
       max: 200,
       capitalize: true,
+      default: 'A fabulous writer name'
     },
     BirthOfDate: {
       type: Date,
       required: [true, "Go ask someone for your birthday."],
+      default: "01-Jan-1998"
     },
     Photo: {
       type: String,
@@ -28,6 +30,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
+      default:'dummy@planet.com'
     },
     Address: {
       type: String,

@@ -23,7 +23,7 @@ block content
           .heroPost(style='padding-bottom: 20%;')
             .heroContentInner
               .heroContent
-                a.postLink(href=`./news/${featuredPost._id}`)
+                a.postLink(href=`./news/${featuredPost.Slug}`)
                 .contentImg
                   .resDiv
                     img(src=`${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
@@ -37,17 +37,17 @@ block content
                           path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                 .contentPadded
                   .itemTag
-                    span !{featuredPost.Category[0].name}
+                    span !{featuredPost.Category[0].Name}
                   h2.itemHeader
                     span !{featuredPost.Title}
                   p.itemDesc !{featuredPost.Content}
-                  time.itemDate !{featuredPost.DateChanged}
+                  time.itemDate !{featuredPost.DateCreate}
         .grid
           .gridInner
             .grid-4-items
               each post in posts
                 .gridItem
-                  a.postLinkSmall(href=`./news/${post._id}`)
+                  a.postLinkSmall(href=`./news/${post.Slug}`)
                   .contentImg
                     .resDiv
                       img(src=`${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
@@ -61,12 +61,12 @@ block content
                               path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                   .contentPadded
                     .itemTag
-                      span !{post.Category[0].name}
+                      span !{post.Category[0].Name}
                     h2.itemHeader
                       span !{post.Title}
                     p.itemDesc
                       | !{post.Description}
-                    time.itemDate !{post.DateChanged}
+                    time.itemDate !{post.DateCreate}
             
           .loadMore
             a.button.loadMoreBtn(href='#')

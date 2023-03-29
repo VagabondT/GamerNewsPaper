@@ -96,4 +96,3 @@ exports.deleteOne = Model =>
     });
 });
 
-

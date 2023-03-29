@@ -42,7 +42,7 @@ const AccountSchema = new mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["administrator", "user"],
+      enum: ["administrator", "user","editor"],
       default: "user",
       trim: true,
       lowercase: true,
@@ -116,7 +116,7 @@ AccountSchema.methods.CorrectPassword = async function (
   return await bcrypt.compare(CandidatePassword, Password);
 };
 
-AccountSchema.method.ChangedPasswordAfter = function (JWTTimestamp) {
+AccountSchema.methods.ChangedPasswordAfter = function (JWTTimestamp) {
   if (this.PasswordChangeAt) {
     const changed_timestamp = parseInt(
       this.PasswordChangeAt.getTime() / 1000,

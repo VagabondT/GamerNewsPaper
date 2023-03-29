@@ -25,7 +25,7 @@ block content
           span Xem thêm
       .newsSectionBody
         .bodyLeft
-          .bigCard.cardBg(style=`background-image:url(${featuredPost.Thumbnail})`, onclick='featuredLink("'+ featuredPost._id +'")')
+          .bigCard.cardBg(style=`background-image:url(${featuredPost.Thumbnail})`, onclick='featuredLink("'+ featuredPost.Slug +'")')
             .badge
               span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
                 svg(viewbox='0 0 24 24' fill='none')
@@ -37,7 +37,7 @@ block content
           ul.newsArticle
             each post in posts
               li
-                a.newsArticleCard(href=`./posts/${post._id}`)
+                a.newsArticleCard(href=`./news/${post.Slug}`)
                   .cardTitle
                     h3.cut-text !{post.Title}
                     p.category !{post.Category[0].name}

@@ -9,7 +9,7 @@ append head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css' integrity='sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==' crossorigin='anonymous' referrerpolicy='no-referrer')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous' referrerpolicy='no-referrer')
 
-  title !{featuredPost[2].Title} 
+  title !{post.Title} | gamerThoiBAO
 
 block content
   #top.container
@@ -22,27 +22,27 @@ block content
               .heroContent
                 .contentPaddedHero
                   .itemTagHero
-                    span !{featuredPost[2].Category[0].name}
+                    span !{post.Category.Name}
                   h2.itemHeaderHero
-                    span !{featuredPost[2].Title}
+                    span !{post.Title}
                   time.itemDateBig
                     span.icon(aria-hidden='true' style='width:20px;height:18px;line-height:18px')
                       svg(viewbox='0 0 20 18')
                         path(d='M3 18c-1.7 0-3-1.4-3-3v-1c0-.1.1-.3.1-.4.1-.1.2-.1.4-.1H2V3c0-1.7 1.4-3 3-3h12c1.7 0 3 1.4 3 3v1.5c0 .2-.2.5-.5.5H15v10c0 1.6-1.3 3-3 3H3zM5 1c-1.1 0-2 .9-2 2v10.5h6.4c.3 0 .5.2.5.5v1c0 1.1.9 2 2 2s2-.9 2-2V3c0-.7.2-1.3.7-1.9l.1-.1H5zM1 15c0 1.1.9 2 2 2h6.7l-.1-.1c-.4-.6-.6-1.2-.6-1.9v-.5H1v.5zM17 1c-1.1 0-2 .9-2 2v1h4V3c0-1.1-.9-2-2-2z')
                         path(d='M5.7 9h6v1h-6zm0-2h6v1h-6zm0-2h6v1h-6z')
-                    |                                         Nov 22, 2021
+                    |                                         !{post.DateCreate}
                   br
                 .contentImg
                   .resDiv
-                    if featuredPost[2].Thumbnail.includes('https://')
-                      img(src=`${featuredPost[2].Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    if post.Thumbnail.includes('https://')
+                      img(src=`${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
                     else 
-                      img(src=`../${featuredPost[2].Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                      img(src=`../${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
         .grid(style='margin-top: 15%;')
           .gridInner
             .grid-4-items
               .gridItem.contentFont
-                p !{featuredPost[2].Content}
+                p !{post.Content}
             .grid-4-items
               .relatedPostArea.gridItem
                 h2(style="text-align: center; font-family: 'Mark Pro',Arial,sans-serif; font-size: 4rem;") Có thể bạn sẽ thích
@@ -50,7 +50,7 @@ block content
                   each e in featuredPost 
                     .item
                       .cardItem
-                        a.postLinkSmall(href='#')
+                        a.postLinkSmall(href=`/news/${e.Slug}`)
                         .contentImg
                           .resDiv
                             img(src=`${e.Thumbnail}` alt='' loading='lazy')
@@ -64,12 +64,12 @@ block content
                                     path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                         .contentPadded
                           .itemTag
-                            span !{e.Category[0].name}
+                            span !{e.Category[0].Name}
                           h2.itemHeader
                             span !{e.Title}
-                          p.itemDesc
-                            | What do you think about a virtual world? She depends on you.
-                          time.itemDate Nov 24, 2021
+                          p.itemDesc !{e.Description}
+
+                          time.itemDate !{e.DateCreate}
                   //- .item
                   //-   .cardItem
                   //-     a.postLinkSmall(href='#')

@@ -8,6 +8,9 @@ const cors = require('cors');
 // const corsOptions = require('./config/corsOptions');
 // const credentials = require('./middlewares/credentials');
 
+const AppError = require('./Utilities/appError');
+const ErorrHandler = require('./controllers//errorController')
+
 var app = express();
 
 // Handle options credentials check - before CORS!
@@ -22,6 +25,7 @@ const newsRouter = require('./routes/news')
 const apiPostRouter = require('./routes/api/post');
 const apiCategoryRouter = require('./routes/api/category');
 const apiUserRouter = require('./routes/api/users');
+const apiAccountRouter = require('./routes/api/account');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,44 +42,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use(verifyJWT);
 app.use('/',indexRouter );
 app.use('/news',newsRouter)
-app.use('/posts', apiPostRouter);
-app.use('/category',apiCategoryRouter);
-app.use('/users',apiUserRouter);
+app.use('/api/posts', apiPostRouter);
+app.use('/api/category',apiCategoryRouter);
+app.use('/api//users',apiUserRouter);
+app.use('/api/account', apiAccountRouter);
 
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error',{msg: err.message});
-
-});
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Không tìm thấy ${req.originalUrl} trên server này!`, 404));
-  err.status = 'fail';
-  err.statusCode = 404;
-  next(err);
+
+  next(new AppError(`Cant find ${req.originalUrl} on this server!`,404))
 });
 
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+// app.use((err,req,res,next)=>{
+//   err.statusCode = err.statusCode || 500;
+//   err.status = err.status || 'error';
+//   res.status(err.statusCode).json({
+//     status: err.status,
+//     message: err.message
 
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message
-  });
-})
+//   })
+// })
+
+app.use(ErorrHandler)
 
 module.exports = app

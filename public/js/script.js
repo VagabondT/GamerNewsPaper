@@ -155,12 +155,12 @@ $(window).resize(function(){
 
 // HeaderLogo
 $(".homeLogo").click(()=>{
-    window.location.href = "./";
+    window.location.href = "/";
 })
 
 
 $("#newsRightHeader").click(()=>{
-    window.location.href = "./news";
+    window.location.href = "/news";
 })
 
 $("#loginRightHeader").click(()=>{
@@ -169,5 +169,5 @@ $("#loginRightHeader").click(()=>{
 
 
 function featuredLink(id){
-    window.location.href = "./posts/" + id;
+    window.location.href = "./news/" + id;
 }
