@@ -10,10 +10,9 @@ const UserSchema = new mongoose.Schema(
   {
     Name: {
       type: String,
-      default: "New User",
       max: 200,
       capitalize: true,
-      default: 'A fabulous writer name'
+      default: 'A fabulous writer name',
       trim: true
     },
     BirthOfDate: {
