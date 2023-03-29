@@ -10,15 +10,15 @@ const UserSchema = new mongoose.Schema(
   {
     Name: {
       type: String,
-      required: [true, "Do you have your name?"],
+      default: "New User",
       max: 200,
       capitalize: true,
       default: 'A fabulous writer name'
+      trim: true
     },
     BirthOfDate: {
       type: Date,
       required: [true, "Go ask someone for your birthday."],
-      default: "01-Jan-1998"
     },
     Photo: {
       type: String,
@@ -53,9 +53,9 @@ const UserSchema = new mongoose.Schema(
     autoCreate: true,
     autoIndex: true,
     collection: "User",
-     // If you want show properties virtual, You must add two row below.
-     toJSON: { virtuals: true },
-     toObject: { virtuals: true },
+    // If you want show properties virtual, You must add two row below.
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
@@ -65,6 +65,7 @@ UserSchema.virtual("Age").get(function () {
     (Date.now() - this.BirthOfDate.getTime()) / (1000 * 3600 * 24 * 365)
   );
 });
+
 
 const User = mongoose.model("User", UserSchema);
 
