@@ -9,7 +9,7 @@ exports.deleteUser= handler.deleteOne(User);
 exports.getAllUser = handler.getAll(User);
 
 exports.getUser = async (req,res,next) =>{
-    console.log(req.params.id);
+
     if (ObjectId.isValid(req.params.id)){
         let query = Category.findById(new ObjectId(req.params.id));
 

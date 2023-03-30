@@ -19,7 +19,7 @@ const AccountSchema = new mongoose.Schema(
   {
     UserName: {
       type: String,
-      required: [true, "Please tell us your login."],
+      required: [true, "We don't know how to call you? Time to introduce your name."],
       lowercase: true,
       trim : true,
       unique: true,
@@ -45,7 +45,7 @@ const AccountSchema = new mongoose.Schema(
       enum: ["administrator", "user","editor"],
       default: "user",
       trim: true,
-      lowercase: true,
+      lowercase: true
     },
     Active: {
       type: Boolean,
@@ -91,7 +91,7 @@ AccountSchema.pre("save", async function (next) {
 
 // middlewares for save event.
 // Mục đích lưu lại thời gian thay đổi mới nhất.
-AccountSchema.pre("pre", function (next) {
+AccountSchema.pre("save", function (next) {
   // Nếu pasword không có sự thay đổi.
   if (!this.isModified("Password") || this.isNew) return next();
 
@@ -117,17 +117,18 @@ AccountSchema.methods.CorrectPassword = async function (
 };
 
 AccountSchema.methods.ChangedPasswordAfter = function (JWTTimestamp) {
+  console.log(this.PasswordChangeAt)
   if (this.PasswordChangeAt) {
     const changed_timestamp = parseInt(
       this.PasswordChangeAt.getTime() / 1000,
       10
     );
-    return JWTTimestamp > changed_timestamp;
+    return JWTTimestamp < changed_timestamp;
   }
   return false;
 };
 
-AccountSchema.methods.CreateResetToken = () => {
+AccountSchema.methods.CreateResetToken = function(){
   const ResetToken = crypto.randomBytes(32).toString("hex");
   this.PasswordResetToken = crypto
     .createHash("sha256")

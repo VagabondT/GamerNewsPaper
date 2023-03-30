@@ -12,52 +12,29 @@ function checkInputValid(){
 const isEmpty = str => !str.trim().length;
 
 
-async function sendRefreshToken(){
-    try{
-        const response = await fetch('http://localhost:6969/refresh',{
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include'
-        });
 
-        if (!response.ok){
-            if (response.status === 401){
-                return response.json();
-
-            }
-            return response.json();
-            // throw new Error(`${response.status} ${response.statusText}`);
-        }
-
-        return await response.json();
-    }catch (err){
-        console.log(err);
-
-    }
-}
 
 const sendLogin = async () =>{
     const user = $('#inputIdUsrname').val();
     const pwd = $('#inputIdPassword').val();
-
+    const postURL = `http://localhost:6868/api/account/login`
     try{
-        const response = await fetch('http://localhost:6969/auth',{
+        const response = await axios({
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({user,pwd})
-        });
-        if (!response.ok){
-            if (response.status === 401){
-                return await sendRefreshToken();
-
+            url: postURL,
+            data: {
+                UserName: user,
+                Password: pwd
             }
-            return response;
-            // throw new Error(`${response.status} ${response.statusText}`);
+        })
+
+        if (response.data.status === 'success'){
+            window.setTimeout(() => {
+                location = '/'
+            }, 1500);
         }
-        return await response.json();
     }catch (err){
-        console.log(err);
+        alert(err.response.data.message);
 
     }
 }
@@ -65,29 +42,7 @@ const sendLogin = async () =>{
 
 $(".submitButton").click(()=>{
     if (!isEmpty($("#inputIdUsrname").val()) && !isEmpty($("#inputIdPassword").val())){
-        sendLogin().then((data) =>{
-            console.log(data);
-            localStorage.setItem('accessToken', data.accessToken)
-            if (data.msg){
-                $(".noticePara").text(data.msg);
-            }
-            else{
-                var akiHeader = new Headers();
-                akiHeader.append('Content-Type', 'application/json');
-                akiHeader.append('Authorization','Bearer '+ localStorage.getItem('accessToken'))
-                fetch('http://localhost:6969/',{
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: akiHeader
-
-                })
-            }
-        
-        }, (err)=>{
-            if (err) {
-                
-            }
-        })
+        sendLogin();
     }
 })
 

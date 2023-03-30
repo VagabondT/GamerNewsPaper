@@ -12,12 +12,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 200,
       capitalize: true,
-      default: 'A fabulous writer name',
+      default: 'Captain A',
       trim: true
     },
     BirthOfDate: {
       type: Date,
-      required: [true, "Go ask someone for your birthday."],
     },
     Photo: {
       type: String,
@@ -25,11 +24,10 @@ const UserSchema = new mongoose.Schema(
     },
     Email: {
       type: String,
-      required: [true, "Please provide your email"],
       unique: true,
       lowercase: true,
       trim: true,
-      default:'dummy@planet.com'
+      required: true
     },
     Address: {
       type: String,
@@ -39,7 +37,7 @@ const UserSchema = new mongoose.Schema(
     Account: {
       type: mongoose.Schema.ObjectId,
       ref: "Account",
-      required: [true],
+      required: true,
     },
     Phone: {
       type: String,
@@ -47,6 +45,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+
   },
   {
     autoCreate: true,
@@ -69,3 +68,4 @@ UserSchema.virtual("Age").get(function () {
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
+

@@ -321,27 +321,47 @@ block header
             defs
             path.cls-1(d='M180,90a90,90,0,1,0,90,90A90,90,0,0,0,180,90Zm34.7,138.71-36.44-9.05-4.43-11.41,42.7,2.2Zm2.6-26.5H199.53l-3.33-45.45-1.87.58-3.17,44.87H177.73l-6.42-37.73-1.88.58.47,37.15H157.21l-7.34-31.08-1.88.58,2.11,30.5H137.89l-9.26-42.63,59.88-28.29,35,8.53Z' transform='translate(-90 -90)')
         li
-          a(href='#') Về chúng tôi
-          svg(width='10' height='5' viewbox='0 0 8 5')
-            title mainNavArrowDown
-            path(d='M.707 1.707l2.586 2.586a1 1 0 001.414 0l2.586-2.586C7.923 1.077 7.477 0 6.586 0H1.414C.524 0 .077 1.077.707 1.707z' fill='#7E7E7E')
-          ul.dropdown(aria-label='submenu')
-            li
-              a(href='#') Tầm nhìn
-            li
-              a(href='#') Sứ mệnh
+            a(href='#') Về chúng tôi
+            svg(width='10' height='5' viewbox='0 0 8 5')
+              title mainNavArrowDown
+              path(d='M.707 1.707l2.586 2.586a1 1 0 001.414 0l2.586-2.586C7.923 1.077 7.477 0 6.586 0H1.414C.524 0 .077 1.077.707 1.707z' fill='#7E7E7E')
+            ul.dropdown(aria-label='submenu')
+              li
+                a(href='#') Tầm nhìn
+              li
+                a(href='#') Sứ mệnh
 
         li
           a(href='/news') Tin tức
+
+        if user 
+          if userAccount.Role = "editor"
+            li
+              a(href='#') Quản lý bài viết
+              svg(width='10' height='5' viewbox='0 0 8 5')
+                title mainNavArrowDown
+                path(d='M.707 1.707l2.586 2.586a1 1 0 001.414 0l2.586-2.586C7.923 1.077 7.477 0 6.586 0H1.414C.524 0 .077 1.077.707 1.707z' fill='#7E7E7E')
+              ul.dropdown(aria-label='submenu')
+                li
+                  a(href='#') Viết bài mới
+                li
+                  a(href='#') Bài viết của bạn
+          else if userAccount.Role = "administrator"  
+            li
+                a(href='#') Duyệt bài viết
+
       .barArea
         .searchBarBox.centerSearch
           input#searchInp(type='text' name='' placeholder='TÌM KIẾM')
           button.submitButton
             i.fas.fa-search
         if !user
-          a.signInBtn(href='./login') ĐĂNG NHẬP
+          a.signInBtn(href='/login') ĐĂNG NHẬP
         else 
-          a.signInBtn(href='#') Xin chào #{user.name}
+          p(style="padding-right: 4%") Xin chào, !{user.Name[0]}!
+          a.signInBtn(href='/account')
+            i.fa.fa-user(aria-hidden='true') 
+            |  Đăng xuất
     .rightHeaderWrapper
       .menuIcon
         svg(width='32' height='32' viewbox='0 0 32 32')
@@ -362,8 +382,16 @@ block header
               circle(opacity='.07' cx='16' cy='16' r='16' fill='#F9F9F9')
               path(d='M12.007 11.973l8.132 8.132m-8.146-.012l8.131-8.132' stroke='#C7C7C7' stroke-width='2')
         ul.rightHeaderContent
-          li#loginRightHeader.linkActive
-            a(href='./login') đăng nhập
+          if !user
+            li#loginRightHeader.linkActive
+              a(href='/login') đăng nhập
+          else 
+            li#loginRightHeader.linkActive
+              a(href='./account') 
+                i.fa.fa-user(aria-hidden='true') 
+                | Tài khoản
+
+         
           li#rightHeaderLink1
             a về chúng tôi
             span.mobileSpanArrow

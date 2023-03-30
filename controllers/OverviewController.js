@@ -82,7 +82,6 @@ exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
 
 exports.RenderNewsview = catchAsync(async (req,res,next) =>{
 
-
     const post = await Post.findOne({Slug: req.params.id}).populate('Category');
     let postmodifed = post;
     postmodifed.DateCreate= prettyDate(post.DateCreate);
@@ -111,3 +110,14 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
 
 })
 
+exports.RenderLoginPage = catchAsync(async(req,res,next)=>{
+    res.status(200).render('login',{
+        title:'Đăng nhập'
+    })
+})
+
+exports.RenderRegisterPage = catchAsync(async(req,res,next)=>{
+    res.status(200).render('register',{
+        title:'Đăng ký | Gamer Thời BÁO'
+    })
+})

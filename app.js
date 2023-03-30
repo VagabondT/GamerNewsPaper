@@ -9,7 +9,7 @@ const cors = require('cors');
 // const credentials = require('./middlewares/credentials');
 
 const AppError = require('./Utilities/appError');
-const ErorrHandler = require('./controllers//errorController')
+const ErorrHandler = require('./controllers//errorController');
 
 var app = express();
 
@@ -40,12 +40,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Authorization below this line
 // app.use(verifyJWT);
+app.use('/api/account', apiAccountRouter);
 app.use('/',indexRouter );
 app.use('/news',newsRouter)
 app.use('/api/posts', apiPostRouter);
 app.use('/api/category',apiCategoryRouter);
 app.use('/api//users',apiUserRouter);
-app.use('/api/account', apiAccountRouter);
+
 
 
 
