@@ -59,7 +59,7 @@ const PostsSchema = new mongoose.Schema(
 );
 
 PostsSchema.pre('save', function(next) {
-  this.Slug = slugify(this.Title +'-'+ this._id.slice(-6,this._id.length), { lower: true });
+  this.Slug = slugify(this.Title +'-'+ this._id, { lower: true });
 
   //sau này implement quill vào cho nó sửa
   if (this.Description === undefined){

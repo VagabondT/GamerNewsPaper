@@ -41,12 +41,18 @@ block content
                   .cardTitle
                     h3.cut-text !{post.Title}
                     p.category !{post.Category[0].Name}
-                  .cardImage(style=`background-image:url(${post.Thumbnail})`)
-                    .badge.bageItems
-                      span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
-                        svg(viewbox='0 0 24 24' fill='none')
-                          path(d='M12.91 0L21 22h-3.893c-1.697-3.478-3.183-4.725-5.258-4.725-2.076 0-3.56 1.247-5.243 4.725H3l8.092-22h1.817zm2.136 16.74l-3.167-8.856-3.227 8.855c1.182-.42 2.287-.594 3.227-.594.925 0 2 .174 3.167.594z' fill='#BA8A63')
-            
+                  if post.Thumbnail.includes('https://') || post.Thumbnail.includes('http://')
+                    .cardImage(style=`background-image:url(${post.Thumbnail})`)
+                      .badge.bageItems
+                        span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
+                          svg(viewbox='0 0 24 24' fill='none')
+                            path(d='M12.91 0L21 22h-3.893c-1.697-3.478-3.183-4.725-5.258-4.725-2.076 0-3.56 1.247-5.243 4.725H3l8.092-22h1.817zm2.136 16.74l-3.167-8.856-3.227 8.855c1.182-.42 2.287-.594 3.227-.594.925 0 2 .174 3.167.594z' fill='#BA8A63')
+                  else
+                    .cardImage(style=`background-image:url(../img/${post.Thumbnail})`)
+                      .badge.bageItems
+                        span.icon(aria-hidden='true' style='width:24px;height:24px;line-height:24px')
+                          svg(viewbox='0 0 24 24' fill='none')
+                            path(d='M12.91 0L21 22h-3.893c-1.697-3.478-3.183-4.725-5.258-4.725-2.076 0-3.56 1.247-5.243 4.725H3l8.092-22h1.817zm2.136 16.74l-3.167-8.856-3.227 8.855c1.182-.42 2.287-.594 3.227-.594.925 0 2 .174 3.167.594z' fill='#BA8A63')
       a#seemore2.buttonSmall(href='#')
         span Xem thêm
     .gameSection

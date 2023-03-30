@@ -534,6 +534,14 @@ html{
     fill:#d1363a;
 }
 
+#postContentHere{
+    max-width: 100%;
+}
+
+#postContentHere img{
+    max-width: 80%;
+}
+
 @media screen and (max-width:1280px){
     .grid{
         margin-top: 12% !important;
@@ -595,3 +603,4 @@ html{
         z-index: 10;
     }
 }
+

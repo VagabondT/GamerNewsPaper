@@ -13,9 +13,10 @@ const UserSchema = new mongoose.Schema(
       max: 200,
       capitalize: true,
       default: 'Captain A',
-      trim: true
+      trim: true,
+      required: true
     },
-    BirthOfDate: {
+    Birthday: {
       type: Date,
     },
     Photo: {

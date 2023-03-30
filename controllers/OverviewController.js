@@ -1,5 +1,6 @@
 const catchAsync = require('./../Utilities/catchAsync');
 const Post = require('../models/posts')
+var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 function prettyDate(dateString){
     //if it's already a date object and not a string you don't need this line:
@@ -84,9 +85,18 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
 
     const post = await Post.findOne({Slug: req.params.id}).populate('Category');
     let postmodifed = post;
-    postmodifed.DateCreate= prettyDate(post.DateCreate);
-    postmodifed.DateChanged= prettyDate(post.DateChanged);
+    // postmodifed.DateCreate= prettyDate(post.DateCreate);
+    // postmodifed.DateChanged= prettyDate(post.DateChanged);
 
+    try{
+        const ops = JSON.parse(post.Content).ops;
+        var cfg = {}
+        var converter = new QuillDeltaToHtmlConverter(ops, cfg);
+        postmodifed.Content = converter.convert();
+    }catch(e){
+
+    }
+   
 
     const featuredPost = await Post.aggregate([
         {
@@ -108,6 +118,7 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
         featuredPost:modifiedFeaturedPosts
     })
 
+
 })
 
 exports.RenderLoginPage = catchAsync(async(req,res,next)=>{
@@ -120,4 +131,30 @@ exports.RenderRegisterPage = catchAsync(async(req,res,next)=>{
     res.status(200).render('register',{
         title:'Đăng ký | Gamer Thời BÁO'
     })
+})
+
+exports.RenderUserRegisterPage = catchAsync(async(req,res,next)=>{
+    res.status(200).render('userRegister',{
+        title:'Đăng ký | Gamer Thời BÁO'
+    })
+})
+
+//In trang createPost
+exports.RenderCreatePostPage = catchAsync(async(req,res,next)=>{
+    res.status(200).render('createPost',{
+        title:'Đăng ký | Gamer Thời BÁO'
+    })
+})
+
+//Lưu post mới vào database
+exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
+    console.log(req.body);
+    const newPost = req.body;
+    var holder = newPost.Content;
+    newPost.Content = JSON.stringify(holder)
+
+    await Post.create(newPost);
+    res.status(200).json({
+        status: 'success'
+    });
 })

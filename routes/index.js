@@ -9,5 +9,12 @@ router.get('/login',overviewController.RenderLoginPage)
 
 router.get('/register',overviewController.RenderRegisterPage)
 
+router.get('/userregis',accountController.protect,overviewController.RenderUserRegisterPage)
+
+
+//Post
+router.route('/create')
+    .get(accountController.protect,overviewController.RenderCreatePostPage)
+    .post(accountController.protect,overviewController.CreatePostFromPage)
 
 module.exports = router;
