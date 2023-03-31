@@ -30,10 +30,28 @@ function test(){
     document.getElementById("NoticePara").innerHTML = html;
 }
 
+$('input[type=radio][name=Category]').change(function() {
+    console.log(this.value);
+    //window.location.href = this.value;
+  });
+  
+  var countFocus = 0;
+  
+  //Close Switch
+  $('.select-box__current').on('click', function() {
+    if ($(this).is(':focus')) {
+      countFocus++;
+      if (countFocus == 2) {
+        this.blur();
+        countFocus = 0;
+      }
+    }
+  });
+
 const sendNewPost = async () =>{
-    const postTitle = 'Test from Quill';
+    const postTitle = $("#inputTitle").val();
     const postContent = editor.getContents();
-    const category = '6422f07a1b289c2c8568010b';
+    const category = $('input[type=radio][name=Category]').val()
 
     const postURL = `http://localhost:6868/create`
     try{
@@ -43,7 +61,7 @@ const sendNewPost = async () =>{
             data: {
                 Title: postTitle,
                 Content: postContent,
-                Category:category
+                Category:category,
             }
         })
 
@@ -53,7 +71,7 @@ const sendNewPost = async () =>{
             }, 1500);
         }
     }catch (err){
-        alert(err.response.data.message);
+        alert(err);
 
     }
 }

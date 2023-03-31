@@ -24,13 +24,13 @@ block content
                   .itemTagHero
                     span !{post.Category.Name}
                   h2.itemHeaderHero
-                    span !{post.Title}
+                    span= `${post.Title}`.substr(0,50) + '...'
                   time.itemDateBig
                     span.icon(aria-hidden='true' style='width:20px;height:18px;line-height:18px')
                       svg(viewbox='0 0 20 18')
                         path(d='M3 18c-1.7 0-3-1.4-3-3v-1c0-.1.1-.3.1-.4.1-.1.2-.1.4-.1H2V3c0-1.7 1.4-3 3-3h12c1.7 0 3 1.4 3 3v1.5c0 .2-.2.5-.5.5H15v10c0 1.6-1.3 3-3 3H3zM5 1c-1.1 0-2 .9-2 2v10.5h6.4c.3 0 .5.2.5.5v1c0 1.1.9 2 2 2s2-.9 2-2V3c0-.7.2-1.3.7-1.9l.1-.1H5zM1 15c0 1.1.9 2 2 2h6.7l-.1-.1c-.4-.6-.6-1.2-.6-1.9v-.5H1v.5zM17 1c-1.1 0-2 .9-2 2v1h4V3c0-1.1-.9-2-2-2z')
                         path(d='M5.7 9h6v1h-6zm0-2h6v1h-6zm0-2h6v1h-6z')
-                    |                                         !{post.DateCreate}
+                    |                                         !{post.DateCreate} bởi !{post.Author.Name}
                   br
                 .contentImg
                   .resDiv
@@ -53,7 +53,11 @@ block content
                         a.postLinkSmall(href=`/news/${e.Slug}`)
                         .contentImg
                           .resDiv
-                            img(src=`${e.Thumbnail}` alt='' loading='lazy')
+                            if post.Thumbnail.includes('https://')
+                              img(src=`${e.Thumbnail}` alt='' loading='lazy')
+                            else 
+                              img(src=`../img/${e.Thumbnail}` alt='' loading='lazy')
+                                    
                             .typeCategorySmall
                               .brush-icon
                                 span.icon.brushIconBg(aria-hidden='true' style='width:50px;height:50px;line-height:50px')
@@ -66,7 +70,7 @@ block content
                           .itemTag
                             span !{e.Category[0].Name}
                           h2.itemHeader
-                            span !{e.Title}
+                            span= `${e.Title}`.substr(0,50) + '...'
                           p.itemDesc !{e.Description}
 
                           time.itemDate !{e.DateCreate}

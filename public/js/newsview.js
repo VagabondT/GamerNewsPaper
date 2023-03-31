@@ -28,3 +28,27 @@ $(document).ready(function(){
   });
 
   $(".searchBarBox").attr("style","background:#333333 !important;border: 1px solid #333333 !important;");
+
+
+let AlignStyle = Quill.import('attributors/style/align')
+let BackgroundStyle = Quill.import('attributors/style/background')
+let ColorStyle = Quill.import('attributors/style/color')
+let DirectionStyle = Quill.import('attributors/style/direction')
+let FontStyle = Quill.import('attributors/style/font')
+let SizeStyle = Quill.import('attributors/style/size')    
+
+Quill.register(AlignStyle, true);
+Quill.register(BackgroundStyle, true);
+Quill.register(ColorStyle, true);
+Quill.register(DirectionStyle, true);
+Quill.register(FontStyle, true);
+Quill.register(SizeStyle, true);
+
+
+var quill = new Quill();
+
+quill.ready(()=>{
+  var justHtml = editor.root.innerHTML;
+  $("#postContentHere").html(justHtml)
+})
+  

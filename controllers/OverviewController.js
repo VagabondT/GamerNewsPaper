@@ -1,6 +1,7 @@
 const catchAsync = require('./../Utilities/catchAsync');
 const Post = require('../models/posts');
 const User = require('../models/user')
+const Category = require('../models/category')
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 function prettyDate(dateString){
@@ -94,12 +95,10 @@ exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
 
 exports.RenderNewsview = catchAsync(async (req,res,next) =>{
 
-    const post = await Post.findOne({Slug: req.params.id}).populate('Category');
+    const post = await Post.findOne({Slug: req.params.id}).populate('Author').populate('Category')
     let postmodifed = post;
-    // postmodifed.DateCreate= prettyDate(post.DateCreate);
-    // postmodifed.DateChanged= prettyDate(post.DateChanged);
-
     try{
+
         const ops = JSON.parse(post.Content).ops;
         var cfg = {}
         var converter = new QuillDeltaToHtmlConverter(ops, cfg);
@@ -124,7 +123,7 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
     var modifiedFeaturedPosts = ConvertObjectTime(featuredPost);
 
     res.status(200).render('newsview',{
-        title:'Newsview',
+        Title:'Newsview',
         post:postmodifed,
         featuredPost:modifiedFeaturedPosts
     })
@@ -158,20 +157,51 @@ exports.RenderUserRegisterPage = catchAsync(async(req,res,next)=>{
 
 //In trang createPost
 exports.RenderCreatePostPage = catchAsync(async(req,res,next)=>{
-    res.status(200).render('createPost',{
-        title:'Đăng ký | Gamer Thời BÁO',
-    })
+
+    const categoryList = await Category.find();
+    var categoryOption = [];
+    categoryList.forEach(element => {
+        categoryOption.push({Name: element.Name, Value: element.id}) 
+    });
+
+    categoryOption[0]["checked"] = true;
+    console.log(categoryOption);
+    if (!categoryList){
+        res.status(200).render('createPost',{
+            title:'Đăng ký | Gamer Thời BÁO',
+        })
+    }else{
+        res.status(200).render('createPost',{
+            title:'Đăng ký | Gamer Thời BÁO',
+            Categories: categoryOption
+        })
+    }
+
 })
 
 //Lưu post mới vào database
 exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
 
-    const newPost = req.body;
-    var holder = newPost.Content;
-    newPost.Content = JSON.stringify(holder)
+    const currentUser = await User.findOne({Account: req.user.id})
+    if (currentUser){
 
-    await Post.create(newPost);
-    res.status(200).json({
-        status: 'success'
-    });
+        const newPostSave = await Post.create({
+            Author: currentUser._id,
+            Title: req.body.Title,
+            Content: JSON.stringify(req.body.Content),
+            Category: req.body.Category
+    
+        });
+        res.status(200).json({
+            status: 'success'
+        });
+    }else{
+        res.status(404).json({
+            status: 'fail',
+            message:'user not found!'
+        });
+    }
+
+
+   
 })

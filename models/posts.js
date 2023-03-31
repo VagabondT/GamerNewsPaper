@@ -41,6 +41,11 @@ const PostsSchema = new mongoose.Schema(
     Tags: {
       type: Array,
     },
+    Author: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: [true, "The posts must be belong to an author."],
+    },
     Slug: String,
     Category: {
       type: mongoose.Schema.ObjectId,
