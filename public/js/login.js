@@ -29,12 +29,13 @@ const sendLogin = async () =>{
         })
 
         if (response.data.status === 'success'){
+            $(".noticePara").html("Đăng nhập thành công! Đang chuyển hướng...")
             window.setTimeout(() => {
                 location = '/'
             }, 1500);
         }
     }catch (err){
-        alert(err.response.data.message);
+        alert(err);
 
     }
 }

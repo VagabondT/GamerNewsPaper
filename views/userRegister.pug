@@ -28,43 +28,32 @@ head
             .col-2
               .input-group
                 label.label Họ và tên
-                input.input--style-4(type='text' name='Name' required)
+                input.input--style-4(type='text' name='Name' required value=`${userData.Name}`)
 
+              
             .col-2
               .input-group
                 label.label Địa chỉ
-                input.input--style-4(type='text' name='Address')
+                input.input--style-4(type='text' name='Address' value=`${userData.Address}`)
           .row.row-space
             .col-2
               .input-group
                 label.label Ngày sinh
                 .input-group-icon
-                  input.input--style-4.js-datepicker(type='text' name='Birthday')
+                  input.input--style-4.js-datepicker(type='text' name='Birthday' value=`${Birthday}`)
                   i.zmdi.zmdi-calendar-note.input-icon.js-btn-calendar
-            //- .col-2
-            //-   .input-group
-            //-     label.label Giới tính
-            //-     .p-t-10
-            //-       label.radio-container.m-r-45
-            //-         | Nam
-            //-         input(type='radio' checked='checked' name='gender')
-            //-         span.checkmark
-            //-       label.radio-container
-            //-         | Nữ
-            //-         input(type='radio' name='gender')
-            //-         span.checkmark
           .row.row-space
             .col-2
               .input-group
                 label.label Email
-                input.input--style-4(type='email' name='email' required)
+                input.input--style-4(type='email' name='Email' required value=`${userData.Email}`)
             .col-2
               .input-group
                 label.label Số điện thoại
-                input.input--style-4(type='text' name='phone')
+                input.input--style-4(type='text' name='Phone' value=`${userData.Phone}` required)
 
           .p-t-15
-            button.btn.btn--radius-2.btn--blue(type='submit') Gửi
+            button.btn.btn--radius-2.btn--blue(type='submit') Xác nhận
 // Jquery JS
 script(src='vendor/jquery/jquery.min.js')
 // Vendor JS

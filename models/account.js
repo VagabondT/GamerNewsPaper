@@ -13,7 +13,7 @@ const validator = require("validator");
 
 // Import package bcryptjs
 // Purpose :
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 const AccountSchema = new mongoose.Schema(
   {
@@ -42,7 +42,7 @@ const AccountSchema = new mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["administrator", "user","editor"],
+      enum: ["administrator", "user"],
       default: "user",
       trim: true,
       lowercase: true
@@ -117,7 +117,7 @@ AccountSchema.methods.CorrectPassword = async function (
 };
 
 AccountSchema.methods.ChangedPasswordAfter = function (JWTTimestamp) {
-  console.log(this.PasswordChangeAt)
+
   if (this.PasswordChangeAt) {
     const changed_timestamp = parseInt(
       this.PasswordChangeAt.getTime() / 1000,

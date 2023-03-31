@@ -10,14 +10,16 @@ router
     .get(accountController.getAllAccounts)
 
 
-router
-    .route('/:id')
-    .get(accountController.getAccount)
+// router
+//     .route('/:id')
+//     .get(accountController.getAccount)
 
 
 router
     .route('/login')
     .post(accountController.Login)
+    
+router.get('/logout', accountController.Logout);
 
 router.post('/signup',accountController.Signup)
 

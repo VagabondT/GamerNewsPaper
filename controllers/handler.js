@@ -29,7 +29,6 @@ catchAsync(async (req, res, next) =>{
 
 exports.getOne = (Model) =>{
     catchAsync(async (req,res,next) =>{
-        console.log("ID la" + req.params.id);
 
         let query = Model.findById(req.params.id);
         // if (popOptions) query = query.populate(popOptions);

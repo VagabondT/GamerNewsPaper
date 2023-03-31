@@ -17,7 +17,7 @@ var toolbarOptions = [
 
     ['clean']                                         // remove formatting button
 ];
-console.log("hello")
+
 
 var editor = new Quill('#editor', {
     modules: { toolbar: toolbarOptions },
@@ -25,7 +25,7 @@ var editor = new Quill('#editor', {
 });
 
 function test(){
-    console.log(editor.getContents())
+
     var html = editor.root.innerHTML;
     document.getElementById("NoticePara").innerHTML = html;
 }

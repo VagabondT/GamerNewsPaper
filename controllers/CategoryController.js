@@ -10,7 +10,6 @@ exports.deleteCategory = handler.deleteOne(Category);
 
 exports.getAllCategory = handler.getAll(Category);
 exports.getCategory = async (req,res,next) =>{
-    console.log(req.params.id);
     if (ObjectId.isValid(req.params.id)){
         let query = Category.findById(new ObjectId(req.params.id));
 

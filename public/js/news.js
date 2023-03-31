@@ -23,4 +23,3 @@ function prettyDate(dateString){
     return d+' '+m+' '+y;
 }
 
-console.log(prettyDate("2023-03-26T06:54:41.785+00:00"))

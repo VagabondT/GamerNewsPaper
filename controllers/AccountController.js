@@ -25,7 +25,6 @@ const createSendToken = (account, statusCode, req, res) => {
   
     // Remove password from output
     account.password = undefined;
-  
     res.status(statusCode).json({
       status: 'success',
       token,
@@ -37,28 +36,33 @@ const createSendToken = (account, statusCode, req, res) => {
 
 
 exports.isLoggedIn = catchAsync(async (req,res,next) =>{
-    
     if (req.cookies.jwt) {
-        token = req.cookies.jwt;
-        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-        
-        const currentAccount = await Account.findById(decoded.id);
-        const currentUser = await User.findOne({"Account": new ObjectId(decoded.id)})
-        
-        if (!currentAccount || !currentUser){
-            return next();
-        }
 
-        if (currentAccount.ChangedPasswordAfter(decoded.iat)){
-            return next();
-        }
-        
-        
-        res.locals.user = currentUser;
-        res.locals.userAccount = currentAccount;
-        return next();
+        try {
+            token = req.cookies.jwt;
+            const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+            
+            const currentAccount = await Account.findById(decoded.id);
+            const currentUser = await User.findOne({Account: new ObjectId(decoded.id)})
+            
+            if (!currentAccount || !currentUser){
+                return next();
+            }
+    
+            if (currentAccount.ChangedPasswordAfter(decoded.iat)){
+                return next();
+            }
+            
+            res.locals.user = currentUser;
+            res.locals.userAccount = currentAccount;
 
+            return next();       
+
+        } catch (error) {
+            return next(); 
+        }
     }
+    
     next();
     
 })
@@ -79,7 +83,7 @@ exports.protect = catchAsync(async (req,res,next) =>{
     }
 
     //veritification token
-    console.log(token);
+
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     
     //check if user still exists
@@ -103,7 +107,6 @@ exports.protect = catchAsync(async (req,res,next) =>{
 
 exports.allowRoles = (...roles) =>{
     return (req, res, next)=>{
-
         if (!roles.includes(req.user.Role)){
             return next(new AppError('You dont have permission to perform this action!', 403));
         }
@@ -114,15 +117,51 @@ exports.allowRoles = (...roles) =>{
 
 exports.Signup = catchAsync(async (req,res, next) =>{
 
-    const newAcc = await Account.create({
-        UserName: req.body.UserName,
-        Password: req.body.Password,
-        Role: req.body.Role,
-        ConfirmPassword: req.body.ConfirmPassword,
-        Active: false
-    });
- 
-    createSendToken(newAcc,201,req,res);
+    const existedAccCheck =  await Account.findOne({UserName: req.body.UserName});
+    const existedEmailCheck = await User.findOne({Email: req.body.Email})
+
+    if (existedAccCheck || existedEmailCheck){
+        res.status(409).json({
+            status:'fail',
+            message:'Username or email already exists'
+        })
+
+    }else{
+        const newAcc = await Account.create({
+            UserName: req.body.UserName,
+            Password: req.body.Password,
+            ConfirmPassword: req.body.ConfirmPassword,
+            Active: false
+        });
+
+        console.log(newAcc);
+    
+        if (newAcc != undefined){
+
+            try {
+                const newUser = await User.create({
+                    Account: new ObjectId(newAcc._id),
+                    Email: req.body.Email
+                });
+                console.log(newUser);
+                createSendToken(newAcc,201,req,res);
+            } catch (error) {
+                console.log(error);
+                await Account.findByIdAndDelete(newAcc._id);
+                res.status(500).json({
+                    status:'fail',
+                    message:'There is error! Please try later'
+                })
+            }
+        }
+        else{
+            await Account.findByIdAndDelete(newAcc._id)
+            res.status(500).json({
+                status:'fail',
+                message:'There is error! Please try later'
+            })
+        }
+    }
 
 });
 
@@ -149,6 +188,23 @@ exports.Login = catchAsync( async (req,res,next) =>{
     //send token
     createSendToken(account,200,req,res);
 })
+
+exports.Logout = (req,res, next) =>{
+
+    if (req.cookies.jwt){
+        res.cookie('jwt', "LoggedOut", {
+            expires: new Date(Date.now() + 10 * 1000),
+          httpOnly: true
+        });
+        req.user = undefined;
+        res.user = undefined;
+        res.locals.user = undefined;
+        res.status(200).json({status: 'success'});
+    }
+    res.status(200).json({status: 'failed'});
+    
+    
+}
 
 exports.forgotPassword = catchAsync(async (req,res,next) =>{
     //get user based on post account
@@ -226,7 +282,7 @@ exports.resetPassword = catchAsync(async (req,res,next) =>{
 exports.updatePassword = catchAsync(async (req,res,next)=>{
 
     const account = await Account.findById(new ObjectId(req.user._id)).select("+Password");
-    console.log(req.body.PasswordCurrent);
+
     if (!(await account.CorrectPassword(req.body.PasswordCurrent, account.Password))){
         return next(new AppError('Your current password is wrong!', 401));
     }

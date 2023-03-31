@@ -1,5 +1,6 @@
 const catchAsync = require('./../Utilities/catchAsync');
-const Post = require('../models/posts')
+const Post = require('../models/posts');
+const User = require('../models/user')
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 function prettyDate(dateString){
@@ -43,13 +44,23 @@ exports.GetOverview = catchAsync(async (req,res ,next) =>{
     const featuredPost = posts[0];
     posts.shift();
 
-    console.log(posts[0].Category[0].name);
-
-    res.status(200).render('index',{
-        title:'All posts',
-        posts,
-        featuredPost
-    })
+    if (res.locals.userAccount != undefined){
+        res.status(200).render('index',{
+            title:'All posts',
+            posts,
+            featuredPost,
+            user: res.locals.user,
+            userAccount: res.locals.userAccount
+        })
+    }else{
+        res.status(200).render('index',{
+            title:'All posts',
+            posts,
+            featuredPost,
+            user: undefined,
+            userAccount: undefined
+        })
+    }
 
 })
 
@@ -117,8 +128,6 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
         post:postmodifed,
         featuredPost:modifiedFeaturedPosts
     })
-
-
 })
 
 exports.RenderLoginPage = catchAsync(async(req,res,next)=>{
@@ -134,21 +143,29 @@ exports.RenderRegisterPage = catchAsync(async(req,res,next)=>{
 })
 
 exports.RenderUserRegisterPage = catchAsync(async(req,res,next)=>{
+
+    const user = await User.findOne({Account: req.user.id})
+    let modifiedData = user;
+    var convertDate = new Date(user.Birthday).toLocaleDateString('en-GB')
+    modifiedData.Birthday = new Date(convertDate);
+
     res.status(200).render('userRegister',{
-        title:'Đăng ký | Gamer Thời BÁO'
+        title:'Đăng ký thông tin | Gamer Thời BÁO',
+        userData: modifiedData,
+        Birthday: convertDate
     })
 })
 
 //In trang createPost
 exports.RenderCreatePostPage = catchAsync(async(req,res,next)=>{
     res.status(200).render('createPost',{
-        title:'Đăng ký | Gamer Thời BÁO'
+        title:'Đăng ký | Gamer Thời BÁO',
     })
 })
 
 //Lưu post mới vào database
 exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
-    console.log(req.body);
+
     const newPost = req.body;
     var holder = newPost.Content;
     newPost.Content = JSON.stringify(holder)

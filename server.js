@@ -19,27 +19,6 @@ mongoose.connect(
 //   });
 
 
-//TEST CREATE MODEL
-// const Category = require('./models/category')
-// // const postModel = require('./models/posts');
-
-// const newCate = new Category({
-//   Name: 'testCateFromSerbrt'
-// })
-
-// newCate.save();
-
-// const newPost = new postModel({
-//     _id: 0,
-//     Title: 'Câu chuyện kì bí về trái bí biết đi',
-//     Category: "0",
-// })
-
-// newPost.save().then((data) =>{
-//     console.log(data);
-// }).catch(err => {
-//     console.log(err);
-// })
 
 app.listen(port,() => {
     console.log(`Server đang chạy ở cổng ${port}...`);

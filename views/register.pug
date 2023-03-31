@@ -26,8 +26,12 @@ head
         .notice
           p.noticePara *Sau bước này, bạn cần kích hoạt tài khoản.
 
-
-
+      .inputFormInnerContent
+        #ip2.floating
+          input#inputEmail.floatingInput(name='input name' placeholder='EMAIL' type='email' required='')
+          label.floatLabel(for='inputEmail' data-content='EMAIL')
+            span.hidden--visually Email
+      
       .inputFormInnerContent
         #ip1.floating
           input#inputIdUsrname.floatingInput(name='input name' placeholder='TÊN ĐĂNG NHẬP' required='')
@@ -42,15 +46,17 @@ head
       .inputFormInnerContent
         #ip2.floating
           input#inputIdPasswordConfirm.floatingInput(name='input name' placeholder='XÁC NHẬN MẬT KHẨU' type='password' required='')
-          label.floatLabel(for='inputIdPassword' data-content='XÁC NHẬN MẬT KHẨU')
+          label.floatLabel(for='inputIdPasswordConfirm' data-content='XÁC NHẬN MẬT KHẨU')
             span.hidden--visually Xác nhận mật khẩu
+
+
       //- .socialLogin
       //-   button.loginButton.login-button-facebook
       //-   button.loginButton.login-google
       //-   button.loginButton.login-apple
       div(style='width: 80%; padding-top: 1rem;')
         label
-          span 
+          span#error
       button.submitButton.submitButtonDisabled
       .inputFormInnerContent.help
         a(href='/login') ĐÃ CÓ TÀI KHOẢN?
