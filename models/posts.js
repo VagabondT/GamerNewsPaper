@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const slugify = require('slugify');
 
+
 const PostsSchema = new mongoose.Schema(
   {
     Title: {
@@ -68,12 +69,10 @@ PostsSchema.pre('save', function(next) {
 
   //sau này implement quill vào cho nó sửa
   if (this.Description === undefined){
-    if (this.Content.length > 100){
-      this.Description = this.Content.slice(0,100) + '...';
-    }else{
-      
-      this.Description = 'Bởi tác giả vô danh'
-    }
+      this.Description = 'Một bài viết thú vị'
+  }
+  if (Date.now() > this.DateCreate){
+    this.DateChanged = Date.now();
   }
   next();
 });

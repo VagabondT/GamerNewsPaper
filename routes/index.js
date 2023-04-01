@@ -4,28 +4,39 @@ const overviewController = require('../controllers/OverviewController');
 const accountController = require('../controllers/AccountController');
 const userController = require('../controllers/UserController');
 
-router.use(accountController.isLoggedIn);
-router.get('/',overviewController.GetOverview);
 
-router.get('/login',overviewController.RenderLoginPage)
+router.get('/',accountController.isLoggedIn,overviewController.GetOverview);
 
-router.get('/register',overviewController.RenderRegisterPage)
+router.get('/login',accountController.isLoggedIn,overviewController.RenderLoginPage)
+
+
+router.get('/register',accountController.isLoggedIn,overviewController.RenderRegisterPage)
 
 router.route('/updateUser')
     .get(accountController.protect,overviewController.RenderUserRegisterPage)
-    .post(accountController.protect, accountController.isLoggedIn, userController.updateUser)
+    .post(accountController.protect, userController.updateUser)
 
+
+router.get('/posts',accountController.isLoggedIn,overviewController.RenderEditorPostsPage)
 
 //Post
 router.route('/create')
     .get(
         accountController.protect,
-        accountController.isLoggedIn,
         accountController.allowRoles('editor'),
         overviewController.RenderCreatePostPage
     )
-    .post(accountController.protect, 
+    .post(accountController.protect,
         overviewController.CreatePostFromPage
     )
 
+router.route("/updatePost/:id")
+    .get(
+    accountController.protect,
+    accountController.allowRoles('editor'),
+    overviewController.RenderUpdatePostPage)
+    .patch(accountController.protect,
+        accountController.allowRoles('editor'),
+        overviewController.UpdatePostPage)
+    
 module.exports = router;

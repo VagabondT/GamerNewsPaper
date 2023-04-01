@@ -24,7 +24,11 @@ block content
                   .itemTagHero
                     span !{post.Category.Name}
                   h2.itemHeaderHero
-                    span= `${post.Title}`.substr(0,50) + '...'
+                    if `${post.Title}`.length > 50
+                      span= `${post.Title}`.substr(0,50) + '...'
+                    else 
+                      span= `${post.Title}`
+                    
                   time.itemDateBig
                     span.icon(aria-hidden='true' style='width:20px;height:18px;line-height:18px')
                       svg(viewbox='0 0 20 18')
@@ -73,7 +77,7 @@ block content
                             span= `${e.Title}`.substr(0,50) + '...'
                           p.itemDesc !{e.Description}
 
-                          time.itemDate !{e.DateCreate}
+                          time.itemDate !{e.DateCreateString}
                   //- .item
                   //-   .cardItem
                   //-     a.postLinkSmall(href='#')

@@ -8,7 +8,7 @@ const handler = require('./handler');
 exports.createUser = handler.createOne(User);
 exports.updateUser = catchAsync(async(req,res,next) =>{
 
-    const UpdatedUser = await User.findOne({Account: req.user.id});
+    const UpdatedUser = await User.findById(res.locals.user.id);
     if (UpdatedUser !== null){
         const rawBirthday = req.body.Birthday
         var convertedBd=  rawBirthday.split('/');
@@ -23,7 +23,7 @@ exports.updateUser = catchAsync(async(req,res,next) =>{
 
         await UpdatedUser.save();
        
-        const accActivation = await Account.findById(req.user.id).select("Active");
+        const accActivation = await Account.findById(res.locals.userAccount.id).select("Active");
         accActivation.Active = true;
         await accActivation.save()
 

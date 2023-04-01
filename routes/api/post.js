@@ -5,7 +5,7 @@ const accountController = require('../../controllers/AccountController')
 
 router
     .route('/')
-    .get(accountController.protect, accountController.allowRoles('administrator'), postController.getAllPosts)
+    .get(postController.getAllPosts)
     .post(postController.createPost)
 
 router

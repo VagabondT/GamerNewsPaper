@@ -26,7 +26,11 @@ block content
                 a.postLink(href=`./news/${featuredPost.Slug}`)
                 .contentImg
                   .resDiv
-                    img(src=`${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    if featuredPost.Thumbnail.includes('https://') || featuredPost.Thumbnail.includes('http://')
+                      img(src=`${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    else
+                      img(src=`../img/${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                    
                   .typeCategory
                     .brush-icon
                       span.icon.brushIconBg(aria-hidden='true' style='width:50px;height:50px;line-height:50px')
@@ -37,11 +41,15 @@ block content
                           path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                 .contentPadded
                   .itemTag
-                    span !{featuredPost.Category[0].Name}
+                    span !{featuredPost.Category.Name}
                   h2.itemHeader
-                    span !{featuredPost.Title}
-                  p.itemDesc !{featuredPost.Content}
-                  time.itemDate !{featuredPost.DateCreate}
+                    if `${featuredPost.Title}`.length > 50
+                      span=`${featuredPost.Title}`.substr(0,40)+'...'
+                    else 
+                      span=`${featuredPost.Title}`
+                   
+                  p.itemDesc !{featuredPost.Description}
+                  time.itemDate=`${featuredPost.DateCreateString}`
         .grid
           .gridInner
             .grid-4-items
@@ -50,7 +58,11 @@ block content
                   a.postLinkSmall(href=`./news/${post.Slug}`)
                   .contentImg
                     .resDiv
-                      img(src=`${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
+                      if post.Thumbnail.includes('https://') || post.Thumbnail.includes('http://')
+                        img(src=`${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
+                      else
+                        img(src=`../img/${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
+                      
                       .typeCategorySmall
                         .brush-icon
                           span.icon.brushIconBg(aria-hidden='true' style='width:50px;height:50px;line-height:50px')
@@ -61,12 +73,15 @@ block content
                               path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                   .contentPadded
                     .itemTag
-                      span !{post.Category[0].Name}
+                      span !{post.Category.Name}
                     h2.itemHeader
-                      span !{post.Title}
+                      if `${post.Title}`.length > 50
+                        span=`${post.Title}`.substr(0,40) + '...'
+                      else 
+                        span=`${post.Title}`
                     p.itemDesc
                       | !{post.Description}
-                    time.itemDate !{post.DateCreate}
+                    time.itemDate=`${post.DateCreateString}`
             
           .loadMore
             a.button.loadMoreBtn(href='#')

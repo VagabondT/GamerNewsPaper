@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const overviewController = require('../controllers/OverviewController')
+const accountController = require('../controllers/AccountController')
 /* GET home page. */
-router.get('/',overviewController.GetNewsOverview);
-router.get('/:id',overviewController.RenderNewsview);
+router.get('/',accountController.isLoggedIn,overviewController.GetNewsOverview);
+router.get('/:id',accountController.isLoggedIn,overviewController.RenderNewsview);
 
 
 module.exports = router;

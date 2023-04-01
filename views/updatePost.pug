@@ -1,0 +1,397 @@
+extends layout
+append head
+  link(href='https://cdn.quilljs.com/1.0.0/quill.snow.css' rel='stylesheet')
+  link(rel='stylesheet' href='../css/newview.css')
+  link(rel='stylesheet' href='../css/footer.css')
+  link(rel='stylesheet' href='../css/style.css')
+  link(rel='stylesheet' href='../css/res.css')
+  style. 
+    .inputFormInnerContent{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0 0 0;
+
+    }
+
+    .floating{
+        width: 80%;
+        opacity: 0;
+    }
+
+    #ip1{
+        animation: LoadAnim .5s ease-in-out forwards;
+    }
+    #ip2{
+        animation: LoadAnim .5s .1s ease-in-out forwards;
+    }
+
+    .floatingInput {
+        padding: 1rem 1rem 0.6rem;
+        font-size: 2rem;
+        width: 90%;
+        height: 100%;
+        font-family: "Mark Pro",'Be Vietnam Pro', Arial, sans-serif;
+        border-radius: 6px;
+        border: none;
+        background-color: #EDEDED;
+        transition: 0.2s;
+        text-align: center;
+    }
+
+    .floatingInput::placeholder {
+        color: var(--label__color);
+    }
+      
+    .floatingInput:focus{
+        border-color: black;
+        background-color: #fff;
+        transition: 0.2s;
+    }
+
+    .floatLabel {
+        display: block;
+        position: relative;
+        max-height: 0;
+        font-weight: 500;
+        pointer-events: none;
+    }
+      
+    .floatLabel::before {
+        color: var(--label__color);
+        content: attr(data-content);
+        display: inline-block;
+        filter: blur(0);
+        backface-visibility: hidden;
+        transform-origin: left top;
+        transition: transform 0.2s ease;
+        left: 1rem;
+        position: relative;
+    }
+      
+    .floatLabel::after {
+        bottom: 1rem;
+        content: "";
+        height: 0.1rem;
+        position: absolute;
+        transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), opacity 180ms cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+        opacity: 0;
+        left: 0;
+        top: 100%;
+        margin-top: -0.1rem;
+        transform: scale3d(0, 1, 1);
+        width: 100%;
+
+    }
+
+    .floatingInput:focus + .floatLabel::after {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+      
+    .floatingInput:placeholder-shown + .floatLabel::before {
+        transform: translate3d(0, -2.2rem, 0) scale3d(1, 1, 1);
+    }
+      
+    .floatLabel::before,
+    .floatingInput:focus + .floatLabel::before {
+        transform: translate3d(0, -3.12rem, 0) scale3d(0.82, 0.82, 1);
+    }
+
+    .hidden--visually{
+        border: 0;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .itemTagHero:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+      background-color: #d1363a;
+    }
+    .select-box {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      color: #60666d;
+      font-family: "Mark Pro",'Be Vietnam Pro', Arial, sans-serif;
+    }
+    @media (min-width: 768px) {
+      .select-box {
+        width: 70%;
+      }
+    }
+
+    .select-box__current {
+      position: relative;
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      outline: none;
+    }
+    .select-box__current:focus + .select-box__list {
+      opacity: 1;
+      -webkit-animation-name: none;
+      animation-name: none;
+    }
+    .select-box__current:focus + .select-box__list .select-box__option {
+      cursor: pointer;
+    }
+    .select-box__current:focus .select-box__icon {
+      -webkit-transform: translateY(-50%) rotate(180deg);
+      transform: translateY(-50%) rotate(180deg);
+    }
+    .select-box__icon {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 20px;
+      opacity: 1;
+      transition: 0.2s ease;
+    }
+    .select-box__icon:nth-of-type(2) {
+      -webkit-transform: translateY(-50%) rotate(90deg);
+      transform: translateY(-50%) rotate(90deg);
+    }
+    .select-box__value {
+      display: flex;
+    }
+    .select-box__input {
+      display: none;
+    }
+    .select-box__input:checked + .select-box__input-text {
+      display: block;
+    }
+    .select-box__input-text {
+      display: none;
+      width: 100%;
+      margin: 0;
+      padding: 15px;
+      color: #fff;
+      background-color: transparent;
+    }
+    .select-box__list {
+      position: absolute;
+      width: 100%;
+      padding: 0;
+      list-style: none;
+      opacity: 0;
+      -webkit-animation-name: HideList;
+      animation-name: HideList;
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
+      -webkit-animation-delay: 0.5s;
+      animation-delay: 0.5s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      -webkit-animation-timing-function: step-start;
+      animation-timing-function: step-start;
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+    .select-box__option {
+      display: block;
+      padding: 15px;
+      background-color: #fff;
+    }
+    .select-box__option:hover, .select-box__option:focus {
+      color: #546c84;
+      background-color: #fbfbfb;
+    }
+
+    @-webkit-keyframes HideList {
+      from {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+      }
+      to {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+      }
+    }
+
+    @keyframes HideList {
+      from {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+      }
+      to {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+      }
+    }
+
+ 
+
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' integrity='sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==' crossorigin='anonymous' referrerpolicy='no-referrer')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css' integrity='sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==' crossorigin='anonymous' referrerpolicy='no-referrer')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css' integrity='sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==' crossorigin='anonymous' referrerpolicy='no-referrer')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous' referrerpolicy='no-referrer')
+
+  title Tạo bài viết| gamerThoiBAO
+
+block content
+  #top.container
+    .row
+      .col-1-3
+        .hero
+          .heroBg
+          .heroPost
+            .heroContentInner
+              .heroContent
+                .contentPaddedHero
+                  .itemTagHero(style="width: 30%; min-width:20%; z-index:99")
+                    .select-box
+                      .select-box__current(tabindex='1')
+                        each val,index in Categories
+                          .select-box__value
+                            input.select-box__input(type='radio' value=val.Value name='Category' checked=val.checked id=index)
+                            p.select-box__input-text !{val.Name} 
+                        
+                        // <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_465802.svg" alt="Arrow Icon" aria-hidden="true">
+                        img.select-box__icon(src='http://cdn.onlinewebfonts.com/svg/img_5121.svg' alt='Arrow Icon' aria-hidden='true')
+                        img.select-box__icon(src='http://cdn.onlinewebfonts.com/svg/img_5121.svg' alt='Arrow Icon' aria-hidden='true')
+                      ul.select-box__list
+                        each val,index in Categories
+                          li
+                            label.select-box__option(for=index aria-hidden='aria-hidden') !{val.Name}
+                          
+
+                  h2.itemHeaderHero(style="width: 80%")
+                    .inputFormInnerContent
+                      #ip2.floating
+                        input#inputTitle.floatingInput(name='TITLE' placeholder='TITLE' type='text' required value=`${post.Title}`)
+                        
+                  time.itemDateBig
+                    span.icon(aria-hidden='true' style='width:20px;height:18px;line-height:18px')
+                      svg(viewbox='0 0 20 18')
+                        path(d='M3 18c-1.7 0-3-1.4-3-3v-1c0-.1.1-.3.1-.4.1-.1.2-.1.4-.1H2V3c0-1.7 1.4-3 3-3h12c1.7 0 3 1.4 3 3v1.5c0 .2-.2.5-.5.5H15v10c0 1.6-1.3 3-3 3H3zM5 1c-1.1 0-2 .9-2 2v10.5h6.4c.3 0 .5.2.5.5v1c0 1.1.9 2 2 2s2-.9 2-2V3c0-.7.2-1.3.7-1.9l.1-.1H5zM1 15c0 1.1.9 2 2 2h6.7l-.1-.1c-.4-.6-.6-1.2-.6-1.9v-.5H1v.5zM17 1c-1.1 0-2 .9-2 2v1h4V3c0-1.1-.9-2-2-2z')
+                        path(d='M5.7 9h6v1h-6zm0-2h6v1h-6zm0-2h6v1h-6z')
+                    |  Được viết bởi !{user.Name}
+                  br
+                .contentImg(style="background-color: transparent !important; width: 80vw; height: 80vh")
+                  .resDiv(style="background-color: transparent !important")
+                    #toolbar
+                    #editor.contentFont(style="background: #fff !important; width: 100%; height: 70%")
+                      span  !{postContent}
+                    
+                    .featureZone
+                      button.signInBtn#submitButon(value=`${post.id}`) Lưu
+                      p#NoticePara vài dòng chú ý là đang test
+
+        .grid(style='margin-top: 0%; height: 50% !important')
+          .gridInner
+            .grid-4-items
+              .gridItem.contentFont
+
+            br
+            br
+            br
+            br
+        footer.footer
+          .footerInner
+            .contentCenter
+              .footerRow
+                .footerCol
+                  .footerColInner
+                    a.footerLogo(href='/')
+                      span.icon(style='width:34px;height:35px;line-height:35px')
+                        svg(viewbox='0 0 34 35')
+                          path(d='M17.8 31.7l-1.6-4.1 15.3.8-.7 6.6zM21.4 0L0 10.2l3.3 15.3h4.4l-.8-11 .7-.2 2.6 11.2h4.6l-.2-13.4.7-.2 2.3 13.6h4.8l1.1-16.1.7-.2 1.2 16.3h6.4L34 3.1z')
+                    .footerNav
+                      nav
+                        ul.footerNavUl
+                          li
+                            a(href='/en/press') Press
+                          li
+                            a(href='/en/security') Security
+                          li
+                            a(href='/en/legal') Legal
+                          li
+                            a(href='/en/leadership') Leadership
+                          li
+                            a(href='/en/candidate-privacy') Candidate Privacy
+                          li
+                            a(href='/en/terms-of-service') Terms of Service
+                          li
+                            a(href='/en/privacy-notice') Privacy Notice
+                          li
+                            a(href='https://support.riotgames.com/hc/en-us' target='_blank' rel='noopener noreferrer') Player Support
+                          li
+                            a(href='/en/e-verify-right-to-work') E-Verify
+                          li
+                            a(href='/en/accessibility') Accessibility
+                  .footerColInner
+                    .footerSNS
+                      a(target='_blank' rel='noopener' href='https://www.facebook.com/RiotGames/')
+                        span.icon(style='width:9px;height:16px;line-height:16px')
+                          svg(viewbox='0 0 9 16')
+                            path(d='M5.7 16V8.7h2.4l.4-2.8H5.7V4c0-.8.2-1.4 1.4-1.4h1.5V.1C8.4.1 7.5 0 6.5 0 4.3 0 2.8 1.3 2.8 3.8v2.1H.3v2.8h2.5V16h2.9z')
+                      a(target='_blank' rel='noopener' href='https://twitter.com/riotgames')
+                        span.icon(style='width:19px;height:14px;line-height:14px')
+                          svg(viewbox='0 0 19 14')
+                            path(d='M19 1.5c-.7.3-1.5.5-2.3.6.8-.4 1.4-1.1 1.7-2-.8.4-1.6.7-2.5.9-.7-.6-1.7-1-2.8-1-2.2 0-3.9 1.6-3.9 3.6 0 .3 0 .5.1.8C6 4.3 3.1 2.9 1.1.9.8 1.4.6 2 .6 2.6c0 1.2.7 2.3 1.8 2.9-.6 0-1.3-.2-1.8-.4C.6 6.8 2 8.2 3.8 8.5c-.3.1-.7.1-1 .1h-.7c.5 1.4 2 2.4 3.7 2.4-1.3 1-3 1.6-4.9 1.6H0c1.8 1 3.8 1.5 6.1 1.5 7.2-.1 11.1-5.5 11-10.2v-.5c.7-.5 1.4-1.1 1.9-1.9z')
+                      a(target='_blank' rel='noopener' href='https://www.linkedin.com/company/riot-games')
+                        span.icon(style='width:16px;height:16px;line-height:16px')
+                          svg(viewbox='0 0 16 16')
+                            path(d='M.3 5.3h3.3V16H.3z')
+                            ellipse(cx='1.9' cy='1.9' rx='1.9' ry='1.9')
+                            path(d='M16 16h-3.3v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.4-2 2.7V16H5.7V5.3h3.2v1.5C9.3 5.9 10.4 5 12 5c3.4 0 4 2.2 4 5.1V16z')
+                      a(target='_blank' rel='noopener' href='https://www.youtube.com/riotgames')
+                        span.icon(style='width:19px;height:13px;line-height:13px')
+                          svg(viewbox='0 0 19 13')
+                            path(d='M18.6 2.8s-.2-1.3-.7-1.8C17.2.3 16.4.3 16 .2 13.4 0 9.5 0 9.5 0S5.6 0 3 .2c-.4 0-1.1 0-1.9.8-.5.5-.7 1.8-.7 1.8s-.2 1.5-.2 3v1.4c0 1.5.2 3 .2 3s.2 1.3.7 1.8c.7.7 1.6.7 2 .8 1.6.2 6.4.2 6.4.2s3.9 0 6.5-.2c.4 0 1.1 0 1.9-.8.6-.6.7-1.8.7-1.8s.2-1.5.2-3V5.8l-.2-3zm-11 6.1V3.7l5 2.6-5 2.6z')
+              .divider
+              .footerRow.bottomFooter
+                .footerCol
+                  .footerColInner
+                    .footerLanguage
+                      button.js-language-selector-trigger
+                        span.icon(aria-hidden='true' style='width:16px;height:16px;line-height:16px')
+                          svg(viewbox='0 0 16 16')
+                            path(d='M8 0s-.1 0 0 0h-.3C3.4.2 0 3.7 0 8s3.4 7.8 7.7 8H8c4.4 0 8-3.6 8-8s-3.6-8-8-8zm7 7.5h-2.8c-.1-2.5-.8-4.7-1.8-6.1 2.5.9 4.4 3.3 4.6 6.1zM7.5 1.1v6.4h-3c.2-3.3 1.4-6.1 3-6.4zm0 7.4v6.4c-1.6-.4-2.8-3.1-3-6.4h3zm1 6.4V8.5h2.7c-.1 3.1-1.2 5.8-2.7 6.4zm0-7.4V1.1c1.5.6 2.6 3.2 2.7 6.4H8.5zm-3.2-6c-1 1.4-1.7 3.5-1.7 6H1c.2-2.7 1.9-5 4.3-6zM1 8.5h2.5c.1 2.5.7 4.6 1.7 6-2.3-1-4-3.3-4.2-6zm9.4 6.1c1.1-1.3 1.7-3.5 1.8-6.1H15c-.2 2.8-2.1 5.2-4.6 6.1z')
+                        | &amp;nbsp English
+                        span.icon(aria-hidden='true' style='width:8px;height:8px;line-height:8px')
+                          svg(viewbox='0 0 8 8')
+                            path(fill-rule='evenodd' clip-rule='evenodd' d='M8 3H5V0H3v3H0v2h3v3h2V5h3z')
+                    .footerCookies
+                      span.icon.is-hidden-mobile(aria-hidden='true' style='width:2px;height:20px;line-height:20px')
+                        svg(viewbox='0 0 2 40')
+                          path(d='M1.7 4.2s.1-.1 0-.1c.1-.3 0-1.8 0-2.1.1-.5 0-.8.2-1.2 0 0-.2-.5-.2-.1 0-.2-.1 0-.2 0V.6C1.4.6.9.6.9.3.7.5.5.1.3.3.1.5.3 1.4.3 1.7c-.1.4-.1 1.2-.1 2-.1 3 0 6.1-.1 9.1 0 1 0 2-.1 3 0 1.6.2 3.2.2 4.8 0 2.7-.1 5.5 0 8.2 0 2 0 4 .1 5.9.1 1 .2 2.6 0 3.3-.1.2 0 .7 0 .9 0 .1.1.5.1.4.3 0 .2.6.4.7.4.3.5-.4.6-.7.3.3.2-.8.2-1v-8.6c0-3.5.1-7 .1-10.5v-4.5c0-.3-.1-1 .1-1.2V8.9c0-.8-.1-1.6 0-2.4 0-.5-.1-1.4.1-1.7-.2-.2-.2-.4-.2-.6M1.8.5s0 .1 0 0zM.3 38.3zM1.8.7c0-.1 0-.1 0 0z')
+                      button.js-cookie-preference-trigger Cookie Preferences
+                    .footerMark
+                      span.icon.is-hidden-mobile(aria-hidden='true' style='width:2px;height:20px;line-height:20px')
+                        svg(viewbox='0 0 2 40')
+                          path(d='M1.7 4.2s.1-.1 0-.1c.1-.3 0-1.8 0-2.1.1-.5 0-.8.2-1.2 0 0-.2-.5-.2-.1 0-.2-.1 0-.2 0V.6C1.4.6.9.6.9.3.7.5.5.1.3.3.1.5.3 1.4.3 1.7c-.1.4-.1 1.2-.1 2-.1 3 0 6.1-.1 9.1 0 1 0 2-.1 3 0 1.6.2 3.2.2 4.8 0 2.7-.1 5.5 0 8.2 0 2 0 4 .1 5.9.1 1 .2 2.6 0 3.3-.1.2 0 .7 0 .9 0 .1.1.5.1.4.3 0 .2.6.4.7.4.3.5-.4.6-.7.3.3.2-.8.2-1v-8.6c0-3.5.1-7 .1-10.5v-4.5c0-.3-.1-1 .1-1.2V8.9c0-.8-.1-1.6 0-2.4 0-.5-.1-1.4.1-1.7-.2-.2-.2-.4-.2-.6M1.8.5s0 .1 0 0zM.3 38.3zM1.8.7c0-.1 0-.1 0 0z')
+                      |                                                 &copy; 2021 Riot Games, Inc. All Rights Reserved. Website UI Cloned by Aki.
+                .footerCol.monospace
+                  .footerColInner
+                    .topLink
+                      a(href='#top')
+                        | To the Surface &nbsp;
+                        span.icon(aria-hidden='true' style='width:8px;height:7px;line-height:7px')
+                          svg(viewbox='0 0 8 7')
+                            path(d='M8 6.6c-.2.3-.4.4-.8.4H6c-.4-.1-.7-.2-1-.1-.6.1-1.3.1-1.9.1-.4 0-.7-.2-1.1-.1-.5.2-1.1 0-1.8.1-.1-.4-.2-.8-.2-1.3 0-.2-.1-.4.1-.6.1-.1.1-.2.2-.2s.1-.1.2-.1c.3-.1.3-.2.5-.5v-.6c.3-.5.8-.8 1-1.4 0 0 0-.1-.1-.1 0 0 0-.1.1-.1 0-.2-.1-.4-.1-.5.3-.5.7-.8 1-1.2.1-.2.3-.3.4-.4h.3c.3.4.4.8.5 1.2.5.6 1 1.2 1.6 1.8.2.3.3.5.4.8.2.4.5.7.8 1 .1.1.2.1.4.2.1 0 .3.1.4.1.1.3.2.6.2 1 0 .2.1.3.1.5z')
+  script(src='../js/script.js')
+  script(src="https://cdn.jsdelivr.net/npm/axios@1.3.4/dist/axios.min.js")
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js' integrity='sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==' crossorigin='anonymous' referrerpolicy='no-referrer')
+  script(src='https://cdn.quilljs.com/1.0.0/quill.js')
+  script(src='../js/updatepost.js')
+
+
+

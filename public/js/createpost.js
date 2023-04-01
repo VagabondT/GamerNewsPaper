@@ -29,10 +29,10 @@ function test(){
     var html = editor.root.innerHTML;
     document.getElementById("NoticePara").innerHTML = html;
 }
-
+var optionValue = $('input[type=radio][name=Category]').val();
 $('input[type=radio][name=Category]').change(function() {
     console.log(this.value);
-    //window.location.href = this.value;
+    optionValue = this.value;
   });
   
   var countFocus = 0;
@@ -51,7 +51,8 @@ $('input[type=radio][name=Category]').change(function() {
 const sendNewPost = async () =>{
     const postTitle = $("#inputTitle").val();
     const postContent = editor.getContents();
-    const category = $('input[type=radio][name=Category]').val()
+    const category = optionValue;
+    const description = editor.getText().slice(0,60) + '....';
 
     const postURL = `http://localhost:6868/create`
     try{
@@ -61,7 +62,8 @@ const sendNewPost = async () =>{
             data: {
                 Title: postTitle,
                 Content: postContent,
-                Category:category,
+                Category: category,
+                Description: description
             }
         })
 
