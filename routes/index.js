@@ -17,13 +17,14 @@ router.route('/updateUser')
     .post(accountController.protect, userController.updateUser)
 
 
-router.get('/posts',accountController.isLoggedIn,overviewController.RenderEditorPostsPage)
+router.get('/posts',accountController.protect,accountController.allowRoles('editor','admin'),overviewController.RenderEditorPostsPage)
+router.get('/postsApproval',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderEditorPostsPage)
 
 //Post
 router.route('/create')
     .get(
         accountController.protect,
-        accountController.allowRoles('editor'),
+        accountController.allowRoles('editor',"admin"),
         overviewController.RenderCreatePostPage
     )
     .post(accountController.protect,
@@ -33,10 +34,10 @@ router.route('/create')
 router.route("/updatePost/:id")
     .get(
     accountController.protect,
-    accountController.allowRoles('editor'),
+    accountController.allowRoles('editor','admin'),
     overviewController.RenderUpdatePostPage)
     .patch(accountController.protect,
-        accountController.allowRoles('editor'),
+        accountController.allowRoles('editor', 'admin'),
         overviewController.UpdatePostPage)
     
 module.exports = router;

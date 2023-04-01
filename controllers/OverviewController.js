@@ -38,7 +38,7 @@ function ConvertObjectTime(object){
 
 exports.GetOverview = catchAsync(async (req,res ,next) =>{
 
-    const GetPosts = await Post.find({}).sort({"DateCreate": -1}).limit(5).populate("Category");
+    const GetPosts = await Post.find({Status:'publish'}).sort({"DateCreate": -1}).limit(5).populate("Category");
 
 
     const featuredPost = GetPosts[0];
@@ -62,7 +62,7 @@ exports.GetOverview = catchAsync(async (req,res ,next) =>{
 
 exports.GetNewsOverview = catchAsync(async (req,res ,next) =>{
 
-    const GetPosts = await Post.find({}).sort({"DateCreate": -1}).limit(7).populate("Category");
+    const GetPosts = await Post.find({Status:'publish'}).sort({DateCreate: -1}).limit(7).populate("Category");
 
     var featuredPost = GetPosts[0];
 
@@ -93,17 +93,7 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
     }
    
 
-    const featuredPost = await Post.aggregate([
-        {
-            $lookup:
-            {
-                from: "Category",
-                localField: 'Category',
-                foreignField: '_id',
-                as: 'Category'
-            }
-        }
-    ])
+    const featuredPost = await Post.find({Status:'publish'}).populate("Category").sort({DateChanged:1}).limit(5)
 
     var modifiedFeaturedPosts = ConvertObjectTime(featuredPost);
 
@@ -214,12 +204,7 @@ exports.RenderUpdatePostPage = catchAsync(async(req,res,next)=>{
 
 exports.UpdatePostPage = catchAsync(async(req,res,next)=>{
 
-    const postData = await Posts.findByIdAndUpdate(req.params.id,{
-        Title: req.body.Title,
-        Content: req.body.Content,
-        Category: req.body.Category
-
-    });
+    const postData = await Posts.findByIdAndUpdate(req.params.id,req.body);
     if (!postData) {
         return next(new AppError('No document found with that ID', 404));
     }
@@ -249,10 +234,7 @@ exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
             status: 'success'
         });
     }else{
-        res.status(404).json({
-            status: 'fail',
-            message:'user not found!'
-        });
+        return next(new AppError('User not found',404))
     }
 
 
@@ -261,25 +243,68 @@ exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
 
 //Editor Post Page
 exports.RenderEditorPostsPage = catchAsync(async(req,res,next)=>{
-    const posts = await Posts.find({Author: res.locals.user.id}).populate("Category").populate("Author");
-    var allCount = posts.length;
-    var publishCount =0;
-    var submitCount = 0;
-    posts.forEach(element => {
-        if (element.Status =="publish")
-            publishCount++;
 
-        if (element.Status =="submit")
-            submitCount++;
-    });
+    if (res.locals.userAccount.Role == "editor"){
+        const posts = await Posts.find({Author: res.locals.user.id}).populate("Category");
+        var allCount = posts.length;
+        var publishCount =0;
+        var submitCount = 0;
+        var cancelCount =0;
+        posts.forEach(element => {
+            if (element.Status =="publish")
+                publishCount++;
     
-    res.status(200).render('controlPanel',{
-        title:'Bài viết của bạn',
-        posts,
-        allCount,
-        publishCount,
-        submitCount
+            if (element.Status =="submit")
+                submitCount++;
+            if (element.Status =="cancel")
+                cancelCount++;
+        });
+        
+        res.status(200).render('controlPanel',{
+            title:'Bài viết của bạn',
+            posts,
+            allCount,
+            publishCount,
+            submitCount,
+            cancelCount
+    
+        })
+    }else if (res.locals.userAccount.Role == "admin"){
+        const posts = await Posts.find({}).sort({DateChanged: -1}).populate("Category").populate("Author")
+        var allCount = posts.length;
+        var publishCount = 0;
+        var submitCount = 0;
+        var cancelCount = 0;
 
-    })
+        posts.forEach(element => {
+            if (element.Status =="publish")
+                publishCount++;
+    
+            if (element.Status =="submit")
+                submitCount++;
+            if (element.Status == "cancel")
+                cancelCount++;
+                
+            
+        });
+        posts.forEach(element => {
+            if (element.Status == "draft"){
+                var index = posts.indexOf(element);
+                if (index > -1)
+                    posts.splice(index,1);
+            }
+
+        });
+        
+        res.status(200).render('controlPanel',{
+            title:'Bài viết của bạn',
+            posts,
+            allCount,
+            publishCount,
+            submitCount,
+            cancelCount
+    
+        })
+    }
 })
 

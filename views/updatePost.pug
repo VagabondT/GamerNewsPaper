@@ -290,9 +290,9 @@ block content
                     #editor.contentFont(style="background: #fff !important; width: 100%; height: 70%")
                       span  !{postContent}
                     
-                    .featureZone
-                      button.signInBtn#submitButon(value=`${post.id}`) Lưu
-                      p#NoticePara vài dòng chú ý là đang test
+                    .featureZone(style="display:flex")
+                      button.signInBtn(style="margin-right: 1rem; background: #ededed !important; color: #e60027" value=`${post.id}`)#SaveButon Lưu
+                      button.signInBtn(style="margin-right: 1rem" value=`${post.id}`)#submitButon Đăng bài
 
         .grid(style='margin-top: 0%; height: 50% !important')
           .gridInner

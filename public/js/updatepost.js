@@ -51,7 +51,7 @@ $('input[type=radio][name=Category]').change(function() {
 
 
 
-const sendNewPost = async () =>{
+const sendNewPost = async (status) =>{
     const postTitle = $("#inputTitle").val();
     const postContent = editor.getContents();
     const category = optionValue;
@@ -66,13 +66,16 @@ const sendNewPost = async () =>{
                 Title: postTitle,
                 Content: JSON.stringify(postContent),
                 Category: category,
-                Description: description
+                Description: description,
+                Status: status,
+                DateChanged: Date.now()
             }
         })
         
         if (response.status == 200){
+            alert("Thành công!")
             window.setTimeout(() => {
-                location = '/'
+                location = '/posts'
             }, 1500);
         }
     }catch (err){
@@ -83,5 +86,11 @@ const sendNewPost = async () =>{
 
 $("#submitButon").click(()=>{
 
-    sendNewPost();
+    sendNewPost('submit');
 })
+
+$("#SaveButon").click(()=>{
+
+    sendNewPost('draft');
+})
+

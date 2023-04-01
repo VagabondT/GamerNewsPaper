@@ -14,7 +14,7 @@ router
     .patch(postController.updatePost)
     .delete(
         accountController.protect, 
-        accountController.allowRoles('administrator'),
+        accountController.allowRoles('administrator','editor'),
         postController.deletePost
     )
 

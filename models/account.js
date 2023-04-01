@@ -42,7 +42,7 @@ const AccountSchema = new mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["administrator", "user"],
+      enum: ["admin", "user"],
       default: "user",
       trim: true,
       lowercase: true

@@ -74,6 +74,9 @@ PostsSchema.pre('save', function(next) {
   if (Date.now() > this.DateCreate){
     this.DateChanged = Date.now();
   }
+  if (this.DateChanged == null){
+    this.DateChanged = Date.now();
+  }
   next();
 });
 

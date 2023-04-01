@@ -25,69 +25,37 @@ head
     li.nav-item.active
       a.nav-link(href='#')
         i.fas.fa-fw.fa-tachometer-alt
-        span Bảng điều khiển
+        span Bảng chung
     // Divider
     hr.sidebar-divider
     // Heading
     .sidebar-heading
-      | Bài viết của bạn
+      | Tuỳ chọn
     // Nav Item - Pages Collapse Menu
     li.nav-item
       a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo')
         i.fas.fa-fw.fa-cog
-        span Components
+        span Tài khoản
       #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordionSidebar')
         .bg-white.py-2.collapse-inner.rounded
-          h6.collapse-header Custom Components:
-          a.collapse-item(href='buttons.html') Buttons
-          a.collapse-item(href='cards.html') Cards
+          h6.collapse-header Chức năng
+          a.collapse-item(href='#') Đổi mật khẩu
+          a.collapse-item(href='#') Thông tin tài khoản
     // Nav Item - Utilities Collapse Menu
     li.nav-item
       a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapseUtilities' aria-expanded='true' aria-controls='collapseUtilities')
-        i.fas.fa-fw.fa-wrench
-        span Utilities
+        i.fas.fa-user.fa-sm.fa-fw.mr-2
+        span Thông tin cá nhân
       #collapseUtilities.collapse(aria-labelledby='headingUtilities' data-parent='#accordionSidebar')
         .bg-white.py-2.collapse-inner.rounded
-          h6.collapse-header Custom Utilities:
-          a.collapse-item(href='utilities-color.html') Colors
-          a.collapse-item(href='utilities-border.html') Borders
-          a.collapse-item(href='utilities-animation.html') Animations
-          a.collapse-item(href='utilities-other.html') Other
+          h6.collapse-header Chức năng
+          a.collapse-item(href='/updateUser') Cập nhật thông tin
     // Divider
     hr.sidebar-divider
     // Heading
-    .sidebar-heading
-      | Addons
-    // Nav Item - Pages Collapse Menu
-    li.nav-item
-      a.nav-link.collapsed(href='#' data-toggle='collapse' data-target='#collapsePages' aria-expanded='true' aria-controls='collapsePages')
-        i.fas.fa-fw.fa-folder
-        span Pages
-      #collapsePages.collapse(aria-labelledby='headingPages' data-parent='#accordionSidebar')
-        .bg-white.py-2.collapse-inner.rounded
-          h6.collapse-header Login Screens:
-          a.collapse-item(href='login.html') Login
-          a.collapse-item(href='register.html') Register
-          a.collapse-item(href='forgot-password.html') Forgot Password
-          .collapse-divider
-          h6.collapse-header Other Pages:
-          a.collapse-item(href='404.html') 404 Page
-          a.collapse-item(href='blank.html') Blank Page
-    // Nav Item - Charts
-    li.nav-item
-      a.nav-link(href='charts.html')
-        i.fas.fa-fw.fa-chart-area
-        span Charts
-    // Nav Item - Tables
-    li.nav-item
-      a.nav-link(href='tables.html')
-        i.fas.fa-fw.fa-table
-        span Tables
-    // Divider
-    hr.sidebar-divider.d-none.d-md-block
-    // Sidebar Toggler (Sidebar)
-    .text-center.d-none.d-md-inline
-      button#sidebarToggle.rounded-circle.border-0
+    //- .sidebar-heading
+    //-   | Một bức ảnh 
+
 
   // End of Sidebar
   // Content Wrapper
@@ -213,24 +181,21 @@ head
             .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
               a.dropdown-item(href='#')
                 i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
-                |                                     Profile
-              a.dropdown-item(href='#')
+                |                                     Hồ sơ
+              a.dropdown-item(href='/updateUser')
                 i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
-                |                                     Settings
-              a.dropdown-item(href='#')
-                i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
-                |                                     Activity Log
+                |                                     Tài khoản
               .dropdown-divider
-              //- data-toggle='modal' data-target='#logoutModal'
+              
               a.dropdown-item#logoutBtn(href='#' )
                 i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
-                |                                     Logout
+                |                                     Đăng xuất
       // End of Topbar
       // Begin Page Content
       .container-fluid
         // Page Heading
         .d-sm-flex.align-items-center.justify-content-between.mb-4
-          h1.h3.mb-0.text-gray-800 Dashboard
+          h1.h3.mb-0.text-gray-800 Bảng chung
           a.d-none.d-sm-inline-block.btn.btn-sm.btn-primary.shadow-sm(href='#')
             i.fas.fa-download.fa-sm.text-white-50
             |  Generate Report
@@ -246,7 +211,9 @@ head
                       | Tổng số bài viết
                     .h5.mb-0.font-weight-bold.text-gray-800=`${allCount}`
                   .col-auto
-                    i.fas.fa-calendar.fa-2x.text-gray-300
+                    
+                    i.fa.fa-bookmark.fa-2x.text-gray-300
+                    
           // Earnings (Monthly) Card Example
           .col-xl-3.col-md-6.mb-4
             .card.border-left-success.shadow.h-100.py-2
@@ -254,22 +221,26 @@ head
                 .row.no-gutters.align-items-center
                   .col.mr-2
                     .text-xs.font-weight-bold.text-success.text-uppercase.mb-1
-                      | Bài viết đã duyệt
-                    .h5.mb-0.font-weight-bold.text-gray-800 !{publishCount}
+                      | Bài viết đã duyệt/ Đang chờ duyệt
+                    .h5.mb-0.font-weight-bold.text-gray-800 !{publishCount}/!{submitCount}
                   .col-auto
-                    i.fas.fa-dollar-sign.fa-2x.text-gray-300
+                    i.fas.fa-calendar.fa-2x.text-gray-300
 
           // Pending Requests Card Example
           .col-xl-3.col-md-6.mb-4
-            .card.border-left-warning.shadow.h-100.py-2
+            .card.border-left-danger.shadow.h-100.py-2
               .card-body
                 .row.no-gutters.align-items-center
                   .col.mr-2
-                    .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1
-                      | Đang chờ duyệt
-                    .h5.mb-0.font-weight-bold.text-gray-800 !{submitCount}
+                    if userAccount.Role == "admin"
+                      .text-xs.font-weight-bold.text-danger.text-uppercase.mb-1
+                        | Đã từ chối
+                    else 
+                      .text-xs.font-weight-bold.text-danger.text-uppercase.mb-1
+                        | Bị từ chối
+                    .h5.mb-0.font-weight-bold.text-gray-800 !{cancelCount}
                   .col-auto
-                    i.fas.fa-comments.fa-2x.text-gray-300
+                    i.fa.fa-times.fa-2x.text-gray-300
           .col-xl-3.col-md-6.mb-4
             .card.border-left-warning.shadow.h-100.py-2
               .card-body
@@ -277,9 +248,9 @@ head
                   .col.mr-2
                     .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1
                       | Bản nháp
-                    .h5.mb-0.font-weight-bold.text-gray-800=`${allCount}` - !{submitCount} + !{publishCount}
+                    .h5.mb-0.font-weight-bold.text-gray-800=`${allCount}` - `${submitCount}` - `${publishCount}`
                   .col-auto
-                    i.fas.fa-comments.fa-2x.text-gray-300
+                    i.fa.fa-sticky-note.fa-2x.text-gray-300
         // Content Row
 
       .container-fluid
@@ -290,42 +261,90 @@ head
             .card-header.py-3
               h6.m-0.font-weight-bold.text-primary Danh sách bài viết của bạn
             .card-body
-              .table-responsive
-                table#dataTable.table.table-bordered(width='100%' cellspacing='0')
-                  thead
-                    tr
-                      th Tên bài viết
-                      th Danh mục
-                      th Tình trạng
-                      th Thời điểm cập nhật
-                      th Thời điểm tạo
-                      th Mô tả
-                      th Hành động
-                  tfoot
-                    tr
-                      th Tên bài viết
-                      th Danh mục
-                      th Tình trạng
-                      th Thời điểm cập nhật
-                      th Thời điểm tạo
-                      th Mô tả
-                      th Hành động
-
-
-                  tbody
-                  each e in posts
-                    tr
-                      td !{e.Title}
-                      td !{e.Category.Name}
-                      td !{e.Status}
-                      td !{e.DateChanged}
-                      td !{e.DateCreate}
-                      td !{e.Description}
-                      td(style="display:flex;") 
-                        button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="UpdatePost(this)") Sửa
-
-                        button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="DeletePost(this)") Xoá
+              if userAccount.Role == "admin"
+                .table-responsive
+                  table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                    thead
+                      tr
+                        th Tên bài viết
+                        th Danh mục
+                        th Tình trạng
+                        th Thời điểm cập nhật
+                        th Tác giả
+                        th Mô tả
+                        th Hành động
                         
+                    tfoot
+                      tr
+                        th Tên bài viết
+                        th Danh mục
+                        th Tình trạng
+                        th Thời điểm cập nhật
+                        th Tác giả
+                        th Mô tả
+                        th Hành động
+
+
+                    tbody
+                    each e in posts
+                      tr
+                        td !{e.Title}
+                        td !{e.Category.Name}
+                        td !{e.Status}
+                        td !{e.DateChanged}
+                        td !{e.Author.Name}
+                        td !{e.Description}
+                        td(style="display:flex;") 
+                          if e.Status !== "publish" 
+                            button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="ApprovePost(this)") Duyệt
+                          else
+                            button.btn.btn-primary.UpdateBtn.disabled(type='button' disabled style="margin: 0.5rem") Duyệt
+                          if e.Status !== "cancel"
+                            button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="CancelPost(this)") Huỷ
+                          else 
+                            button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" disabled) Huỷ
+              else
+                .table-responsive
+                  table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                    thead
+                      tr
+                        th Tên bài viết
+                        th Danh mục
+                        th Tình trạng
+                        th Thời điểm cập nhật
+                        th Thời điểm tạo
+                        th Mô tả
+                        th Hành động
+                    tfoot
+                      tr
+                        th Tên bài viết
+                        th Danh mục
+                        th Tình trạng
+                        th Thời điểm cập nhật
+                        th Thời điểm tạo
+                        th Mô tả
+                        th Hành động
+
+
+                    tbody
+                    each e in posts
+                      tr
+                        td !{e.Title}
+                        td !{e.Category.Name}
+                        td !{e.Status}
+                        td !{e.DateChanged}
+                        td !{e.DateCreate}
+                        td !{e.Description}
+                        td(style="display:flex;") 
+                          if e.Status !== "publish" || e.Status !== "submit"
+                              button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="UpdatePost(this)") Sửa
+                          else
+                            button.btn.btn-primary.UpdateBtn.disabled(type='button' disabled style="margin: 0.5rem") Sửa
+                          if e.Status == "draft"
+                            button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="DeletePost(this)") Xoá
+                          else 
+                            button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" disabled) Xoá
+              
 
       // /.container-fluid
     // End of Main Content
@@ -341,17 +360,17 @@ head
 a.scroll-to-top.rounded(href='#page-top')
   i.fas.fa-angle-up
 // Logout Modal
-#logoutModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+#ConfirmModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog(role='document')
     .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title Ready to Leave?
+        h5#exampleModalLabel.modal-title Xoá bài viết này?
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
-      .modal-body Select &quot;Logout&quot; below if you are ready to end your current session.
+      .modal-body 
       .modal-footer
         button.btn.btn-secondary(type='button' data-dismiss='modal') Thôi từ từ đã...
-        a.btn.btn-primary#logoutBtn(href='#') Đăng xuất
+        a.btn.btn-primary#ConfirmModalBtn(href='#') Xoá luôn 
 // Bootstrap core JavaScript
 script(src='vendor/jquery/jquery.min.js')
 script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
@@ -362,45 +381,14 @@ script(src='js/sb-admin-2.min.js')
 // Page level plugins
 script(src='vendor/chart.js/Chart.min.js')
 
-script(src='js/demo/datatables-demo.js')
+
 
 // Page level plugins
 //- script(src='vendor/datatables/jquery.dataTables.min.js')
 script(src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js") 
 script(src="https://cdn.jsdelivr.net/npm/axios@1.3.4/dist/axios.min.js")
 script(src='vendor/datatables/dataTables.bootstrap4.min.js')
-script.
-    const sendLogout = async () =>{
-    const postURL = `http://localhost:6868/api/account/logout`
-    try{
-        const response = await axios({
-            method: 'GET',
-            url: postURL
-        })
-  
-        if (response.data.status === 'success'){
-            window.setTimeout(() => {
-                location = '/'
-            }, 1500);
-        }
-    }catch (err){
-        alert(err);
-    }
-  }
-  
-  $("#logoutBtn").click(()=>{
-    sendLogout();
-    console.log("clicked");
-  })
 
-  function UpdatePost(obj){
-    
-    const postURL = `http://localhost:6868/updatePost/`+ obj.value;
-    window.setTimeout(() => {
-      location = postURL
-    }, 1500);
-  }
+script(src='js/controlPanel.js')
 
-  function DeletePost(obj){
-    alert(obj.value)
-  }
+

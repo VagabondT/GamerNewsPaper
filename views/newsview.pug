@@ -72,7 +72,7 @@ block content
                                     path(d='M2 3.7L10.3 9 2 14.3V3.7zM0 18l14-9L0 0v18z')
                         .contentPadded
                           .itemTag
-                            span !{e.Category[0].Name}
+                            span !{e.Category.Name}
                           h2.itemHeader
                             span= `${e.Title}`.substr(0,50) + '...'
                           p.itemDesc !{e.Description}
