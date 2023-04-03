@@ -18,7 +18,7 @@ const sendRegister = async ()=>{
     const pwd = $('#inputIdPassword').val();
     const email = $("#inputEmail").val();
     const pwdConfirm = $("#inputIdPasswordConfirm").val();
-    const postURL = `http://localhost:6868/api/account/signup`
+    const postURL = window.location.origin + `/api/account/signup`
     try{
         const response = await axios({
             method: 'POST',

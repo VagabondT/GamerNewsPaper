@@ -347,9 +347,15 @@ block header
                     a(href='/create') Viết bài mới
                   li
                     a(href='/posts') Bài viết của bạn
-            else if (`${userAccount.Role}` == "admin")
+            else if (`${userAccount.Role}` == "moderator")
               li
                   a(href='/posts') Duyệt bài viết
+            else if (`${userAccount.Role}` == "admin")
+              li
+                  a(href='/posts') Quản lý bài viết
+              li
+                  a(href='/accountControl') Quản lý tài khoản
+
           
 
 
@@ -366,13 +372,13 @@ block header
             a(style="padding-right: 4%; color:white; text-decoration: none", href="/updateUser") Xin chào, !{user.Name}!
           else
             a(style="padding-right: 4%; color:white; text-decoration: none", href="/updateUser")= 'Xin chào, '+ `${user.Name}`.substr(0,20) +'!'
-          a.signInBtn#logoutBtn(href='#')
+          a.signInBtn.logoutBtn(href='#')
             i.fa.fa-user(aria-hidden='true') 
             |  Đăng xuất
     .rightHeaderWrapper
       .menuIcon
         svg(width='32' height='32' viewbox='0 0 32 32')
-          title burgerNav
+          title Tuỳ chọn
           circle(opacity='.07' cx='16' cy='16' r='16' fill='#F9F9F9')
           path(fill='#C7C7C7' d='M22 10v2H10v-2zm0 5v2H10v-2zm0 5v2H10v-2z')
       .rightHeader
@@ -394,44 +400,57 @@ block header
               a(href='/login') đăng nhập
           else 
             li#loginRightHeader.linkActive
-              a(href='./account') 
+              a(href='/updateUser') 
                 i.fa.fa-user(aria-hidden='true') 
                 | Tài khoản
 
          
           li#rightHeaderLink1
-            a về chúng tôi
+            a Chức năng
             span.mobileSpanArrow
               svg(width='5' height='9' viewbox='0 0 5 9')
                 title subMenuRight
                 path(d='M1.707 7.793l2.586-2.586a1 1 0 000-1.414L1.707 1.207C1.077.577 0 1.023 0 1.914v5.172c0 .89 1.077 1.337 1.707.707z' fill='#7E7E7E')
           
           li#newsRightHeader
-            a(href='./news') tin tức
+            a(href='/news') tin tức
+          if userAccount
+            li
+              a.logoutBtn(href="#") Đăng xuất
+
           li(style='background-color: #212121;')
             .searchBarBox
               input#searchInp(type='text' name='' placeholder='TÌM KIẾM')
               button.submitButton
                 i.fas.fa-search
+
+          
+
+          
   .rightHeaderSubContent.rightHeader
     .rightSubHeader
       li#homeLogo1
         svg(width='5' height='8' viewbox='0 0 5 8')
           title subMenuBack
           path(d='M3.293 7.293L.707 4.707a1 1 0 010-1.414L3.293.707C3.923.077 5 .523 5 1.414v5.172c0 .89-1.077 1.337-1.707.707z' fill='#7E7E7E')
-        span.subHeaderTitle Who We Are
+        span.subHeaderTitle Chức năng
       a#close-btn2(href='#')
         svg(width='32' height='32' viewbox='0 0 32 32')
           title burgerNavClose
           circle(opacity='.07' cx='16' cy='16' r='16' fill='#F9F9F9')
           path(d='M12.007 11.973l8.132 8.132m-8.146-.012l8.131-8.132' stroke='#C7C7C7' stroke-width='2')
     ul.rightHeaderContent
-      li
-        a about aki riot
-      li
-        a diversity and inclusion
-      li
-        a social impact
+      if userAccount
+          if `${userAccount.Active}`
+            if (`${userAccount.Role}` == "editor")
+              li
+                a(href='/create') Viết bài mới
+              li
+                a(href='/posts') Bài viết của bạn
+                
+            else if (`${userAccount.Role}` == "admin")
+              li
+                  a(href='/posts') Duyệt bài viết
   .rightHeaderSubContent2.rightHeader
     .rightSubHeader
       a#close-btn-3(href='#')

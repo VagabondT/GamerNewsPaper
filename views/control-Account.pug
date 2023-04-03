@@ -5,7 +5,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
   meta(name='description' content='')
   meta(name='author' content='')
-  title Game Thời BÁO - Bảng chung
+  title Game Thời BÁO - Bảng tài khoản
   // Custom fonts for this template
   link(href='vendor/fontawesome-free/css/all.min.css' rel='stylesheet' type='text/css')
   link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
@@ -22,8 +22,8 @@ head
     // Divider
     hr.sidebar-divider.my-0
     // Nav Item - Dashboard
-    li.nav-item.active
-      a.nav-link(href='#')
+    li.nav-item
+      a.nav-link(href='/posts')
         i.fas.fa-fw.fa-tachometer-alt
         span Bảng chung
     // Divider
@@ -53,10 +53,10 @@ head
     // Divider
     hr.sidebar-divider
 
-    if userAccount.Role == "admin" 
+    if userAccount.Role == "admin"
       .sidebar-heading
         | Quản lý
-      li.nav-item
+      li.nav-item.active
         a.nav-link(href='/accountControl')
           i.fas.fa-fw.fa-tachometer-alt
           span Bảng tài khoản
@@ -188,11 +188,8 @@ head
               
               if (user.Name.length < 20)
                   span.mr-2.d-none.d-lg-inline.text-gray-600.small !{user.Name}
-                  
               else
                   span.mr-2.d-none.d-lg-inline.text-gray-600.small=`${user.Name}`.substr(0,20)
-              br
-              span.mr-2.d-none.d-lg-inline.text-gray-600.small 
               img.img-profile.rounded-circle(src='img/undraw_profile.svg')
             // Dropdown - User Information
             .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in(aria-labelledby='userDropdown')
@@ -212,7 +209,7 @@ head
       .container-fluid
         // Page Heading
         .d-sm-flex.align-items-center.justify-content-between.mb-4
-          h1.h3.mb-0.text-gray-800 Bảng chung
+          h1.h3.mb-0.text-gray-800 Bảng tài khoản
           a.d-none.d-sm-inline-block.btn.btn-sm.btn-primary.shadow-sm(href='#')
             i.fas.fa-download.fa-sm.text-white-50
             |  À không có gì đâu :)
@@ -225,7 +222,7 @@ head
                 .row.no-gutters.align-items-center
                   .col.mr-2
                     .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1
-                      | Tổng số bài viết
+                      | Tổng số người dùng
                     .h5.mb-0.font-weight-bold.text-gray-800=`${allCount}`
                   .col-auto
                     
@@ -238,8 +235,8 @@ head
                 .row.no-gutters.align-items-center
                   .col.mr-2
                     .text-xs.font-weight-bold.text-success.text-uppercase.mb-1
-                      | Bài viết đã duyệt/ Đang chờ duyệt
-                    .h5.mb-0.font-weight-bold.text-gray-800 !{publishCount}/!{submitCount}
+                      | Tài khoản editor
+                    .h5.mb-0.font-weight-bold.text-gray-800 !{publishCount}
                   .col-auto
                     i.fas.fa-calendar.fa-2x.text-gray-300
 
@@ -249,13 +246,9 @@ head
               .card-body
                 .row.no-gutters.align-items-center
                   .col.mr-2
-                    if userAccount.Role == "admin" || userAccount.Role == "moderator"
-                      .text-xs.font-weight-bold.text-danger.text-uppercase.mb-1
-                        | Đã từ chối
-                    else 
-                      .text-xs.font-weight-bold.text-danger.text-uppercase.mb-1
-                        | Bị từ chối
-                    .h5.mb-0.font-weight-bold.text-gray-800 !{cancelCount}
+                    .text-xs.font-weight-bold.text-danger.text-uppercase.mb-1
+                        | Tài khoản moderator
+                    .h5.mb-0.font-weight-bold.text-gray-800 !{submitCount}
                   .col-auto
                     i.fa.fa-times.fa-2x.text-gray-300
           .col-xl-3.col-md-6.mb-4
@@ -264,105 +257,75 @@ head
                 .row.no-gutters.align-items-center
                   .col.mr-2
                     .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1
-                      | Bản nháp
-                    .h5.mb-0.font-weight-bold.text-gray-800=`${allCount}` - `${submitCount}` - `${publishCount}`
+                      | Tài khoản user
+                    .h5.mb-0.font-weight-bold.text-gray-800 !{cancelCount}
                   .col-auto
                     i.fa.fa-sticky-note.fa-2x.text-gray-300
         // Content Row
 
       .container-fluid
           // Page Heading
-          h1.h3.mb-2.text-gray-800 Danh sách bài viết
+          h1.h3.mb-2.text-gray-800 Danh sách tài khoản
           // DataTales Example
           .card.shadow.mb-4
             .card-header.py-3
-              h6.m-0.font-weight-bold.text-primary Danh sách bài viết của bạn
+              h6.m-0.font-weight-bold.text-primary Danh sách tài khoản
             .card-body
-              .table-responsive
-                table#posts_data.table.table-bordered(width='100%' cellspacing='0')
-              //- if userAccount.Role == "admin" || userAccount.Role == "moderator"
-              //-   .table-responsive
-              //-     table#dataTable.table.table-bordered(width='100%' cellspacing='0')
-              //-       thead
-              //-         tr
-              //-           th Tên bài viết
-              //-           th Danh mục
-              //-           th Tình trạng
-              //-           th Thời điểm cập nhật
-              //-           th Tác giả
-              //-           th Mô tả
-              //-           th Hành động
+              if userAccount.Role == "admin"
+                .table-responsive
+                  table#dataTable.table.table-bordered(width='100%' cellspacing='0')
+                    thead
+                      tr
+                        th Tên đăng nhập
+                        th Chức năng
+                        th Kích hoạt?
+                        th Hành động
+                        th DANGERZONE
                         
-              //-       tfoot
-              //-         tr
-              //-           th Tên bài viết
-              //-           th Danh mục
-              //-           th Tình trạng
-              //-           th Thời điểm cập nhật
-              //-           th Tác giả
-              //-           th Mô tả
-              //-           th Hành động
+                    tfoot
+                      tr
+                        th Tên đăng nhập
+                        th Chức năng
+                        th Kích hoạt?
+                        th Hành động
+                        th DANGERZONE
 
 
-              //-       tbody
-              //-       each e in posts
-              //-         tr
-              //-           td !{e.Title}
-              //-           td !{e.Category.Name}
-              //-           td !{e.Status}
-              //-           td !{e.DateChanged}
-              //-           td !{e.Author.Name}
-              //-           td !{e.Description}
-              //-           td(style="display:flex;") 
-              //-             if e.Status !== "publish" 
-              //-               button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="ApprovePost(this)") Duyệt
-              //-             else
-              //-               button.btn.btn-primary.UpdateBtn.disabled(type='button' disabled style="margin: 0.5rem") Duyệt
-              //-             if e.Status !== "cancel"
-              //-               button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="CancelPost(this)") Huỷ
-              //-             else 
-              //-               button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" disabled) Huỷ
-              //- else
-              //-   .table-responsive
-              //-     table#posts_data.table.table-bordered(width='100%' cellspacing='0')
-              //-       thead
-              //-         tr
-              //-           th Tên bài viết
-              //-           th Danh mục
-              //-           th Tình trạng
-              //-           th Thời điểm cập nhật
-              //-           th Thời điểm tạo
-              //-           th Mô tả
-              //-           th Hành động
-              //-       tfoot
-              //-         tr
-              //-           th Tên bài viết
-              //-           th Danh mục
-              //-           th Tình trạng
-              //-           th Thời điểm cập nhật
-              //-           th Thời điểm tạo
-              //-           th Mô tả
-              //-           th Hành động
+                    tbody
+                    each e in posts
+                      tr
+                        td !{e.UserName}
+                        td !{e.Role}
+                        td !{e.Active}
+                        td(style="display:flex;") 
+                          if e.Role == "editor" 
+                            button.btn.btn-success.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeUser(this)") User
+                            button.btn.btn-info.UpdateBtn(type='button' style="margin: 0.5rem" disabled) Editor
+                            button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeModer(this)") Moderator
+                          
+                          else if e.Role == "moderator" 
+                            button.btn.btn-success.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeUser(this)") User
+                            button.btn.btn-info.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeEditor(this)") Editor
+                            button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" disabled) Moderator
 
+                          else if e.Role == "admin" 
+                            button.btn.btn-success.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeUser(this)") User
+                            button.btn.btn-info.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeEditor(this)") Editor
+                            button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeModer(this)") Moderator
 
-              //-       tbody
-              //-       each e in posts
-              //-         tr
-              //-           td !{e.Title}
-              //-           td !{e.Category.Name}
-              //-           td !{e.Status}
-              //-           td !{e.DateChanged}
-              //-           td !{e.DateCreate}
-              //-           td !{e.Description}
-              //-           td(style="display:flex;") 
-              //-             if e.Status !== "publish" || e.Status !== "submit"
-              //-                 button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="UpdatePost(this)") Sửa
-              //-             else
-              //-               button.btn.btn-primary.UpdateBtn.disabled(type='button' disabled style="margin: 0.5rem") Sửa
-              //-             if e.Status == "draft"
-              //-               button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="DeletePost(this)") Xoá
-              //-             else 
-              //-               button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" disabled) Xoá
+                          else 
+                            button.btn.btn-success.UpdateBtn(type='button' style="margin: 0.5rem" disabled) User
+                            button.btn.btn-info.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeEditor(this)") Editor
+                            button.btn.btn-primary.UpdateBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="MakeModer(this)") Moderator
+
+                        td 
+                          button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="DeleteAccount(this)") Cook
+                          //-   button.btn.btn-primary.UpdateBtn.disabled(type='button' disabled style="margin: 0.5rem") Duyệt
+                          //- if e.Status !== "cancel"
+                          //-   button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" value=`${e.id}` onclick="CancelPost(this)") Huỷ
+                          //- else 
+                          //-   button.btn.btn-danger.DelBtn(type='button' style="margin: 0.5rem" disabled) Huỷ
+              
               
 
       // /.container-fluid
@@ -403,13 +366,11 @@ script(src='vendor/chart.js/Chart.min.js')
 
 
 // Page level plugins
-script(src='vendor/datatables/jquery.dataTables.min.js')
+//- script(src='vendor/datatables/jquery.dataTables.min.js')
 script(src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js") 
 script(src="https://cdn.jsdelivr.net/npm/axios@1.3.4/dist/axios.min.js")
 script(src='vendor/datatables/dataTables.bootstrap4.min.js')
 
-
-script(src="js/demo/datatables-demo.js") 
-script(src='js/controlPanel.js')
+script(src='js/accountControl.js')
 
 

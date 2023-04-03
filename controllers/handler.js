@@ -3,6 +3,8 @@ const AppError = require('./../Utilities/appError');
 const slugify = require('slugify')
 const APIFeatures = require('../Utilities//apiFeatures')
 
+var ObjectId = require('mongoose').Types.ObjectId;
+
 
 exports.getAll = Model => 
 catchAsync(async (req, res, next) =>{
@@ -61,6 +63,7 @@ exports.createOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
+    console.log(req.params);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true

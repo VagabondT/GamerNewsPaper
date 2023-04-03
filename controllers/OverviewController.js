@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Category = require('../models/category');
 const Posts = require('../models/posts');
 const AppError = require('../Utilities/appError');
+const Account = require('../models/account');
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 function prettyDate(dateString){
@@ -243,7 +244,7 @@ exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
 
 //Editor Post Page
 exports.RenderEditorPostsPage = catchAsync(async(req,res,next)=>{
-
+    console.log(res.locals.userAccount.Role);
     if (res.locals.userAccount.Role == "editor"){
         const posts = await Posts.find({Author: res.locals.user.id}).populate("Category");
         var allCount = posts.length;
@@ -269,8 +270,8 @@ exports.RenderEditorPostsPage = catchAsync(async(req,res,next)=>{
             cancelCount
     
         })
-    }else if (res.locals.userAccount.Role == "admin"){
-        const posts = await Posts.find({}).sort({DateChanged: -1}).populate("Category").populate("Author")
+    }else if (res.locals.userAccount.Role == "admin" || res.locals.userAccount.Role == "moderator"){
+        const posts = await Posts.find().sort({DateChanged: -1}).populate("Category").populate("Author")
         var allCount = posts.length;
         var publishCount = 0;
         var submitCount = 0;
@@ -287,18 +288,94 @@ exports.RenderEditorPostsPage = catchAsync(async(req,res,next)=>{
                 
             
         });
-        posts.forEach(element => {
-            if (element.Status == "draft"){
-                var index = posts.indexOf(element);
-                if (index > -1)
-                    posts.splice(index,1);
-            }
+        // posts.forEach(element => {
+        //     if (element.Status == "draft"){
+        //         var index = posts.indexOf(element);
+        //         if (index > -1)
+        //             posts.splice(index,1);
+        //     }
 
-        });
+        // });
+        var i = posts.length;
+        while (i--) {
+            if (posts[i].Status == 'draft') {
+                posts.splice(i, 1);
+            }
+        }
         
         res.status(200).render('controlPanel',{
             title:'Bài viết của bạn',
             posts,
+            allCount,
+            publishCount,
+            submitCount,
+            cancelCount
+    
+        })
+    }else{
+        return next(new AppError('Lỗi!',500))
+    }
+    
+})
+
+exports.renderPreviewPage = catchAsync(async(req,res,next)=>{
+    console.log(req.params.id);
+    
+    const post = await Posts.findById(req.params.id).populate("Author").populate("Category");
+    if (!post){
+        return next(new AppError("Not found!",404));
+    }
+
+    let postmodifed = post;
+    try{
+
+        const ops = JSON.parse(post.Content).ops;
+        var cfg = {}
+        var converter = new QuillDeltaToHtmlConverter(ops, cfg);
+        postmodifed.Content = converter.convert();
+
+        
+    }catch(e){
+
+    }
+   
+
+
+    res.status(200).render('newspreview',{
+        Title:'Newsview',
+        post:postmodifed
+    })
+
+})
+
+
+
+
+exports.RenderControlAccountPage = catchAsync(async(req,res,next)=>{
+
+    if (res.locals.userAccount.Role == "admin"){
+        const accounts = await Account.find().select("+Active");
+        var allCount = accounts.length;
+        var publishCount = 0;
+        var submitCount = 0;
+        var cancelCount = 0;
+
+        accounts.forEach(element => {
+            if (element.Role =="editor")
+                publishCount++;
+    
+            if (element.Role =="moderator")
+                submitCount++;
+            if (element.Role == "user")
+                cancelCount++;
+                
+            
+        });
+
+
+        res.status(200).render('control-Account',{
+            title:'Bài viết của bạn',
+            posts: accounts,
             allCount,
             publishCount,
             submitCount,

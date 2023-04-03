@@ -57,7 +57,7 @@ const sendNewPost = async (status) =>{
     const category = optionValue;
     const description = editor.getText().slice(0,60) + '....';
 
-    const postURL = `http://localhost:6868/updatePost/`+ $("#submitButon").val();
+    const postURL = window.location.origin + `/updatePost/`+ $("#submitButon").val();
     try{
         const response = await axios({
             method: 'PATCH',

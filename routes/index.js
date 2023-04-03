@@ -3,12 +3,11 @@ var router = express.Router();
 const overviewController = require('../controllers/OverviewController');
 const accountController = require('../controllers/AccountController');
 const userController = require('../controllers/UserController');
-
+const postController = require('../controllers/PostsController')
 
 router.get('/',accountController.isLoggedIn,overviewController.GetOverview);
 
 router.get('/login',accountController.isLoggedIn,overviewController.RenderLoginPage)
-
 
 router.get('/register',accountController.isLoggedIn,overviewController.RenderRegisterPage)
 
@@ -17,8 +16,13 @@ router.route('/updateUser')
     .post(accountController.protect, userController.updateUser)
 
 
-router.get('/posts',accountController.protect,accountController.allowRoles('editor','admin'),overviewController.RenderEditorPostsPage)
-router.get('/postsApproval',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderEditorPostsPage)
+//ControlArea
+router.get('/posts',accountController.protect,accountController.allowRoles('editor','admin', 'moderator'),overviewController.RenderEditorPostsPage)
+// router.get('/postsApproval',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderEditorPostsPage)
+router.get('/accountControl',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderControlAccountPage)
+
+router.get('/preview/:id',accountController.protect,accountController.allowRoles('editor','admin', 'moderator'),overviewController.renderPreviewPage)
+
 
 //Post
 router.route('/create')
@@ -39,5 +43,9 @@ router.route("/updatePost/:id")
     .patch(accountController.protect,
         accountController.allowRoles('editor', 'admin'),
         overviewController.UpdatePostPage)
-    
+
+router.route('/postControl')
+    .get(accountController.protect, accountController.allowRoles('admin','editor','moderator'), postController.GETEditorPostsData)
+   
+
 module.exports = router;

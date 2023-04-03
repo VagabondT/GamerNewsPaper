@@ -42,7 +42,7 @@ exports.isLoggedIn = catchAsync(async (req,res,next) =>{
             token = req.cookies.jwt;
             const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
             
-            const currentAccount = await Account.findById(decoded.id);
+            const currentAccount = await Account.findById(decoded.id).select("+Active");
             const currentUser = await User.findOne({Account: new ObjectId(decoded.id)})
             
             if (!currentAccount || !currentUser){
@@ -87,7 +87,7 @@ exports.protect = catchAsync(async (req,res,next) =>{
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     
     //check if user still exists
-    const currentAccount = await Account.findById(decoded.id);
+    const currentAccount = await Account.findById(decoded.id).select("+Active");
     const currentUser = await User.findOne({Account: new ObjectId(decoded.id)})
     if (!currentAccount){
         return next(new AppError('Token of this user is no longer exists!',401));

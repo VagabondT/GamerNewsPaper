@@ -17,7 +17,7 @@ const isEmpty = str => !str.trim().length;
 const sendLogin = async () =>{
     const user = $('#inputIdUsrname').val();
     const pwd = $('#inputIdPassword').val();
-    const postURL = `http://localhost:6868/api/account/login`
+    const postURL = window.location.origin + `/api/account/login`
     try{
         const response = await axios({
             method: 'POST',

@@ -5,8 +5,8 @@ const accountController = require('../../controllers/AccountController')
 
 router
     .route('/')
-    .get(postController.getAllPosts)
-    .post(postController.createPost)
+    .get(accountController.protect,postController.getAllPosts)
+    .post(accountController.protect,postController.createPost)
 
 router
     .route('/:id')
@@ -16,7 +16,8 @@ router
         accountController.protect, 
         accountController.allowRoles('administrator','editor'),
         postController.deletePost
-    )
+)
+
 
 
 module.exports = router;

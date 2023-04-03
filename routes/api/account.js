@@ -7,13 +7,12 @@ const userController = require('../../controllers/UserController');
 
 router
     .route('/')
-    .get(accountController.getAllAccounts)
+    .get(accountController.protect, accountController.getAllAccounts)
+    
 
-
-// router
-//     .route('/:id')
-//     .get(accountController.getAccount)
-
+router.route('/:id')
+    .patch(accountController.protect, accountController.allowRoles('admin'), accountController.updateAccount)
+    .delete(accountController.protect, accountController.allowRoles('admin'),accountController.deleteAccount)
 
 router
     .route('/login')

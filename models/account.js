@@ -42,7 +42,7 @@ const AccountSchema = new mongoose.Schema(
     },
     Role: {
       type: String,
-      enum: ["admin", "user"],
+      enum: ["admin", "user", "editor","moderator"],
       default: "user",
       trim: true,
       lowercase: true
@@ -104,7 +104,7 @@ AccountSchema.pre("save", function (next) {
 // return All account is active.
 AccountSchema.pre("find", function (next) {
   // $ne: value ==> return object # value
-  this.find({ Active: { $ne: false } });
+  // this.find({ Active: { $ne: false } });
   next();
 });
 

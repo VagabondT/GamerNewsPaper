@@ -48,13 +48,13 @@ $('input[type=radio][name=Category]').change(function() {
     }
   });
 
-const sendNewPost = async () =>{
+const sendNewPost = async (status) =>{
     const postTitle = $("#inputTitle").val();
     const postContent = editor.getContents();
     const category = optionValue;
     const description = editor.getText().slice(0,60) + '....';
 
-    const postURL = `http://localhost:6868/create`
+    const postURL = window.location.origin + '/create'
     try{
         const response = await axios({
             method: 'POST',
@@ -63,7 +63,8 @@ const sendNewPost = async () =>{
                 Title: postTitle,
                 Content: postContent,
                 Category: category,
-                Description: description
+                Description: description,
+                Status: status
             }
         })
 
@@ -79,5 +80,11 @@ const sendNewPost = async () =>{
 }
 
 $("#submitButon").click(()=>{
-    sendNewPost();
+    $("#submitButon").prop( "disabled", true );
+    sendNewPost('submit');
+})
+
+$("#SaveButon").click(()=>{
+    $("#SaveButon").prop( "disabled", true );
+    sendNewPost('draft');
 })

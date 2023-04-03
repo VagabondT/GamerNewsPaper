@@ -67,7 +67,7 @@ app.use('/',indexRouter );
 app.use('/news',newsRouter)
 app.use('/api/posts', apiPostRouter);
 app.use('/api/category',apiCategoryRouter);
-app.use('/api//users',apiUserRouter);
+app.use('/api/users',apiUserRouter);
 
 
 

@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "dadc0567-7f6b-4e43-8d71-dbb26ca3ca8a",
+		"name": "gamerThoiBao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "POST post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"Title\":\"Một bài viết mà phải cần tài khoản\",\r\n    \"Tags\":[],\r\n    \"Category\":\"6422f07a1b289c2c8568010b\",\r\n    \"Thumbnail\":\"https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80\",\r\n    \"Content\":\"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem. Veritatisobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquamnihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdamrecusandae alias error harum maxime adipisci amet laborum. Perspiciatis\"\r\n    }\r\n    \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/posts",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"_id\": 0,\r\n    \"Title\": \"Câu chuyện kì bí về trái bí biết đi\",\r\n    \"Category\": \"0\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/posts/6423019804930ae3cb450736",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"6423019804930ae3cb450736"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Post id =1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/posts/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post id =1 Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 1,\r\n    \"Title\": \"Chuyện tình game thủ updated\",\r\n    \"Thubnail\": \"default.jpg\",\r\n    \"DateCreate\": null,\r\n    \"DateChanged\": \"2023-03-26T07:20:03.963Z\",\r\n    \"Status\": \"wait\",\r\n    \"Tags\": [],\r\n    \"Category\": 0,\r\n    \"__v\": 0,\r\n    \"id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/posts/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilteringGET POST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/posts?limit=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-DateCreate",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "DELETE Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6868/category/6420791e09293151a4b62833",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category",
+								"6420791e09293151a4b62833"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                \"name\": \"Technology\",\r\n                \"__v\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6868/category/64207e808e73609cc7afb86c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category",
+								"64207e808e73609cc7afb86c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET false id Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Event\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6868/category/6420791e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category",
+								"6420791e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Test from PostMAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6868/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Category ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6868/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6868/category/Game",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category",
+								"Game"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "SIGNUP Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"UserName\": \"test\",\r\n  \"Password\": \"12345678\",\r\n  \"ConfirmPassword\": \"12345678\",\r\n  \"Email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/account/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"signup"
+							]
+						},
+						"description": "Đăng ký tài khoản người dùng. Sau khi đăng ký thành công sẽ tự động đăng nhập bằng việc cấp token.\n\nYêu cầu: UserName, Password, ConfirmPassword, Email\nPassword trùng với ConfirmPassword và cả hai phải trên 8 kí tự.\n```\n{\n\"UserName\": \"akkii\",\n  \"Password\": \"123456789\",\n  \"ConfirmPassword\": \"123456789\",\n  \"Email\": \"test@mail.com\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\": \"test\",\r\n    \"Password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/account/login",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"login"
+							]
+						},
+						"description": "Đăng nhập tài khoản\nYêu cầu: UserName, Password\n```\n{\n    \"UserName\": \"test\",\n    \"Password\": \"12345678\"\n}\n```\nTrả về token nếu thành công.\n```\n{\n    \"status\": \"success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjkyYTZkZDRiMmM3ODI2NzAzNDNlMiIsImlhdCI6MTY4MDQxOTYzNCwiZXhwIjoxNjgzMDExNjM0fQ.LtX-5VEelL-oVXCexQgHH6t4rNXi39gJIhS48e4ZXKs\",\n    \"data\": {\n        \"account\": {\n            \"_id\": \"64292a6dd4b2c782670343e2\",\n            \"Password\": \"$2b$12$49PXJZzsUjnezgMMBmdwQuH7DypMDJ0ZLaLntKrAjNsFUgOOQ8n.e\",\n            \"id\": \"64292a6dd4b2c782670343e2\"\n        }\n    }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/account/logout",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"logout"
+							]
+						},
+						"description": "Gửi một request đến /api/account/logout.\nToken mới nội dung \"LoggedOut\" được cấp."
+					},
+					"response": []
+				},
+				{
+					"name": "ForgotPassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"playscooter0401@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/account/forgotPassword/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"forgotPassword",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ResetPassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Password\":\"matkhaumoine\",\r\n    \"ConfirmPassword\":\"matkhaumoine\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/account/resetPassword/f3926a07b3a58472dfe9cdab72738a4ebd55dd67c6fe9dfbc29ed7ad98b61ddd",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"resetPassword",
+								"f3926a07b3a58472dfe9cdab72738a4ebd55dd67c6fe9dfbc29ed7ad98b61ddd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangePassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUyYTYzZWY1Zjg2Yjk0ZWY1NTY2NCIsImlhdCI6MTY4MDE2NjUyNywiZXhwIjoxNjgyNzU4NTI3fQ.xqGME4l_Z9Ekeh2QD148BwP5Zq5JddXQ-OAZzarAPlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PasswordCurrent\":\"matkhaumoine\",\r\n    \"Password\":\"matkhaunaymoihonnua\",\r\n    \"ConfirmPassword\": \"matkhaunaymoihonnua\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/account/changePassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL ACCOUNT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/account",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/users/64292dedef1e22d2b4608d96",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								"64292dedef1e22d2b4608d96"
+							]
+						},
+						"description": "Liệt kê tất cả user đang có trong database.\nCần tài khoản có quyền admin."
+					},
+					"response": []
+				},
+				{
+					"name": "POST Users | Tạo mới user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"Name\":\"Nguyễn Nguyễn Tuấn Tú\",\r\n    \"Birthday\":\"2003-01-12\",\r\n    \"Email\":\"test@mail.com\",\r\n    \"Address\":\"Bình Phước\",\r\n    \"Account\":\"64292a6dd4b2c782670343e2\",\r\n    \"Phone\":\"0967620778\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/users",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Tạo mới user.\nYêu cầu: \n```\n{\n    \n    \"Name\":\"Nguyễn Nguyễn Tuấn Tú\",\n    \"Birthday\":\"2003-01-12\",\n    \"Email\":\"nguyenhuutuantu@gmail.com\",\n    \"Address\":\"Bình Phước\",\n    \"Account\":\"64292a6dd4b2c782670343e2\", // AccountID\n    \"Phone\":\"0967620778\"\n    \n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Users | Cập nhật user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjkyYTZkZDRiMmM3ODI2NzAzNDNlMiIsImlhdCI6MTY4MDQyMTI3NSwiZXhwIjoxNjgzMDEzMjc1fQ.bY5tCcX32Qo6kaR63cbcniyXZitmXh-xYgw-XUSiG3o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"Name\":\"Nguyễn Hữu Tuấn Tú\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/users/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "Cập nhật user.\nYêu cầu: userID trên request.params.id\n```\nbody\n{\n    \n    \"Name\":\"Nguyễn Hữu Tuấn Tú\" //Cập nhật lại tên\n    \n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROTECT ROUTE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjNiY2U3ZDIyN2U4ZjM0OTU4Mjc1MSIsImlhdCI6MTY4MDA5NjA3NiwiZXhwIjoxNjgyNjg4MDc2fQ.lrcVkESbfNShZeulYTN4RR3S8JBcPiXqc9f07mZRWBC",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"akkii\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}api/posts/",
+					"host": [
+						"{{URL}}api"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

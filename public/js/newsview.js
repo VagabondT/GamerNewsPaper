@@ -52,3 +52,42 @@ quill.ready(()=>{
   $("#postContentHere").html(justHtml)
 })
   
+const sendUpdatePost = async (id, status) =>{
+
+  const postURL = window.location.origin + `/updatePost/`+ id;
+  try{
+      const response = await axios({
+          method: 'PATCH',
+          url: postURL,
+          data: {
+              Status: status
+          }
+      })
+
+      window.setTimeout(() => {
+          location.reload()
+      }, 1500);
+  }catch (err){
+      alert(err);
+
+  }
+}
+
+function ApprovePost(obj){
+  $("#ApproveBtn").attr('disabled', true);
+  sendUpdatePost(obj.value,'publish')
+
+
+}
+
+function CancelPost(obj){
+  $("#CancelBtn").attr('disabled', true);
+  sendUpdatePost(obj.value,'cancel')
+
+}
+
+function GotoControlPanel(){
+  setTimeout(() => {
+    window.location = window.location.origin +'/posts'
+  }, 1000);
+}

@@ -1,5 +1,5 @@
 const sendLogout = async () =>{
-    const postURL = `http://localhost:6868/api/account/logout`
+    const postURL = window.location.origin + `/api/account/logout`
     try{
         const response = await axios({
             method: 'GET',
@@ -16,6 +16,6 @@ const sendLogout = async () =>{
     }
 }
 
-$("#logoutBtn").click(()=>{
+$(".logoutBtn").click(()=>{
     sendLogout();
 })
