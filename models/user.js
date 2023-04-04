@@ -12,13 +12,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 200,
       capitalize: true,
-      default: 'Captain',
+      default: "Captain",
       trim: true,
-      required: true
+      required: true,
     },
     Birthday: {
       type: Date,
-      default: "2000-10-31T01:30:00.000-05:00"
+      default: "2000-10-31T01:30:00.000-05:00",
     },
     Photo: {
       type: String,
@@ -29,13 +29,13 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      required: true
+      required: true,
     },
     Address: {
       type: String,
       max: 300,
       trim: true,
-      default:''
+      default: "",
     },
     Account: {
       type: mongoose.Schema.ObjectId,
@@ -44,10 +44,8 @@ const UserSchema = new mongoose.Schema(
     },
     Phone: {
       type: String,
-      default:'',
-      unique: false
+      default: "",
     },
-
   },
   {
     autoCreate: true,
@@ -66,6 +64,14 @@ const UserSchema = new mongoose.Schema(
 //   );
 // });
 
+// Kiểm tra số điện thoại đã tồn tại chưa, nếu rồi thì số điện thoại sẽ
+// UserSchema.pre("save", (next) => {
+//   const result = User.find({});
+//   if (result) {
+//     console.log("The phone number already exists!")
+//     // handler
+//   }
+// });
 
 const User = mongoose.model("User", UserSchema);
 

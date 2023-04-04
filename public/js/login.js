@@ -40,7 +40,6 @@ const sendLogin = async () =>{
     }
 }
 
-
 $(".submitButton").click(()=>{
     if (!isEmpty($("#inputIdUsrname").val()) && !isEmpty($("#inputIdPassword").val())){
         sendLogin();
