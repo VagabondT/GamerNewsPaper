@@ -31,9 +31,7 @@ router.route('/create')
         accountController.allowRoles('editor',"admin"),
         overviewController.RenderCreatePostPage
     )
-    .post(accountController.protect,
-        overviewController.CreatePostFromPage
-    )
+
 
 router.route("/updatePost/:id")
     .get(
@@ -41,7 +39,7 @@ router.route("/updatePost/:id")
     accountController.allowRoles('editor','admin'),
     overviewController.RenderUpdatePostPage)
     .patch(accountController.protect,
-        accountController.allowRoles('editor', 'admin'),
+        accountController.allowRoles('editor', 'admin','moderator'),
         overviewController.UpdatePostPage)
 
 router.route('/postControl')

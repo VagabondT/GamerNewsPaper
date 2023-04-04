@@ -51,31 +51,34 @@ $('input[type=radio][name=Category]').change(function() {
 
 
 
-const sendNewPost = async (status) =>{
+const sendNewPost = async (status,id) =>{
     const postTitle = $("#inputTitle").val();
-    const postContent = editor.getContents();
+    const postContent = JSON.stringify(editor.getContents());
     const category = optionValue;
     const description = editor.getText().slice(0,60) + '....';
+    const thumbnail = $('#inputImage')[0].files[0]
 
-    const postURL = window.location.origin + `/updatePost/`+ $("#submitButon").val();
+    var formData = new FormData();
+    formData.append("Title",postTitle);
+    formData.append("Content", postContent);
+    formData.append("Category",category);
+    formData.append("Description",description);
+    formData.append("photo",thumbnail);
+    formData.append("Status",status);
+    console.log(formData)
+
+    const postURL = window.location.origin + '/api/posts/' + id
     try{
         const response = await axios({
             method: 'PATCH',
             url: postURL,
-            data: {
-                Title: postTitle,
-                Content: JSON.stringify(postContent),
-                Category: category,
-                Description: description,
-                Status: status,
-                DateChanged: Date.now()
-            }
+            data: formData
+            
         })
-        
-        if (response.status == 200){
-            alert("Thành công!")
+
+        if (response.data.status === 'success'){
             window.setTimeout(() => {
-                location = '/posts'
+                location = '/'
             }, 1500);
         }
     }catch (err){
@@ -86,11 +89,11 @@ const sendNewPost = async (status) =>{
 
 $("#submitButon").click(()=>{
 
-    sendNewPost('submit');
+    sendNewPost('submit',$("#submitButon").val());
 })
 
 $("#SaveButon").click(()=>{
 
-    sendNewPost('draft');
+    sendNewPost('draft',$("#SaveButon").val());
 })
 

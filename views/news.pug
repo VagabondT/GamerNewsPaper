@@ -29,7 +29,7 @@ block content
                     if featuredPost.Thumbnail.includes('https://') || featuredPost.Thumbnail.includes('http://')
                       img(src=`${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
                     else
-                      img(src=`../img/${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                      img(src=`../${featuredPost.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
                     
                   .typeCategory
                     .brush-icon

@@ -50,22 +50,27 @@ $('input[type=radio][name=Category]').change(function() {
 
 const sendNewPost = async (status) =>{
     const postTitle = $("#inputTitle").val();
-    const postContent = editor.getContents();
+    const postContent = JSON.stringify(editor.getContents());
     const category = optionValue;
     const description = editor.getText().slice(0,60) + '....';
+    const thumbnail = $('#inputImage')[0].files[0]
 
-    const postURL = window.location.origin + '/create'
+    var formData = new FormData();
+    formData.append("Title",postTitle);
+    formData.append("Content", postContent);
+    formData.append("Category",category);
+    formData.append("Description",description);
+    formData.append("photo",thumbnail);
+    formData.append("Status",status);
+    console.log(formData)
+
+    const postURL = window.location.origin + '/api/posts'
     try{
         const response = await axios({
             method: 'POST',
             url: postURL,
-            data: {
-                Title: postTitle,
-                Content: postContent,
-                Category: category,
-                Description: description,
-                Status: status
-            }
+            data: formData
+            
         })
 
         if (response.data.status === 'success'){

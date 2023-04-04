@@ -41,7 +41,7 @@ block content
                     if post.Thumbnail.includes('https://')
                       img(src=`${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
                     else 
-                      img(src=`../img/${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                      img(src=`../${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
         .grid(style='margin-top: 15%;')
           .gridInner
             .grid-4-items
@@ -49,15 +49,16 @@ block content
                 #postContentHere !{post.Content}
             .grid-4-items
               .relatedPostArea.gridItem
-                h2(style="text-align: center; font-family: 'Mark Pro',Arial,sans-serif; font-size: 4rem;") Quyết định
-                .actionDiv(style="display:flex; justify-content:center; align-item:center")
-                  button.cssbuttons-io.cssbuttons-ioSuccess#CancelBtn(onclick="ApprovePost(this)" value=`${post.id}`)
-                      span
-                        |  Duyệt  
-                  
-                  button.cssbuttons-io.cssbuttons-ioDanger#CancelBtn(onclick="CancelPost(this)" value=`${post.id}`)
-                      span
-                        |  Huỷ   
+                if post.Status !== 'publish'
+                  h2(style="text-align: center; font-family: 'Mark Pro',Arial,sans-serif; font-size: 4rem;") Quyết định
+                  .actionDiv(style="display:flex; justify-content:center; align-item:center")
+                    button.cssbuttons-io.cssbuttons-ioSuccess#CancelBtn(onclick="ApprovePost(this)" value=`${post.id}`)
+                        span
+                          |  Duyệt  
+                    
+                    button.cssbuttons-io.cssbuttons-ioDanger#CancelBtn(onclick="CancelPost(this)" value=`${post.id}`)
+                        span
+                          |  Huỷ   
 
                 br
                 .actionDiv(style="display:flex; justify-content:center; align-item:center")   

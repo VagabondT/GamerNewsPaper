@@ -41,7 +41,7 @@ block content
                     if post.Thumbnail.includes('https://')
                       img(src=`${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
                     else 
-                      img(src=`../img/${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
+                      img(src=`../${post.Thumbnail}` alt='' loading='lazy' style="object-fit: cover; max-height:720px")
         .grid(style='margin-top: 15%;')
           .gridInner
             .grid-4-items
@@ -60,7 +60,7 @@ block content
                             if post.Thumbnail.includes('https://')
                               img(src=`${e.Thumbnail}` alt='' loading='lazy')
                             else 
-                              img(src=`../img/${e.Thumbnail}` alt='' loading='lazy')
+                              img(src=`../${e.Thumbnail}` alt='' loading='lazy')
                                     
                             .typeCategorySmall
                               .brush-icon

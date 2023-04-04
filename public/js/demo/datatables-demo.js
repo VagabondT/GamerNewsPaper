@@ -14,7 +14,7 @@ $(document).ready(async function(){
     return d+' '+m+' '+y;
   }
 
-  function ConvertObjectTime(object){
+  function ConvertObjectTime(object){ 
 
       object.forEach(element => {
           if (element.DateChanged!== null){
@@ -81,8 +81,12 @@ $(document).ready(async function(){
             }
 
             if (Role == 'moderator')
-              if (data.Status != "publish")
-                return readBtn+ approveBtn + cancelBtn
+              if (data.Status == "publish")
+                return readBtn
+
+              if (data.Status == "submit")
+                return readBtn + approveBtn + cancelBtn
+                
               else return readBtn;
 
             if (Role =='admin') 

@@ -156,47 +156,47 @@ exports.RenderCreatePostPage = catchAsync(async(req,res,next)=>{
 })
 
 exports.RenderUpdatePostPage = catchAsync(async(req,res,next)=>{
-
+    
     const selectedPost = await Posts.findById(req.params.id);
-    if (selectedPost){
 
-
-        const ops = JSON.parse(selectedPost.Content).ops;
-        var cfg = {}
-        var converter = new QuillDeltaToHtmlConverter(ops, cfg);
-        var content = converter.convert();
-
-
-
-        const categoryList = await Category.find();
-        var categoryOption = [];
-        categoryList.forEach(element => {
-            
-            if (selectedPost.Category == element.id){
-                categoryOption.push({Name: element.Name, Value: element.id, "checked": true}) 
-            }else{
-                categoryOption.push({Name: element.Name, Value: element.id});
-            }
-
-        });
-    
-    
-        if (!categoryList){
-            res.status(200).render('updatePost.pug',{
-                title:'Sửa bài viết' + selectedPost.Name+ '| Gamer Thời BÁO',
-                post:selectedPost,
-                postContent: content
-            })
-        }else{
-            res.status(200).render('updatePost.pug',{
-                title:'Tạo bài viết| Gamer Thời BÁO',
-                Categories: categoryOption,
-                post: selectedPost,
-                postContent: content
-            })
-        }
-    }else{
+    if (!selectedPost){
         return next(new AppError("Không tìm thấy bài viết!",404));
+        
+    }
+    const ops = JSON.parse(selectedPost.Content).ops;
+    var cfg = {}
+    var converter = new QuillDeltaToHtmlConverter(ops, cfg);
+    var content = converter.convert();
+
+
+
+
+    const categoryList = await Category.find();
+    var categoryOption = [];
+    categoryList.forEach(element => {
+        
+        if (selectedPost.Category == element.id){
+            categoryOption.push({Name: element.Name, Value: element.id, "checked": true}) 
+        }else{
+            categoryOption.push({Name: element.Name, Value: element.id});
+        }
+
+    });
+
+
+    if (!categoryList){
+        res.status(200).render('updatePost',{
+            title:'Sửa bài viết' + selectedPost.Name+ '| Gamer Thời BÁO',
+            post:selectedPost,
+            postContent: content
+        })
+    }else{
+        res.status(200).render('updatePost',{
+            title:'Tạo bài viết| Gamer Thời BÁO',
+            Categories: categoryOption,
+            post: selectedPost,
+            postContent: content
+        })
     }
     
     
@@ -217,30 +217,7 @@ exports.UpdatePostPage = catchAsync(async(req,res,next)=>{
     });
 })
 
-//Lưu post mới vào database
-exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
 
-    const currentUser = await User.findById(res.locals.user.id);
-    if (currentUser){
-
-        const newPostSave = await Post.create({
-            Author: currentUser._id,
-            Title: req.body.Title,
-            Content: JSON.stringify(req.body.Content),
-            Category: req.body.Category,
-            Description: req.body.Description
-    
-        });
-        res.status(200).json({
-            status: 'success'
-        });
-    }else{
-        return next(new AppError('User not found',404))
-    }
-
-
-   
-})
 
 //Editor Post Page
 exports.RenderEditorPostsPage = catchAsync(async(req,res,next)=>{
@@ -347,9 +324,6 @@ exports.renderPreviewPage = catchAsync(async(req,res,next)=>{
     })
 
 })
-
-
-
 
 exports.RenderControlAccountPage = catchAsync(async(req,res,next)=>{
 
