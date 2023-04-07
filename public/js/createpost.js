@@ -52,7 +52,7 @@ const sendNewPost = async (status) =>{
     const postTitle = $("#inputTitle").val();
     const postContent = JSON.stringify(editor.getContents());
     const category = optionValue;
-    const description = editor.getText().slice(0,60) + '....';
+    const description = editor.getText().slice(0,100) + '....';
     const thumbnail = $('#inputImage')[0].files[0]
 
     var formData = new FormData();
@@ -75,7 +75,7 @@ const sendNewPost = async (status) =>{
 
         if (response.data.status === 'success'){
             window.setTimeout(() => {
-                location = '/'
+                location = window.location.origin + '/posts'
             }, 1500);
         }
     }catch (err){

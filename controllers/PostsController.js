@@ -39,8 +39,9 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.uploadPhoto = upload.single('photo')
 exports.resizePhoto = (req,res,next) =>{
+    console.log(req.body);
     if (!req.file) return next();
-    req.file.filename = `post-${req.body.Title}-${Date.now()}.jpeg`
+    req.file.filename = `post-${req.body.Title}.jpeg`
     sharp(req.file.buffer).resize(1000,563).toFormat('jpeg').jpeg({quality: 100}).toFile(`public/img/PostThumbnail/${req.file.filename}`);
     console.log(req.file.filename);
     next();
@@ -83,7 +84,30 @@ exports.getPost = async (req,res,next) =>{
 }
 
 exports.createPost = handler.createOne(Post)
-exports.updatePost = handler.updateOne(Post);
+exports.updatePost = catchAsync(async (req,res,next)=>{
+    var imageName;
+    var data = req.body;
+    if (req.file){
+        imageName = 'img/PostThumbnail/'+ req.file.filename;
+        data.Thumbnail = imageName;
+    } 
+    
+    const doc = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+
+    if (!doc) {
+      return next(new AppError('No document found with that ID', 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: doc
+      }
+    });
+})
 exports.deletePost = catchAsync(async (req, res, next) => {
    const foundPost =  await Post.findById(req.params.id)
     console.log(foundPost.Author);
@@ -207,9 +231,7 @@ exports.GETEditorPostsData = catchAsync(async(req,res,next)=>{
 
 
 //Lưu post mới vào database
-exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
-    console.log(req.file);
-    console.log(req.body);
+exports.CreatePost = catchAsync(async(req, res, next)=>{
     const currentUser = await User.findById(res.locals.user.id);
     var imageName = 'img/PostThumbnail/default.jpg'
     if (currentUser){
@@ -218,7 +240,7 @@ exports.CreatePostFromPage = catchAsync(async(req, res, next)=>{
         const newPostSave = await Post.create({
             Author: currentUser._id,
             Title: req.body.Title,
-            Content: JSON.stringify(req.body.Content),
+            Content: req.body.Content,
             Category: req.body.Category,
             Description: req.body.Description,
             Thumbnail: imageName,

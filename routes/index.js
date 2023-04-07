@@ -18,7 +18,6 @@ router.route('/updateUser')
 
 //ControlArea
 router.get('/posts',accountController.protect,accountController.allowRoles('editor','admin', 'moderator'),overviewController.RenderEditorPostsPage)
-// router.get('/postsApproval',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderEditorPostsPage)
 router.get('/accountControl',accountController.protect,accountController.allowRoles('admin'),overviewController.RenderControlAccountPage)
 
 router.get('/preview/:id',accountController.protect,accountController.allowRoles('editor','admin', 'moderator'),overviewController.renderPreviewPage)

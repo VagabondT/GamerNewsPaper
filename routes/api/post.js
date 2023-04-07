@@ -7,15 +7,15 @@ const accountController = require('../../controllers/AccountController')
 router
     .route('/')
     .get(accountController.protect,postController.getAllPosts)
-    .post(accountController.protect, postController.uploadPhoto,postController.resizePhoto,postController.CreatePostFromPage)
+    .post(accountController.protect,accountController.allowRoles('admin','editor'), postController.uploadPhoto,postController.resizePhoto,postController.CreatePost)
 
 router
     .route('/:id')
     .get(postController.getPost)
-    .patch(accountController.protect, postController.uploadPhoto,postController.resizePhoto,postController.updatePost)
+    .patch(accountController.protect, accountController.allowRoles('admin','editor'), postController.uploadPhoto,postController.resizePhoto,postController.updatePost)
     .delete(
         accountController.protect, 
-        accountController.allowRoles('administrator','editor'),
+        accountController.allowRoles('admin','editor'),
         postController.deletePost
 )
 

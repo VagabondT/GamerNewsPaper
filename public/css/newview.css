@@ -544,7 +544,7 @@ html{
 
 @media screen and (max-width:1280px){
     .grid{
-        margin-top: 12% !important;
+        margin-top: 44% !important;
     }
     .relatedPostArea h2{
         font-size: 2rem !important;
@@ -556,6 +556,36 @@ html{
     .item{
         width: 100%;
     }
+
+    .gridItem{
+        flex: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+}
+
+@media screen and (max-width:1280px){
+    .grid{
+        margin-top: 44% !important;
+    }
+    .relatedPostArea h2{
+        font-size: 2rem !important;
+    }
+
+    .caroselInner{
+        width: 100% !important;
+    }
+    .item{
+        width: 100%;
+    }
+
+    .gridItem{
+        flex: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
 }
 
 
@@ -603,7 +633,6 @@ html{
         z-index: 10;
     }
 }
-
 
 .cssbuttons-io {
     position: relative;

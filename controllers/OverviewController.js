@@ -168,9 +168,6 @@ exports.RenderUpdatePostPage = catchAsync(async(req,res,next)=>{
     var converter = new QuillDeltaToHtmlConverter(ops, cfg);
     var content = converter.convert();
 
-
-
-
     const categoryList = await Category.find();
     var categoryOption = [];
     categoryList.forEach(element => {
@@ -216,7 +213,6 @@ exports.UpdatePostPage = catchAsync(async(req,res,next)=>{
         }
     });
 })
-
 
 
 //Editor Post Page
@@ -320,7 +316,7 @@ exports.renderPreviewPage = catchAsync(async(req,res,next)=>{
 
     res.status(200).render('newspreview',{
         Title:'Newsview',
-        post:postmodifed
+        post
     })
 
 })

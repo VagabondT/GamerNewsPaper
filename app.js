@@ -76,7 +76,6 @@ app.use('/api/users',apiUserRouter);
 
 
 app.all('*', (req, res, next) => {
-
   next(new AppError(`Cant find ${req.originalUrl} on this server!`,404))
 });
 

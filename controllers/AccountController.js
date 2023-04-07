@@ -134,26 +134,33 @@ exports.Signup = catchAsync(async (req,res, next) =>{
             ConfirmPassword: req.body.ConfirmPassword,
             Active: false
         });
-
-        console.log(newAcc);
     
         if (newAcc != undefined){
-
+            var newUser
             try {
-                const newUser = await User.create({
+                newUser = await User.create({
                     Account: new ObjectId(newAcc._id),
                     Email: req.body.Email
                 });
                 console.log(newUser);
+                newUser.Name = newAcc.UserName;
+                const url = `${req.protocol}://${req.get('host')}/updateUser`;
+
+                await new Email(newUser,url).sendWelcome();
+                
                 createSendToken(newAcc,201,req,res);
             } catch (error) {
                 console.log(error);
                 await Account.findByIdAndDelete(newAcc._id);
+                await User.findByIdAndDelete(newUser._id);
                 res.status(500).json({
                     status:'fail',
                     message:'There is error! Please try later'
                 })
             }
+
+            
+            
         }
         else{
             await Account.findByIdAndDelete(newAcc._id)
@@ -209,7 +216,8 @@ exports.Logout = (req,res, next) =>{
 
 exports.forgotPassword = catchAsync(async (req,res,next) =>{
     //get user based on post account
-    const user = await User.findOne({Email: req.body.email});
+    console.log(req.body.Email);
+    const user = await User.findOne({Email: req.body.Email});
     if (!user){
         return next(new AppError('There is no user with this email address', 404));
     }
@@ -230,11 +238,7 @@ exports.forgotPassword = catchAsync(async (req,res,next) =>{
         const message = `Forgot password? Submit a PATCH request with your new password and confirmPassword to:
         ${resetURL}\nIf you didn't forget password, it's time to ignore this email.`
 
-        await Email({
-            email: user.Email,
-            subject: 'Your password reset token (valid in 10 mins)',
-            message
-        })
+        await new Email(user, resetURL).sendPasswordReset();
 
         res.status(200).json({
             status: 'success',
@@ -331,4 +335,27 @@ exports.getAccount = catchAsync(async (req,res,next) =>{
         })
     }
  
+})
+
+
+exports.renderPasswordResetPage = catchAsync(async (req,res,next)=>{
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await Account.findOne({PasswordResetToken: hashedToken, PasswordResetExpires: { $gt: Date.now()}});
+
+    // nếu token hợp lệ, đổi mật khẩu cho user
+    if (!user){
+        res.status(400).render('error', {
+            msg: 'Token is invalid or has expired.'
+        });
+    }
+
+    res.status(200).render('resetPassword', {
+        token: req.params.token
+    });
+})
+
+exports.renderForgotPasswordPage = catchAsync(async (req,res,next)=>{
+
+    res.status(200).render('forgotPassword');
 })

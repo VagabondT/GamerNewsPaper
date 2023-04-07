@@ -61,7 +61,7 @@ block content
                       if post.Thumbnail.includes('https://') || post.Thumbnail.includes('http://')
                         img(src=`${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
                       else
-                        img(src=`../img/${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
+                        img(src=`../${post.Thumbnail}` alt='' loading='lazy' width='600' height='337' style='max-width:1000px; max-height:563px')
                       
                       .typeCategorySmall
                         .brush-icon

@@ -22,8 +22,14 @@ router.get('/logout', accountController.Logout);
 
 router.post('/signup',accountController.Signup)
 
-router.post('/forgotPassword', accountController.forgotPassword);
-router.patch('/resetPassword/:token', accountController.resetPassword);
+router
+    .route("/forgotPassword")
+    .post(accountController.forgotPassword)
+    .get(accountController.renderForgotPasswordPage)
+router
+    .route('/resetPassword/:token')
+    .patch(accountController.resetPassword)
+    .get(accountController.renderPasswordResetPage)
 router.route('/changePassword').patch(accountController.protect,accountController.updatePassword)
 
 

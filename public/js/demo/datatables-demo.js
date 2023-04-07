@@ -75,7 +75,9 @@ $(document).ready(async function(){
             
             if (Role == 'editor'){
               if (data.Status == "draft")
-                return changeBtn + delBtn
+                return readBtn + changeBtn + delBtn;
+              else if (data.Status == "publish")
+                return readBtn;
               else
                 return 'Không có hành động'
             }

@@ -78,7 +78,7 @@ const sendNewPost = async (status,id) =>{
 
         if (response.data.status === 'success'){
             window.setTimeout(() => {
-                location = '/'
+                location = window.location.origin + '/posts'
             }, 1500);
         }
     }catch (err){

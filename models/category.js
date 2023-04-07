@@ -15,10 +15,6 @@ const CategorySchema = new mongoose.Schema(
       type: String,
       max : 200
     },
-    Thumbnail: {
-      type: String,
-      default: "default.jpg"
-    },
     Slug : String
   },
   {
