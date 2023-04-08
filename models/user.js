@@ -41,12 +41,7 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Account",
       required: true,
-    },
-    Phone: {
-      type: String,
-      default:'',
-      unique: false
-    },
+    }
 
   },
   {

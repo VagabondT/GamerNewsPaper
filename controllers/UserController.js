@@ -33,11 +33,7 @@ exports.updateUser = catchAsync(async(req,res,next) =>{
             UpdatedUser.Email = req.body.Email;
         }
 
-            
-        if (req.body.Phone !== undefined)
-            UpdatedUser.Phone = req.body.Phone;
-
-
+        
         await UpdatedUser.save();
        
         if (res.locals.userAccount.Active == false){
