@@ -22,6 +22,9 @@ router.get('/logout', accountController.Logout);
 
 router.post('/signup',accountController.Signup)
 
+
+router.post('/changePassword',accountController.protect,accountController.updatePassword)
+
 router
     .route("/forgotPassword")
     .post(accountController.forgotPassword)
@@ -30,7 +33,8 @@ router
     .route('/resetPassword/:token')
     .patch(accountController.resetPassword)
     .get(accountController.renderPasswordResetPage)
-router.route('/changePassword').patch(accountController.protect,accountController.updatePassword)
+
+
 
 
 module.exports = router;

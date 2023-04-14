@@ -77,16 +77,16 @@ exports.protect = catchAsync(async (req,res,next) =>{
         token = req.cookies.jwt;
     }
 
-
     if (!token){
         return next(new AppError('You are not logged in, please login first!', 401))
     }
 
     //veritification token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    
+
     //check if user still exists
-    const currentAccount = await Account.findById(decoded.id).select("+Active");
+
+    const currentAccount = await Account.findById(new ObjectId(decoded.id)).select("+Active");
     const currentUser = await User.findOne({Account: new ObjectId(decoded.id)})
     if (!currentAccount){
         return next(new AppError('Token of this user is no longer exists!',401));
@@ -132,7 +132,7 @@ exports.Signup = catchAsync(async (req,res, next) =>{
             UserName: req.body.UserName,
             Password: req.body.Password,
             ConfirmPassword: req.body.ConfirmPassword,
-            Active: false
+            Active: true
         });
     
         if (newAcc != undefined){
@@ -286,9 +286,12 @@ exports.resetPassword = catchAsync(async (req,res,next) =>{
 
 exports.updatePassword = catchAsync(async (req,res,next)=>{
 
-    const account = await Account.findById(new ObjectId(req.user._id)).select("+Password");
+    const reqUser = req.userAccount;
+    const body = req.body;
+    const account = await Account.findById(new ObjectId(reqUser.id)).select("+Password");
+    console.log(account, reqUser.id);
 
-    if (!(await account.CorrectPassword(req.body.PasswordCurrent, account.Password))){
+    if (!(await account.CorrectPassword(body.PasswordCurrent, account.Password))){
         return next(new AppError('Your current password is wrong!', 401));
     }
 
