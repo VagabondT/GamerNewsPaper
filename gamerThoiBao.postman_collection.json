@@ -15,7 +15,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"\r",
 									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
 								],
 								"type": "text/javascript"
@@ -37,7 +36,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"UserName\": \"akine\",\r\n  \"Password\": \"12345678\",\r\n  \"ConfirmPassword\": \"12345678\",\r\n  \"Email\": \"playscooter0401@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"UserName\": \"akine\",\r\n  \"Password\": \"Gamerthoibao1234\",\r\n  \"ConfirmPassword\": \"Gamerthoibao1234\",\r\n  \"Email\": \"gamerthoibao@simba.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,7 +64,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"\r",
 									"pm.environment.set(\"jwt\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
@@ -87,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"UserName\": \"editor\",\r\n    \"Password\": \"12345678\"\r\n}",
+							"raw": "{\r\n  \"UserName\": \"akine\",\r\n  \"Password\": \"Gamerthoibao1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,7 +154,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
 							}
@@ -177,7 +175,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Email\": \"youremailhere@email.com\"\r\n}",
+							"raw": "{\r\n    \"Email\": \"gamerthoibao@simba.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,7 +203,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
 							}
@@ -234,14 +232,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}api/account/resetPassword/87ad44ce7b612836cf7542f7afdf148d775ba3ef72036f39a4b694038c262075",
+							"raw": "{{URL}}api/account/resetPassword/d552eea70b72ba82ab8d031501fdd358cfe1b085fd71529873b267a2298fb62c",
 							"host": [
 								"{{URL}}api"
 							],
 							"path": [
 								"account",
 								"resetPassword",
-								"87ad44ce7b612836cf7542f7afdf148d775ba3ef72036f39a4b694038c262075"
+								"d552eea70b72ba82ab8d031501fdd358cfe1b085fd71529873b267a2298fb62c"
 							]
 						}
 					},
@@ -258,6 +256,15 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -266,16 +273,16 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjUyYTYzZWY1Zjg2Yjk0ZWY1NTY2NCIsImlhdCI6MTY4MDE2NjUyNywiZXhwIjoxNjgyNzU4NTI3fQ.xqGME4l_Z9Ekeh2QD148BwP5Zq5JddXQ-OAZzarAPlQ",
+									"value": "{{jwt}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"PasswordCurrent\":\"youroldpassword\",\r\n    \"Password\":\"yournewpassword\",\r\n    \"ConfirmPassword\": \"yournewpassword\"\r\n}",
+							"raw": "{\r\n    \"PasswordCurrent\":\"Gamerthoibao1234\",\r\n    \"Password\":\"Gamerthoibao12345\",\r\n    \"ConfirmPassword\": \"Gamerthoibao12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,13 +290,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}api/account/changePassword",
+							"raw": "{{URL}}api/account/changePassword/",
 							"host": [
 								"{{URL}}api"
 							],
 							"path": [
 								"account",
-								"changePassword"
+								"changePassword",
+								""
 							]
 						}
 					},
@@ -335,7 +343,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}api/posts",
+							"raw": "{{URL}}api/posts?sort=-DateCreate&page=1",
 							"host": [
 								"{{URL}}api"
 							],
@@ -350,13 +358,11 @@
 								},
 								{
 									"key": "sort",
-									"value": "-DateCreate",
-									"disabled": true
+									"value": "-DateCreate"
 								},
 								{
 									"key": "page",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								}
 							]
 						}
@@ -687,13 +693,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}api/users/64292dedef1e22d2b4608d96",
+							"raw": "{{URL}}api/users/",
 							"host": [
 								"{{URL}}api"
 							],
 							"path": [
 								"users",
-								"64292dedef1e22d2b4608d96"
+								""
 							]
 						},
 						"description": "Liệt kê tất cả user đang có trong database.\nCần tài khoản có quyền admin."
@@ -729,7 +735,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n    \"Name\":\"Nguyễn Nguyễn Tuấn Tú\",\r\n    \"Birthday\":\"2003-01-12\",\r\n    \"Email\":\"test@mail.com\",\r\n    \"Address\":\"Bình Phước\",\r\n    \"Account\":\"64292a6dd4b2c782670343e2\",\r\n    \"Phone\":\"0967620778\"\r\n    \r\n}",
+							"raw": "{\r\n    \r\n    \"Name\":\"Nguyễn Nguyễn Tuấn Tú\",\r\n    \"Birthday\":\"2003-01-12\",\r\n    \"Email\":\"test@mail.com\",\r\n    \"Address\":\"Bình Phước\",\r\n    \"Account\":\"64292a6dd4b2c782670343e2\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
