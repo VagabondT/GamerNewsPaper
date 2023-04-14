@@ -94,7 +94,7 @@ exports.RenderNewsview = catchAsync(async (req,res,next) =>{
     }
    
 
-    const featuredPost = await Post.find({Status:'publish'}).populate("Category").sort({DateChanged:1}).limit(5)
+    const featuredPost = await Post.find({Status:'publish'}).populate("Category").sort({DateChanged:-1}).limit(5)
 
     var modifiedFeaturedPosts = ConvertObjectTime(featuredPost);
 

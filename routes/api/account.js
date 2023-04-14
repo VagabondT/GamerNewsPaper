@@ -7,7 +7,7 @@ const userController = require('../../controllers/UserController');
 
 router
     .route('/')
-    .get(accountController.protect, accountController.getAllAccounts)
+    .get(accountController.protect, accountController.allowRoles('admin') , accountController.getAllAccounts)
     
 
 router.route('/:id')

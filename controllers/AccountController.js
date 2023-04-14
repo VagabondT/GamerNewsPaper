@@ -142,7 +142,7 @@ exports.Signup = catchAsync(async (req,res, next) =>{
                     Account: new ObjectId(newAcc._id),
                     Email: req.body.Email
                 });
-                console.log(newUser);
+                
                 newUser.Name = newAcc.UserName;
                 const url = `${req.protocol}://${req.get('host')}/updateUser`;
 
@@ -216,7 +216,7 @@ exports.Logout = (req,res, next) =>{
 
 exports.forgotPassword = catchAsync(async (req,res,next) =>{
     //get user based on post account
-    console.log(req.body.Email);
+    
     const user = await User.findOne({Email: req.body.Email});
     if (!user){
         return next(new AppError('There is no user with this email address', 404));

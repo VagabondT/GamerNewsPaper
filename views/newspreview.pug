@@ -49,7 +49,8 @@ block content
                 #postContentHere !{post.Content}
             .grid-4-items
               .relatedPostArea.gridItem
-                if post.Status !== 'publish'
+                if userAccount.Role == 'moderator'
+                  if post.Status !== 'publish'
                   h2(style="text-align: center; font-family: 'Mark Pro',Arial,sans-serif; font-size: 4rem;") Quyết định
                   .actionDiv(style="display:flex; justify-content:center; align-item:center")
                     button.cssbuttons-io.cssbuttons-ioSuccess#CancelBtn(onclick="ApprovePost(this)" value=`${post.id}`)

@@ -7,17 +7,7 @@ const multer = require('multer')
 const sharp = require('sharp')
 const fs = require('fs')
 var path = require('path');
-
-// const multerStorage = multer.diskStorage({
-//     destination: (req, file, cb) =>{
-//         cb(null, 'public/img/PostThumbnail');
-//     },
-//     filename: (req, file, cb) =>{
-//         const ext = file.mimetype.split('/')[1];
-
-//         cb(null, `post-${req.body.Title}-${Date.now()}.${ext}`);
-//     }
-// })
+const slugify = require('slugify');
 
 const multerStorage = multer.memoryStorage();
 
@@ -39,7 +29,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.uploadPhoto = upload.single('photo')
 exports.resizePhoto = (req,res,next) =>{
-    console.log(req.body);
+    
     if (!req.file) return next();
     req.file.filename = `post-${req.body.Title}.jpeg`
     sharp(req.file.buffer).resize(1000,563).toFormat('jpeg').jpeg({quality: 100}).toFile(`public/img/PostThumbnail/${req.file.filename}`);
@@ -50,7 +40,7 @@ exports.resizePhoto = (req,res,next) =>{
 
 exports.getAllPosts = handler.getAll(Post);
 // exports.getPost = handler.getOne(Post, { path: 'Category'});
-exports.getPost = async (req,res,next) =>{
+exports.getPost = catchAsync(async (req,res,next) =>{
 
 
     if (ObjectId.isValid(req.params.id)){
@@ -82,7 +72,7 @@ exports.getPost = async (req,res,next) =>{
         })
     }
 }
-
+)
 exports.createPost = handler.createOne(Post)
 exports.updatePost = catchAsync(async (req,res,next)=>{
     var imageName;
@@ -235,6 +225,7 @@ exports.CreatePost = catchAsync(async(req, res, next)=>{
     const currentUser = await User.findById(res.locals.user.id);
     var imageName = 'img/PostThumbnail/default.jpg'
     if (currentUser){
+        var imageTitle = slugify(this.Title +'-'+ this._id, { lower: true });
         if (req.file) imageName = 'img/PostThumbnail/'+ req.file.filename;
 
         const newPostSave = await Post.create({

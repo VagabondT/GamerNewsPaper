@@ -6,306 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Post",
-			"item": [
-				{
-					"name": "POST post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n    \"Title\":\"Một bài viết mà phải cần tài khoản\",\r\n    \"Tags\":[],\r\n    \"Category\":\"6422f07a1b289c2c8568010b\",\r\n    \"Thumbnail\":\"https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80\",\r\n    \"Content\":\"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborumnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentiumoptio, eaque rerum! Provident similique accusantium nemo autem. Veritatisobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquamnihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdamrecusandae alias error harum maxime adipisci amet laborum. Perspiciatis\"\r\n    }\r\n    \r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}api/posts",
-							"host": [
-								"{{URL}}api"
-							],
-							"path": [
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Post by ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n    \"_id\": 0,\r\n    \"Title\": \"Câu chuyện kì bí về trái bí biết đi\",\r\n    \"Category\": \"0\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/api/posts/6423019804930ae3cb450736",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"6423019804930ae3cb450736"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete Post id =1",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/api/posts/",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Post id =1 Copy",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\": 1,\r\n    \"Title\": \"Chuyện tình game thủ updated\",\r\n    \"Thubnail\": \"default.jpg\",\r\n    \"DateCreate\": null,\r\n    \"DateChanged\": \"2023-03-26T07:20:03.963Z\",\r\n    \"Status\": \"wait\",\r\n    \"Tags\": [],\r\n    \"Category\": 0,\r\n    \"__v\": 0,\r\n    \"id\": \"1\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/api/posts/1",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FilteringGET POST",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{URL}}/api/posts?limit=2",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "-DateCreate",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "2"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Category",
-			"item": [
-				{
-					"name": "DELETE Category",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:6868/category/6420791e09293151a4b62833",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category",
-								"6420791e09293151a4b62833"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH Category",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n                \"name\": \"Technology\",\r\n                \"__v\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:6868/category/64207e808e73609cc7afb86c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category",
-								"64207e808e73609cc7afb86c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET false id Category",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"name\": \"Event\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:6868/category/6420791e",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category",
-								"6420791e"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Category",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \"name\": \"Test from PostMAN\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:6868/category",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Category ALL",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:6868/category",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:6868/category/Game",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6868",
-							"path": [
-								"category",
-								"Game"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Account",
 			"item": [
 				{
@@ -337,7 +37,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"UserName\": \"test\",\r\n  \"Password\": \"12345678\",\r\n  \"ConfirmPassword\": \"12345678\",\r\n  \"Email\": \"test@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"UserName\": \"akine\",\r\n  \"Password\": \"12345678\",\r\n  \"ConfirmPassword\": \"12345678\",\r\n  \"Email\": \"playscooter0401@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,7 +66,7 @@
 							"script": {
 								"exec": [
 									"\r",
-									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
 							}
@@ -387,7 +87,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"UserName\": \"test\",\r\n    \"Password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"UserName\": \"editor\",\r\n    \"Password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -416,7 +116,7 @@
 							"script": {
 								"exec": [
 									"\r",
-									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
 							}
@@ -456,7 +156,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
+									"pm.environment.set(\"jwt\", \"pm.response.json().token\");"
 								],
 								"type": "text/javascript"
 							}
@@ -477,7 +177,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"playscooter0401@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"Email\": \"youremailhere@email.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -526,7 +226,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Password\":\"matkhaumoine\",\r\n    \"ConfirmPassword\":\"matkhaumoine\"\r\n}",
+							"raw": "{\r\n    \"Password\":\"yourpassword\",\r\n    \"ConfirmPassword\":\"yourpassword\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -534,14 +234,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}api/account/resetPassword/f3926a07b3a58472dfe9cdab72738a4ebd55dd67c6fe9dfbc29ed7ad98b61ddd",
+							"raw": "{{URL}}api/account/resetPassword/87ad44ce7b612836cf7542f7afdf148d775ba3ef72036f39a4b694038c262075",
 							"host": [
 								"{{URL}}api"
 							],
 							"path": [
 								"account",
 								"resetPassword",
-								"f3926a07b3a58472dfe9cdab72738a4ebd55dd67c6fe9dfbc29ed7ad98b61ddd"
+								"87ad44ce7b612836cf7542f7afdf148d775ba3ef72036f39a4b694038c262075"
 							]
 						}
 					},
@@ -575,7 +275,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"PasswordCurrent\":\"matkhaumoine\",\r\n    \"Password\":\"matkhaunaymoihonnua\",\r\n    \"ConfirmPassword\": \"matkhaunaymoihonnua\"\r\n}",
+							"raw": "{\r\n    \"PasswordCurrent\":\"youroldpassword\",\r\n    \"Password\":\"yournewpassword\",\r\n    \"ConfirmPassword\": \"yournewpassword\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -607,6 +307,370 @@
 							],
 							"path": [
 								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get All Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"_id\": 0,\r\n    \"Title\": \"Câu chuyện kì bí về trái bí biết đi\",\r\n    \"Category\": \"0\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/posts",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-DateCreate",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/posts/642bf3c809ae9395c26e3165?fields=Title",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"posts",
+								"642bf3c809ae9395c26e3165"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "Title"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Title",
+									"value": "Test post",
+									"type": "default"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/plays/Downloads/FB_IMG_1674029024114.jpg"
+								},
+								{
+									"key": "Category",
+									"value": "6422f07a1b289c2c8568010b",
+									"type": "default"
+								},
+								{
+									"key": "Content",
+									"value": "{\n        \"ops\": [\n            {\n                \"insert\": \"342134235345345\\n\"\n            }\n        ]\n    }",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/posts",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "Tạo bài viết.\nYêu cầu: \n- Tài khoản đã đăng nhập và có role là editor.\n\"Title\": Tiêu đề bài viết (required)\n\"Content\": Nội dung bài viết (được encode theo ops của Quill)\n\"Category\": ID của danh mục bài viết thuộc về (required)\n\"Description\": Mô tả bài viết\n\"Thumbnail\": Hình ảnh bìa của bài viết."
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Post id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/posts/6428fe9d4e1e200e25d0a82e",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"posts",
+								"6428fe9d4e1e200e25d0a82e"
+							]
+						},
+						"description": "Xoá bài viết qua ID.\n\nEditor được xoá những bài viết ở trạng thái \"draft\" của mình.\nChỉ có Admin là có quyền xoá bài viết mà không cần điều kiện nào.\n\nTrả về:\n204 - thành công\n403 - forbidden"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post id =1 Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": 1,\r\n    \"Title\": \"Chuyện tình game thủ updated\",\r\n    \"Thubnail\": \"default.jpg\",\r\n    \"DateCreate\": null,\r\n    \"DateChanged\": \"2023-03-26T07:20:03.963Z\",\r\n    \"Status\": \"wait\",\r\n    \"Tags\": [],\r\n    \"Category\": 0,\r\n    \"__v\": 0,\r\n    \"id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/posts/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "Update bài viết"
+					},
+					"response": []
+				},
+				{
+					"name": "GET control posts Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}postControl",
+							"host": [
+								"{{URL}}postControl"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get all Categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/category",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Event\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/category/6422f07a1b289c2c8568010b",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"category",
+								"6422f07a1b289c2c8568010b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Cate này tạo từ API\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/category/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category by id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Cate này tạo từ API ( rồi update rùi nè)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/category/642e721198798fa40792048f",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"category",
+								"642e721198798fa40792048f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6868/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"category"
 							]
 						}
 					},
@@ -736,64 +800,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "PROTECT ROUTE",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"\r",
-							"pm.environment.set(\"jwt\", \"pm.respond.json().token\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjNiY2U3ZDIyN2U4ZjM0OTU4Mjc1MSIsImlhdCI6MTY4MDA5NjA3NiwiZXhwIjoxNjgyNjg4MDc2fQ.lrcVkESbfNShZeulYTN4RR3S8JBcPiXqc9f07mZRWBC",
-						"type": "default"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"UserName\": \"akkii\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}api/posts/",
-					"host": [
-						"{{URL}}api"
-					],
-					"path": [
-						"posts",
-						""
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

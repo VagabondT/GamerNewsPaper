@@ -38,7 +38,7 @@ router.route("/updatePost/:id")
     accountController.allowRoles('editor','admin'),
     overviewController.RenderUpdatePostPage)
     .patch(accountController.protect,
-        accountController.allowRoles('editor', 'admin','moderator'),
+        accountController.allowRoles('editor','moderator'),
         overviewController.UpdatePostPage)
 
 router.route('/postControl')
